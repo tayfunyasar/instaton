@@ -1,0 +1,220 @@
+.header-navigation {
+	display: table;
+	width: 100%;
+	margin-top: $space-lg;
+	
+	> .navbar-collapse {
+		padding: 0;
+		@media screen and (min-width: $screen-xs-max) {
+			display: table-cell !important;
+			float: left;
+		}
+		vertical-align: top;
+		> .site-navigation {
+			> .nav {
+				@media screen and (min-width: $screen-xs-max) {
+					float: right;
+				}
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				
+				> li {
+					display: inline-block;
+					
+					> a {
+						display: block;
+						color: $nav-text-color;
+						padding: $space-sm $space-lg;
+						background-color: transparent;
+						border-radius: $radius-base;
+						
+						&:hover,
+						&:focus {
+							text-decoration: none;
+							background-color: $nav-link-hover-bg;
+						}
+					}
+					
+					&.selected {
+						> a {
+							background-color: $nav-link-active-bg;
+						}
+					}
+					
+					&.dropdown {
+						> ul.dropdown-menu {
+							margin: 0;
+							padding: 0;
+							border: 0 none;
+							border-radius: 0;
+							max-heigth: none;
+							overflow: visible;
+							background-color: $dropdown-passive-bg;
+							
+							> li {
+								&.dropdown-submenu {
+									> a {
+										> i {
+											color: $button-color-login;
+											font-size: $font-size-small;
+										}
+									}
+									> ul {
+										left: 100%;
+										top: 0;
+										margin: 0;
+										padding: 0;
+										border: 0 none;
+										border-radius: 0;
+										background-color: $dropdown-active-bg;
+										
+										> li {
+											> a {
+												&:hover,
+												&:focus {
+													background-color: darken($dropdown-active-bg, 5%);
+												}
+											}
+										}
+									}
+									&.open {
+										> a {
+											background-color: $dropdown-active-bg;
+										}
+									}
+								}
+							}
+						}
+						&.open {
+							> a {
+								background-color: $nav-link-hover-bg;
+							}
+						}
+					}
+				}
+			}
+		}
+		> .header-navigation-portfolio {
+			@media screen and (min-width: $screen-xs-max) {
+				float: right;
+			}
+		}
+	}
+	
+	.dropdown-menu > li > a {
+		padding: $space-xs $space-md;
+		color: $white;
+		
+		&:hover,
+		&:focus {
+			background-color: $dropdown-active-bg;
+		}
+	}
+}
+
+.footer-images {
+	margin: $space-sm 0;
+	table {
+		table-layout: fixed;
+		width: 100%;
+		td {
+			text-align: center;
+			vertical-align: middle;
+		}
+	}
+}
+
+@media (orientation:portrait) {
+	.footer-images {
+		margin: 20px 0;
+		> table {
+			display: block;
+			> tbody {
+				display: block;
+				> tr {
+					display: block;
+					text-align: center;
+					> td {
+						display: inline-block;
+						width: 15%;
+					}
+				}
+			}
+		}
+	}
+}
+
+.footer-nav {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	> li {
+		float: left;
+		border-left: 1px solid $text-color;
+		> a {
+			display: block;
+			padding: 0 $space-xs;
+			color: $text-color;
+			&:hover,
+			&:focus {
+				color: $text-color;
+			}
+		}
+		&:first-child {
+			border-left: 0 none;
+			> a {
+				padding-left: 0;
+			}
+		}
+	}
+}
+
+.header-buttons {
+	> .header-buttons-container {
+		text-align: right;
+		> .header-buttons-username {
+			display: inline-block;
+			margin-right: $space-lg;
+		}
+		> .header-buttons-icons {
+			display: inline-block;
+			> a {
+				float: left;
+				position: relative;
+				width: 30px;
+				height: 25px;
+				border-left: 1px solid $gray-base;
+				background-image: url('../img/bonus/menu-icons.png');
+				background-repeat: no-repeat;
+				
+				&.header-buttons-icons-search {
+					background-position: 4px 0;
+				}
+				&.header-buttons-icons-notification {
+					background-position: -34px 0;
+				}
+				&.header-buttons-icons-message {
+					background-position: -74px 0;
+				}
+				&.header-buttons-icons-logout {
+					background-position: -110px 0;
+				}
+				
+				&:first-child {
+					border-left: 0 none;
+				}
+
+				> .badge {
+					position: absolute;
+					right: 0;
+					top: -13px;
+					color: $white;
+					background-color: $brand-danger;
+					font-size: $font-size-small - 2;
+				}
+
+			}
+		}
+	}
+}

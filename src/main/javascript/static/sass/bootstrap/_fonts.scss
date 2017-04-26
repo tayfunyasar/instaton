@@ -1,0 +1,128 @@
+@font-face {
+	font-family: 'Gotham-Book';
+	src: url('../fonts/Gotham-Book.eot');
+	src: url('../fonts/Gotham-Book.woff2') format('woff2'),
+		 url('../fonts/Gotham-Book.woff') format('woff'),
+		 url('../fonts/Gotham-Book.ttf') format('truetype'),
+		 url('../fonts/Gotham-Book.svg#Gotham-Book') format('svg'),
+		 url('../fonts/Gotham-Book.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gotham-Medium';
+	src: url('../fonts/Gotham-Medium.eot');
+	src: url('../fonts/Gotham-Medium.woff2') format('woff2'),
+		 url('../fonts/Gotham-Medium.woff') format('woff'),
+		 url('../fonts/Gotham-Medium.ttf') format('truetype'),
+		 url('../fonts/Gotham-Medium.svg#Gotham-Medium') format('svg'),
+		 url('../fonts/Gotham-Medium.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gotham-Bold';
+	src: url('../fonts/Gotham-Bold.eot');
+	src: url('../fonts/Gotham-Bold.woff2') format('woff2'),
+		 url('../fonts/Gotham-Bold.woff') format('woff'),
+		 url('../fonts/Gotham-Bold.ttf') format('truetype'),
+		 url('../fonts/Gotham-Bold.svg#Gotham-Bold') format('svg'),
+		 url('../fonts/Gotham-Bold.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gotham-Light';
+	src: url('../fonts/Gotham-Light.eot');
+	src: url('../fonts/Gotham-Light.woff2') format('woff2'),
+	     url('../fonts/Gotham-Light.woff') format('woff'),
+	     url('../fonts/Gotham-Light.ttf') format('truetype'),
+	     url('../fonts/Gotham-Light.svg#Gotham-Light') format('svg'),
+	     url('../fonts/Gotham-Light.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'GothamCondensed-Light';
+	src: url('../fonts/GothamCondensed-Light.eot');
+	src: url('../fonts/GothamCondensed-Light.woff2') format('woff2'),
+	     url('../fonts/GothamCondensed-Light.woff') format('woff'),
+	     url('../fonts/GothamCondensed-Light.ttf') format('truetype'),
+	     url('../fonts/GothamCondensed-Light.svg#GothamCondensed-Light') format('svg'),
+	     url('../fonts/GothamCondensed-Light.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Gotham-Thin';
+	src: url('../fonts/Gotham-Thin.eot');
+	src: url('../fonts/Gotham-Thin.woff2') format('woff2'),
+	     url('../fonts/Gotham-Thin.woff') format('woff'),
+	     url('../fonts/Gotham-Thin.ttf') format('truetype'),
+	     url('../fonts/Gotham-Thin.svg#Gotham-Thin') format('svg'),
+	     url('../fonts/Gotham-Thin.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Crocante';
+	src: url('../fonts/Crocante.eot');
+	src: url('../fonts/Crocante.woff2') format('woff2'),
+	     url('../fonts/Crocante.woff') format('woff'),
+	     url('../fonts/Crocante.ttf') format('truetype'),
+	     url('../fonts/Crocante.svg#Crocante') format('svg'),
+	     url('../fonts/Crocante.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'MuseoSansRounded-900';
+	src: url('../fonts/MuseoSansRounded-900.eot');
+	src: url('../fonts/MuseoSansRounded-900.woff2') format('woff2'),
+	     url('../fonts/MuseoSansRounded-900.woff') format('woff'),
+	     url('../fonts/MuseoSansRounded-900.ttf') format('truetype'),
+	     url('../fonts/MuseoSansRounded-900.svg#MuseoSansRounded-900') format('svg'),
+	     url('../fonts/MuseoSansRounded-900.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.regular {
+	font-family: 'Gotham-Book' !important;
+}
+.medium {
+	font-family: 'Gotham-Medium';
+}
+.bold {
+	font-family: 'Gotham-Bold';
+}
+.light {
+	font-family: 'Gotham-Light';
+}
+.condensed-light {
+	font-family: 'GothamCondensed-Light';
+}
+.crocante {
+	font-family: 'Crocante';
+}
+.museo {
+	font-family: 'MuseoSansRounded-900';
+}
+.arial {
+	font-family: 'Arial';
+}
+.thin {
+	font-family: 'Gotham-Thin';
+	&.thin-bold {
+		font-weight: bold;
+	}
+	&.thin-huge {
+		font-size: 30px;
+	}
+}
+.normal {
+	font-weight: normal;
+}
+.font-14x {
+	font-size: 14px !important;
+}

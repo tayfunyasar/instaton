@@ -1,0 +1,163 @@
+//
+// Tooltips
+// --------------------------------------------------
+
+
+// Base class
+.tooltip {
+  position: absolute;
+  z-index: $zindex-tooltip;
+  display: block;
+  // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
+  // So reset our font and text properties to avoid inheriting weird values.
+  @include reset-text;
+  font-size: $font-size-small;
+
+  @include opacity(0);
+
+  &.in     { @include opacity(1); }
+  &.top    { margin-top:  -3px; padding: $tooltip-arrow-width 0; }
+  &.right  { margin-left:  3px; padding: 0 $tooltip-arrow-width; }
+  &.bottom { margin-top:   3px; padding: $tooltip-arrow-width 0; }
+  &.left   { margin-left: -3px; padding: 0 $tooltip-arrow-width; }
+}
+
+// Wrapper for the tooltip content
+.tooltip-inner {
+  max-width: $tooltip-max-width;
+  padding: 3px 8px;
+  color: $tooltip-color;
+  text-align: center;
+  background-color: $tooltip-bg;
+  border-radius: $border-radius-base;
+}
+
+// Arrows
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+// Note: Deprecated .top-left, .top-right, .bottom-left, and .bottom-right as of v3.3.1
+.tooltip {
+  &.top .tooltip-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -$tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
+    border-top-color: $tooltip-arrow-color;
+  }
+  &.top-left .tooltip-arrow {
+    bottom: 0;
+    right: $tooltip-arrow-width;
+    margin-bottom: -$tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
+    border-top-color: $tooltip-arrow-color;
+  }
+  &.top-right .tooltip-arrow {
+    bottom: 0;
+    left: $tooltip-arrow-width;
+    margin-bottom: -$tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
+    border-top-color: $tooltip-arrow-color;
+  }
+  &.right .tooltip-arrow {
+    top: 50%;
+    left: 0;
+    margin-top: -$tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+    border-right-color: $tooltip-arrow-color;
+  }
+  &.left .tooltip-arrow {
+    top: 50%;
+    right: 0;
+    margin-top: -$tooltip-arrow-width;
+    border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+    border-left-color: $tooltip-arrow-color;
+  }
+  &.bottom .tooltip-arrow {
+    top: 0;
+    left: 50%;
+    margin-left: -$tooltip-arrow-width;
+    border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
+    border-bottom-color: $tooltip-arrow-color;
+  }
+  &.bottom-left .tooltip-arrow {
+    top: 0;
+    right: $tooltip-arrow-width;
+    margin-top: -$tooltip-arrow-width;
+    border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
+    border-bottom-color: $tooltip-arrow-color;
+  }
+  &.bottom-right .tooltip-arrow {
+    top: 0;
+    left: $tooltip-arrow-width;
+    margin-top: -$tooltip-arrow-width;
+    border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
+    border-bottom-color: $tooltip-arrow-color;
+  }
+}
+
+.tooltip-chart {
+	position: absolute;
+	background-color: #47c278;
+	padding: 10px;
+	box-shadow: 0 0px 16px rgba(0, 0, 0, .58);
+	
+	> .arrow {
+		position: absolute;
+		bottom: -10px;
+		width: 20px;
+		height: 10px;
+		margin-left: -8px;
+		left: 50%;
+		&:before {
+			border-color: rgba(0, 0, 0, .16) transparent;
+			border-style: solid;
+			border-width: 10px 10px 0;
+			content: "";
+			display: block;
+			top: 0;
+			left: -2px;
+			position: absolute;
+			width: 0;
+		}
+		&:after {
+			border-color: #47c278 transparent;
+			border-style: solid;
+			border-width: 8px 8px 0;
+			content: "";
+			display: block;
+			top: 0;
+			left: 0;
+			position: absolute;
+			width: 0;
+		}
+	}
+	&.tooltip-chart-alt {
+		background-color: #65e689;
+		box-shadow: none;
+		padding: 5px 10px;
+		-webkit-transform: translate(-50%, 0);
+		transform: translate(-50%, 0);
+		
+		> .arrow {
+			&:before {
+				display: none;
+			}
+			&:after {
+				border-color: #65e689 transparent;
+			}
+		}
+	}
+}
+
+.cardtype-position {
+	.tooltip {
+		&.bottom {
+			margin-top: -12px;
+		}
+	}
+}

@@ -1,0 +1,99 @@
+.uib-datepicker-popup {
+	> li {
+		> .uib-datepicker {
+			> table {
+				> thead > tr > th {
+					> .btn {
+						background-color: $white;
+						color: $gray-base;
+						border: 0 none;
+
+						&:active,
+						&:focus,
+						&:hover {
+							box-shadow: none;
+						}
+
+						&.uib-title {}
+
+						&.uib-left > .glyphicon:before,
+						&.uib-right > .glyphicon:before {
+							font-family: 'FontAwesome';
+							font-style: normal;
+						}
+
+						&.uib-left {
+							> .glyphicon:before {
+								content: "\f053";
+							}
+						}
+
+						&.uib-right {
+							> .glyphicon:before {
+								content: "\f054";
+							}
+						}
+					}
+				}
+
+				> tbody > tr > td {
+					&.uib-day,
+					&.uib-month,
+					&.uib-year {
+						> .btn-default {
+							background-color: $white;
+							color: $gray-base;
+							border: 0 none;
+
+							&:active,
+							&:focus,
+							&:hover {
+								background-color: darken($white, 10%);
+								box-shadow: none;
+							}
+
+							&[disabled] {
+								color: $gray-light !important;
+
+								&:active,
+								&:focus,
+								&:hover {
+									background-color: transparent !important;
+									color: $gray-light !important;
+								}
+
+								&.active {
+									background-color: transparent;
+
+									* {
+										color: $gray-light !important;
+									}
+								}
+							}
+						}
+
+						> .btn-info {
+							background-color: $brand-primary;
+							color: $white;
+							box-shadow: none;
+
+							* {
+								color: $white;
+							}
+							&:hover {
+								background-color:  darken($brand-primary, 10%);
+								color: $gray-light !important;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	*:active,
+	*:focus,
+	*:hover {
+		outline: none !important;
+	}
+}
