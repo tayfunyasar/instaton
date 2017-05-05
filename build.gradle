@@ -13,8 +13,8 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'gs-accessing-twitter'
-    version =  '0.1.0'
+    baseName = 'instaton'
+    version =  '0.0.1'
 }
 
 repositories {
@@ -25,6 +25,13 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("org.springframework.social:spring-social-twitter")
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web' 
+	
+	compile('org.springframework.boot:spring-boot-devtools')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-social-twitter')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('com.h2database:h2')
+    
 }
