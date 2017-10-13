@@ -1,0 +1,5 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<cache name="PARAMETER_LIST" maxEntriesLocalHeap="200" timeToLiveSeconds="43200"></cache>
+
+</ehcache>

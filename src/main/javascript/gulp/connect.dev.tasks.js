@@ -8,59 +8,59 @@ var connect = require('gulp-connect');
 var modRewrite = require('connect-modrewrite');
 var beautify = require('gulp-jsbeautifier');
 
-gulp.task('beautify', function () {
-    return gulp.src(['./app/**/*.html', './app/**/*.js',  '!./app/translate/*'])
-        .pipe(
-    		beautify({
-    			config: './app/.jsbeautifyrc'
-    		})
-        )
-        .pipe(gulp.dest('./app'));
+gulp.task('beautify', function() {
+  return gulp.src(['./app/**/*.html', './app/**/*.js', '!./app/translate/*'])
+    .pipe(
+      beautify({
+        config: './app/.jsbeautifyrc',
+      })
+    )
+    .pipe(gulp.dest('./app'));
 });
 
 gulp.task('reload', ['build'], function() {
-    browserSync.reload();
+  console.log('Reloading');
+  browserSync.reload();
 });
 
-gulp.task('watch', ['build', 'beautify'], function() {
-    // watch for changes livereload browser
-    gulp.watch([
-        '**/*.html',
-        'app/**/*.*',
-        'static/**/*.*',
-        '!app/instaton.templates.js'
-    ], ['reload']);
+gulp.task('watch', ['start-server'], function() {
+  // watch for changes livereload browser
+  gulp.watch([
+    './app/**/*.*',
+    './static/**/*.*',
+    '!./app/partnerloyalty.template.js'
+  ], ['reload']);
 
 });
 
-gulp.task('start-server', ['watch'], function() {
-    var url = require('url');
-    var proxy = require('proxy-middleware');
+gulp.task('start-server', ['build', 'beautify'], function() { //
+  var url = require('url');
+  var proxy = require('proxy-middleware');
 
-    var options = url.parse('http://localhost:8081/giris');
-    options.route = '/giris';
+  var options = url.parse('http://localhost:8080/');
+  options.route = '/';
 
-    var optionsForPortal = url.parse('http://localhost:8080/');
-    optionsForPortal.route = '/bonus';
-
-    browserSync.init({
-        server: {
-            baseDir: "../webapp/",
-            middleware: [proxy(options), proxy(optionsForPortal), modRewrite([
-                '!\\.\\w+$ /index.html [L]'
-            ])]
-        },
-        port: 3000,
-        open: false
-    });
+  browserSync.init({
+    server: {
+      baseDir: "../webapp/",
+      middleware: [proxy(options), modRewrite([
+        '!\\.\\w+$ /index.html [L]'
+      ])]
+    },
+    port: 5000,
+    open: false
+  });
 });
 
 gulp.task('clean', function() {
-	console.log('clean');
-    return gulp.src(['app/tmp', 'dist/'], {
-            read: false
-        })
-        .pipe(clean());
+  gulp.src([
+      '../webapp/assets/',
+    ], {
+      read: false
+    })
+    .pipe(clean({
+      force: true
+    }));
 });
 
 gulp.task('serve', ['start-server', 'watch']);

@@ -3,13 +3,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
@@ -18,6 +17,9 @@ jar {
 }
 
 repositories {
+    maven {
+        url 'https://repo.spring.io/libs-release'
+    }
     mavenCentral()
 }
 
@@ -25,16 +27,27 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web' 
-	
-	compile('org.springframework.boot:spring-boot-devtools')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-devtools")
 	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.social:spring-social-security')
 	compile('org.springframework.boot:spring-boot-starter-social-twitter')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-jdbc')
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	// compile('org.springframework.boot:spring-boot-starter-jdbc')
+	 compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	
+	
+    compile "org.springframework.social:spring-social-core"
+   	compile "org.springframework.social:spring-social-web"
+    compile "org.springframework.social:spring-social-twitter"
+	// compile('org.springframework.social:spring-social-security')
+	
 	compile("org.apache.commons:commons-lang3:3.0")
-	compile('com.h2database:h2')
-    
+	compile 'org.apache.commons:commons-collections4:4.1'
+	
+	// compile 'org.springframework.data:spring-data-jpa'
+	compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+	
+	compile 'net.sf.ehcache:ehcache:2.10.2.2.21'
+	compile 'org.springframework:spring-context'
+	compile 'org.springframework:spring-context-support'
+	
 }

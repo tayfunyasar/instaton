@@ -3,6 +3,6 @@
 # node_modules ignored by default
 
 # ignore custom dir
-/
+translate/
 
 # ignore custom files

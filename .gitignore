@@ -1,5 +1,6 @@
 .classpath
 .project
+.metadata
 
 .git
 .gradle
@@ -8,3 +9,4 @@
 bin
 build
 gradle/wrapper/gradle-wrapper.jar
+

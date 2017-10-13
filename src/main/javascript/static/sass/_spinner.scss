@@ -1,0 +1,59 @@
+section.wrapper {
+    position: fixed;
+    top: 40%;
+    left: 42.5%;
+}
+
+.spinner-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.05);
+  z-index: 99998;
+}
+
+.spinner-bg-report {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 3;
+
+  span{
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 80px;
+    width: 70%;
+    margin: auto;
+}
+
+}
+
+/* @-moz-keyframes fadeG{ */
+/* 	0%{ */
+/* 		background-color:rgba(34, 66, 37, 1); */
+/* 	} */
+
+/* 	50%{ */
+/* 		background-color:rgba(100, 175, 104, 1); */
+/* 	} */
+
+/* 	100%{ */
+/* 		background-color:rgba(200, 226, 201, 0.25); */
+/* 	} */
+/* } */
+
+.uil-default-css div {
+	/* yeni renk buraya yazilabilir.
+	background: red !important;
+	*/
+}

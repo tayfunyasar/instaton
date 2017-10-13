@@ -1,0 +1,1 @@
+require('./state-translate.factory');

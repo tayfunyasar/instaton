@@ -1,14 +1,13 @@
-var bonus = {};
+var partner = {};
 
-bonus.dev = {
-    srcDir : 'app/',
-    devServerDir : 'dist/',
+partner.dev = {
+    srcDir: 'app',
+    devServerDir: 'dist/',
     distPath: '/',
-    devServerPort : 3000,
+    devServerPort: 5000,
     index: 'index.html'
 };
 
-bonus.prod = {
-};
+partner.prod = {};
 
-module.exports = bonus;
+module.exports = partner;

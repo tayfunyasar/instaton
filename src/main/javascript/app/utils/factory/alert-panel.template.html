@@ -1,0 +1,11 @@
+<div class="alert" ng-repeat="alert in self.messageList track by $index" ng-class="{
+      'alert-danger' : alert.type == 'danger',
+      'alert-success' : alert.type == 'success',
+      'alert-warning' : alert.type == 'warning',
+      'alert-info' : alert.type == 'info'
+    }" role="alert">
+
+      <button type="button" class="close" ng-click="self.closeAlert(alert)" data-dismiss="alert" aria-label="Close">
+            <i class="fa fa-times-circle-o"></i>
+      </button> {{alert.text}}
+</div>
