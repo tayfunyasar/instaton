@@ -1,0 +1,16 @@
+database:
+      image: postgres:instaton
+      hostname: "database"
+      restart: always
+      ports:
+        - "5432:5432"
+      environment:
+        - POSTGRES_USER=docker
+        - POSTGRES_PASSWORD=docker
+        - POSTGRES_DB=instaton
+      
+smtp:
+      image: smtp:instaton
+      hostname: "smtp"
+      ports:
+        - "2525:2525"

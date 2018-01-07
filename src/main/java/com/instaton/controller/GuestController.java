@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.instaton.constant.EndpointConstant;
 import com.instaton.entity.guest.JSErrorInputData;
-import com.instaton.response.LoyaltyResponse;
-import com.instaton.response.LoyaltyResponseBuilder;
+import com.instaton.response.InstatonResponse;
+import com.instaton.response.InstatonResponseBuilder;
 import com.instaton.security.AuthenticationToken;
 import com.instaton.service.AuthenticationService;
 
@@ -31,7 +31,7 @@ public class GuestController {
 	private HttpServletRequest request;
 
 	@RequestMapping(value = "/jserrorlogger", method = { RequestMethod.POST })
-	public LoyaltyResponse<Boolean> logJSErrors(@RequestBody JSErrorInputData inputData) {
+	public InstatonResponse<Boolean> logJSErrors(@RequestBody JSErrorInputData inputData) {
 
 		Authentication authentication = authenticationService.getCurrentAuthentication();
 
@@ -46,6 +46,6 @@ public class GuestController {
 			logger.error("JSErrorController remoteAddr = {} inputData = {}", remoteAddr, inputData.toString());
 		}
 
-		return LoyaltyResponseBuilder.buildSuccessResponseData(Boolean.TRUE);
+		return InstatonResponseBuilder.buildSuccessResponseData(Boolean.TRUE);
 	}
 }

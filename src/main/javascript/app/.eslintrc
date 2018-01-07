@@ -1,1 +1,68 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "google",
+    "angular"
+  ],
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "globals": {
+        "angular": false,
+        "jQuery": true,
+        "$": true,
+        "moment": true,
+        "d3": true
+    },
+  // severity for a rule should be one of the following: "off" = off, "warn" = warning, "error" = error
+  "rules": {
+    // error list
+    // "angular/controller-as-vm": ["error","self"],
+    "angular/controller-as-vm": 0,
+    "consistent-this": ["error", "self"],
+    "quotes": ["error", "single"], // çift tırnak kullanılamaz.
+    "wrap-iife": ["error", "inside"],
+    "no-use-before-define": ["error", "nofunc"],
+    "no-unused-vars": ["error", {"vars": "local", "args": "none"}],
+    "no-multi-str": "error",
+    "no-irregular-whitespace": "error",
+    "semi": ["error", "always"],
+    "object-curly-newline": ["error", "always"], // { "minProperties": 1 }],
+    "curly": ["error", "multi-line"],
+    "object-shorthand": [2, "consistent"],
+    "max-len": ["error", 240],
+    "new-cap": ["error", { "capIsNewExceptionPattern": "MonthPicker" }],
 
+    // warning list
+    "angular/di": ["warn", "function"], // dependencyInjection
+    "angular/no-service-method": 0,
+    "comma-dangle": ["warn", {
+        "arrays": "never",
+        "objects": "always",
+        "imports": "never",
+        "exports": "never",
+        "functions": "ignore",
+    }],
+    "angular/on-watch" : "warn",
+
+    // dont warn list
+    "prefer-spread": "off",
+    "padded-blocks": "off",
+    "eol-last": "off",
+    "eqeqeq": "off", // == or ===
+    "quote-props": ["off"], // property lerde tırnak zorunlu mu? hayır.
+    "linebreak-style": "off",
+    "no-var": "off",
+    "array-bracket-spacing": ["error", "never"],
+    "space-before-function-paren": ["off", "never"],
+    "indent": "off", // ["error", "tab"], olması gerekiyor. beautify eklentisini açtığımız için bunu kapattım.
+    "import/no-commonjs": ["off", "allow-primitive-modules"],
+    "prefer-arrow-callback": "off",
+    "require-jsdoc": "off",
+    "no-trailing-spaces": "off",
+    "angular/no-private-call": "off",
+    "no-extend-native": "off",
+    "angular/module-getter": "off"
+  }
+}

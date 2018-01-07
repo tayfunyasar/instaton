@@ -3,7 +3,7 @@ package com.instaton.exception;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum LoyaltyReturnCode {
+public enum InstatonReturnCode {
 
 	ACCESS_DENIED_EXCEPTION("10002", "ACCESS_DENIED_EXCEPTION", "EXCEPTION", Boolean.FALSE),
 	APPLICATION_ERROR("-10", "APPLICATION_ERROR", ResponseType.ERROR, Boolean.TRUE),
@@ -54,7 +54,7 @@ public enum LoyaltyReturnCode {
 	TERMINAL_ERROR("-21", "TERMINAL_ERROR", ResponseType.ERROR, Boolean.TRUE),
 	UNSUCCESSFUL_LOGIN_COMPLETE("-40", "UNSUCCESSFUL_LOGIN_COMPLETE", ResponseType.ERROR, Boolean.TRUE);
 
-	private static final Map<String, LoyaltyReturnCode> lookup = new HashMap<>();
+	private static final Map<String, InstatonReturnCode> lookup = new HashMap<>();
 
 	private String code;
 	private String key;
@@ -62,19 +62,19 @@ public enum LoyaltyReturnCode {
 	private String type;
 
 	static {
-		for (LoyaltyReturnCode loyaltyReturnCode : LoyaltyReturnCode.values()) {
+		for (InstatonReturnCode loyaltyReturnCode : InstatonReturnCode.values()) {
 			lookup.put(loyaltyReturnCode.getCode(), loyaltyReturnCode);
 		}
 	}
 
-	private LoyaltyReturnCode(String code, String key, String type, Boolean showInModal) {
+	private InstatonReturnCode(String code, String key, String type, Boolean showInModal) {
 		this.code = code;
 		this.type = type;
 		this.key = key;
 		this.showInModal = showInModal;
 	}
 
-	public static LoyaltyReturnCode get(String code) {
+	public static InstatonReturnCode get(String code) {
 		if (lookup.containsKey(code)) {
 			return lookup.get(code);
 		}

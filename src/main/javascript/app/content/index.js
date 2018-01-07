@@ -1,7 +1,11 @@
 // parent
-require('./content.config');
-require('./content.controller');
+require('./config');
+require('./controller');
 
 // dirs
+// settings
 require('./components');
-require('./content-dashboard');
+
+// pages
+require('./dashboard');
+require('./login');

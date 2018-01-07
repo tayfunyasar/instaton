@@ -2,15 +2,21 @@ config.$inject = ['$stateProvider'];
 
 function config($stateProvider) {
   $stateProvider.state('content', {
-    url: '/content',
-    templateUrl: './tpl.html',
+    templateUrl: 'content/tpl.html',
     controller: 'ContentController',
     controllerAs: 'self',
   });
 
   $stateProvider.state('content.dashboard', {
     url: '/dashboard',
-    templateUrl: './content-dashboard/tpl.html',
+    templateUrl: 'content/dashboard/tpl.html',
+    controller: 'ContentDashboardController',
+    controllerAs: 'self',
+  });
+
+  $stateProvider.state('content.login', {
+    url: '/',
+    templateUrl: 'content/login/tpl.html',
     controller: 'ContentDashboardController',
     controllerAs: 'self',
   });

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.instaton.response.LoyaltyResponse;
-import com.instaton.response.LoyaltyResponseBuilder;
+import com.instaton.response.InstatonResponse;
+import com.instaton.response.InstatonResponseBuilder;
 
 @ControllerAdvice
 public class ExceptionHandlingController extends ResponseEntityExceptionHandler {
@@ -20,28 +20,28 @@ public class ExceptionHandlingController extends ResponseEntityExceptionHandler 
 	private final String errorMessage = "Operation Failed";
 
 	@SuppressWarnings("rawtypes")
-	@ExceptionHandler(LoyaltyException.class)
-	public ResponseEntity<LoyaltyResponse> handleException(LoyaltyException exception) {
+	@ExceptionHandler(InstatonException.class)
+	public ResponseEntity<InstatonResponse> handleException(InstatonException exception) {
 		log.error(errorMessage, exception);
-		LoyaltyResponse response = LoyaltyResponseBuilder.begin().code(exception.getReturnCode()).message(exception.getResponseMessage()).build();
+		InstatonResponse response = InstatonResponseBuilder.begin().code(exception.getReturnCode()).message(exception.getResponseMessage()).build();
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<LoyaltyResponse<Object>> handleException(Exception exception) {
+	public ResponseEntity<InstatonResponse<Object>> handleException(Exception exception) {
 		log.error(errorMessage, exception);
-		LoyaltyResponse<Object> response = LoyaltyResponseBuilder.begin().code(LoyaltyReturnCode.GENERIC_ERROR).message(exception.getMessage()).build();
+		InstatonResponse<Object> response = InstatonResponseBuilder.begin().code(InstatonReturnCode.GENERIC_ERROR).message(exception.getMessage()).build();
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(AccessDeniedException.class)
-	public ResponseEntity<LoyaltyResponse<Object>> handleException(AccessDeniedException exception) {
+	public ResponseEntity<InstatonResponse<Object>> handleException(AccessDeniedException exception) {
 		log.error(errorMessage, exception);
-		LoyaltyResponse<Object> response = LoyaltyResponseBuilder.begin().code(LoyaltyReturnCode.ACCESS_DENIED_EXCEPTION).message(exception.getMessage()).build();
+		InstatonResponse<Object> response = InstatonResponseBuilder.begin().code(InstatonReturnCode.ACCESS_DENIED_EXCEPTION).message(exception.getMessage()).build();
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

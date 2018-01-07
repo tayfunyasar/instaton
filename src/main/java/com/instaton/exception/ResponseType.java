@@ -6,6 +6,8 @@ public class ResponseType {
 
 	public static final String ERROR = "ERROR";
 
-	private ResponseType() {}
+	private ResponseType() {
+		// NO-OP
+	}
 
 }

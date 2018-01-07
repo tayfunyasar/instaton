@@ -11,11 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.instaton.cache.KeyGeneratorConstants;
 import com.instaton.constant.CacheConstants;
-import com.instaton.constant.WebConstants;
 import com.instaton.entity.generic.parameter.ParameterListInputData;
 import com.instaton.entity.generic.parameter.ParameterListItem;
 import com.instaton.entity.generic.parameter.ParameterListOutput;
-import com.instaton.exception.LoyaltyException;
+import com.instaton.exception.InstatonException;
 import com.instaton.service.proxy.GenericDataService;
 
 @Service
@@ -24,13 +23,10 @@ public class GenericService extends BaseService {
 	private static final Logger logger = LoggerFactory.getLogger(GenericService.class);
 
 	@Autowired
-	private WebConstants webConstants;
-
-	@Autowired
 	private GenericDataService genericDataService;
 
 	@Cacheable(cacheNames = CacheConstants.PARAMETER_LIST, keyGenerator = KeyGeneratorConstants.INPUT_BASED_CACHE_KEY_GENERATOR)
-	public ParameterListOutput getParameterList(ParameterListInputData inputData) throws LoyaltyException {
+	public ParameterListOutput getParameterList(ParameterListInputData inputData) throws InstatonException {
 		ParameterListOutput allParameterList = genericDataService.getAllParameterList();
 
 		List<ParameterListItem> parameterList = allParameterList.getParameterList();

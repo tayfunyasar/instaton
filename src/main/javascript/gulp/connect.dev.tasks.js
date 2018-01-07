@@ -6,17 +6,17 @@ var debowerify = require('debowerify');
 var browserSync = require('browser-sync').create();
 var connect = require('gulp-connect');
 var modRewrite = require('connect-modrewrite');
-var beautify = require('gulp-jsbeautifier');
-
-gulp.task('beautify', function() {
-  return gulp.src(['./app/**/*.html', './app/**/*.js', '!./app/translate/*'])
-    .pipe(
-      beautify({
-        config: './app/.jsbeautifyrc',
-      })
-    )
-    .pipe(gulp.dest('./app'));
-});
+//var beautify = require('gulp-jsbeautifier');
+//
+//gulp.task('beautify', function () {
+//    return gulp.src(['./app/**/*.html', './app/**/*.js',  '!./app/translate/*'])
+//        .pipe(
+//      		beautify({
+//              config: './app/.jsbeautifyrc',
+//      		})
+//        )
+//        .pipe(gulp.dest('./app'));
+//});
 
 gulp.task('reload', ['build'], function() {
   console.log('Reloading');
@@ -28,12 +28,12 @@ gulp.task('watch', ['start-server'], function() {
   gulp.watch([
     './app/**/*.*',
     './static/**/*.*',
-    '!./app/partnerloyalty.template.js'
+    '!./app/instaton.template.js'
   ], ['reload']);
 
 });
 
-gulp.task('start-server', ['build', 'beautify'], function() { //
+gulp.task('start-server', ['build'], function() { //
   var url = require('url');
   var proxy = require('proxy-middleware');
 
@@ -42,7 +42,7 @@ gulp.task('start-server', ['build', 'beautify'], function() { //
 
   browserSync.init({
     server: {
-      baseDir: "../webapp/",
+      baseDir: '../webapp/',
       middleware: [proxy(options), modRewrite([
         '!\\.\\w+$ /index.html [L]'
       ])]

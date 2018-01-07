@@ -1,53 +1,52 @@
 buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE")
-    }
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/release" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
-jar {
-    baseName = 'instaton'
-    version =  '0.0.1'
-}
+group = 'com.instaton'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
 
 repositories {
-    maven {
-        url 'https://repo.spring.io/libs-release'
-    }
-    mavenCentral()
+	mavenCentral()
+	maven { url "https://repo.spring.io/release" }
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-devtools")
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-cache')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	compile('org.springframework.boot:spring-boot-starter-mail')
 	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.session:spring-session')
+	compile('org.springframework.boot:spring-boot-starter-social-facebook')
+	compile('org.springframework.boot:spring-boot-starter-social-linkedin')
 	compile('org.springframework.boot:spring-boot-starter-social-twitter')
-	// compile('org.springframework.boot:spring-boot-starter-jdbc')
-	 compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile('org.springframework.boot:spring-boot-starter-web')
 	
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
 	
-    compile "org.springframework.social:spring-social-core"
-   	compile "org.springframework.social:spring-social-web"
-    compile "org.springframework.social:spring-social-twitter"
-	// compile('org.springframework.social:spring-social-security')
-	
-	compile("org.apache.commons:commons-lang3:3.0")
-	compile 'org.apache.commons:commons-collections4:4.1'
-	
-	// compile 'org.springframework.data:spring-data-jpa'
-	compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+	runtime('org.springframework.boot:spring-boot-devtools')
+	runtime('org.postgresql:postgresql')
 	
 	compile 'net.sf.ehcache:ehcache:2.10.2.2.21'
 	compile 'org.springframework:spring-context'
 	compile 'org.springframework:spring-context-support'
-	
 }

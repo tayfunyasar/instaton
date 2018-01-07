@@ -12,7 +12,7 @@ import com.instaton.cache.KeyGeneratorConstants;
 import com.instaton.constant.CacheConstants;
 import com.instaton.entity.generic.parameter.ParameterListItem;
 import com.instaton.entity.generic.parameter.ParameterListOutput;
-import com.instaton.exception.LoyaltyException;
+import com.instaton.exception.InstatonException;
 import com.instaton.repository.ParameterRepository;
 
 @Service
@@ -22,7 +22,7 @@ public class GenericDataService {
 	private ParameterRepository parameterRepository;
 
 	@Cacheable(cacheNames = CacheConstants.PARAMETER_LIST, keyGenerator = KeyGeneratorConstants.INPUT_BASED_CACHE_KEY_GENERATOR)
-	public ParameterListOutput getAllParameterList() throws LoyaltyException {
+	public ParameterListOutput getAllParameterList() throws InstatonException {
 		Iterable<ParameterListItem> findAll = parameterRepository.findAll();
 
 		ParameterListOutput output = new ParameterListOutput();

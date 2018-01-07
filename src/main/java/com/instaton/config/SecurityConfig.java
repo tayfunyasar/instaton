@@ -1,8 +1,8 @@
 package com.instaton.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,11 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private Http403AccessDeniedEntryPoint accessDeniedEntryPoint;
 
-	// ignore static resources such as CSS or JS files.
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/assets/**", "/logon/**", "/logon/**.jsp");
-	}
+	// // ignore static resources such as CSS or JS files.
+	// @Override
+	// public void configure(WebSecurity web) throws Exception {
+	// web.ignoring().antMatchers("/assets/**", "/logon/**", "/logon/**.jsp");
+	// }
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -38,33 +38,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		authorizeRequests(http);
 
-		http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class).csrf().csrfTokenRepository(csrfTokenRepository());
-
-		http.headers()
-				.xssProtection() /* prevents cross site scripting */
-				.and()
-				.frameOptions()
-				.sameOrigin() /* prevents x-frame attacks. The request only comes from the same origin */
-				.and()
-				.headers()
-				.httpStrictTransportSecurity() /* LOGIN ADD SOME DESC */
-				.and()
-				.contentTypeOptions(); /* X-Content-Type-Options: nosniff */
-
-		http.headers().cacheControl();
-
-		http.sessionManagement().sessionFixation(); /* Creates new jsession id after login */
+		// http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class).csrf().csrfTokenRepository(csrfTokenRepository());
+		//
+		// http.headers()
+		// .xssProtection() /* prevents cross site scripting */
+		// .and()
+		// .frameOptions()
+		// .sameOrigin() /* prevents x-frame attacks. The request only comes from the same origin */
+		// .and()
+		// .headers()
+		// .httpStrictTransportSecurity() /* LOGIN ADD SOME DESC */
+		// .and()
+		// .contentTypeOptions(); /* X-Content-Type-Options: nosniff */
+		//
+		// http.headers().cacheControl();
+		//
+		// http.sessionManagement().sessionFixation(); /* Creates new jsession id after login */
 
 	}
 
 	protected void authorizeRequests(HttpSecurity http) throws Exception {
 
-		//@formatter:off
-		http.authorizeRequests()
-			.antMatchers(EndpointConstant.API_ENDPOINT_GUEST_PATTERN).permitAll()
-			.antMatchers(EndpointConstant.API_ENDPOINT_GENERIC_PATTERN).permitAll()
-			.anyRequest().permitAll()
-			.antMatchers(EndpointConstant.API_ENDPOINT_PATTERN).authenticated();
+		http.csrf().disable();
+
+		http.authorizeRequests().anyRequest().permitAll();
+
+//		//@formatter:off
+//		http.authorizeRequests()
+//			.antMatchers(EndpointConstant.API_ENDPOINT_GUEST_PATTERN).permitAll()
+//			.antMatchers(EndpointConstant.API_ENDPOINT_GENERIC_PATTERN).permitAll()
+//			.anyRequest().permitAll()
+//			.antMatchers(EndpointConstant.API_ENDPOINT_PATTERN).authenticated();
 		
 		http.exceptionHandling()
 			.authenticationEntryPoint(authenticationEntryPoint)
@@ -76,11 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 		repository.setHeaderName("X-XSRF-TOKEN");
 		return repository;
-	}
-
-	@Bean
-	public SessionTimeoutFilter sessionTimeoutFilter() {
-		return new SessionTimeoutFilter();
 	}
 
 }

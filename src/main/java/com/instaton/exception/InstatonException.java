@@ -1,43 +1,43 @@
 package com.instaton.exception;
 
-public class LoyaltyException extends Exception {
+public class InstatonException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	private LoyaltyReturnCode returnCode;
+	private InstatonReturnCode returnCode;
 	private String responseMessage;
 
-	public LoyaltyException() {
+	public InstatonException() {
 		super();
 	}
 
-	public LoyaltyException(LoyaltyReturnCode loyaltyReturnCode, String message, String responseMessage) {
+	public InstatonException(InstatonReturnCode loyaltyReturnCode, String message, String responseMessage) {
 		super(message);
 		this.setReturnCode(loyaltyReturnCode);
 		this.setResponseMessage(responseMessage);
 	}
 
-	public LoyaltyException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public InstatonException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
-	public LoyaltyException(String message, Throwable cause) {
+	public InstatonException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public LoyaltyException(String message) {
+	public InstatonException(String message) {
 		super(message);
 	}
 
-	public LoyaltyException(Throwable cause) {
+	public InstatonException(Throwable cause) {
 		super(cause);
 	}
 
-	public LoyaltyReturnCode getReturnCode() {
+	public InstatonReturnCode getReturnCode() {
 		return returnCode;
 	}
 
-	public void setReturnCode(LoyaltyReturnCode returnCode) {
+	public void setReturnCode(InstatonReturnCode returnCode) {
 		this.returnCode = returnCode;
 	}
 

@@ -1,2 +1,3 @@
 node_modules
-app/instaton.templates.js
+app/instaton.template.js
+.DS_Store

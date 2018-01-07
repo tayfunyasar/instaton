@@ -2,9 +2,9 @@ package com.instaton.response;
 
 import java.io.Serializable;
 
-import com.instaton.exception.LoyaltyReturnCode;
+import com.instaton.exception.InstatonReturnCode;
 
-public class LoyaltyResponse<T> implements Serializable {
+public class InstatonResponse<T> implements Serializable {
 
 	private static final long serialVersionUID = -4072370032137500624L;
 
@@ -16,11 +16,11 @@ public class LoyaltyResponse<T> implements Serializable {
 	private Boolean showInModal;
 	private String type;
 
-	public LoyaltyResponse() {
+	public InstatonResponse() {
 		super();
 	}
 
-	public LoyaltyResponse(LoyaltyReturnCode rc) {
+	public InstatonResponse(InstatonReturnCode rc) {
 		super();
 		this.returnCode = rc.getCode();
 		this.reasonCode = null;
@@ -31,7 +31,7 @@ public class LoyaltyResponse<T> implements Serializable {
 		this.message = "";
 	}
 
-	public LoyaltyResponse(LoyaltyReturnCode rc, String responseMessage) {
+	public InstatonResponse(InstatonReturnCode rc, String responseMessage) {
 		super();
 		this.returnCode = rc.getCode();
 		this.returnKey = rc.getKey();
@@ -41,7 +41,7 @@ public class LoyaltyResponse<T> implements Serializable {
 		this.data = null;
 	}
 
-	public LoyaltyResponse(LoyaltyReturnCode rc, T data) {
+	public InstatonResponse(InstatonReturnCode rc, T data) {
 		super();
 		this.returnCode = rc.getCode();
 		this.returnKey = rc.getKey();
@@ -51,7 +51,7 @@ public class LoyaltyResponse<T> implements Serializable {
 		this.message = "";
 	}
 
-	public LoyaltyResponse(LoyaltyReturnCode rc, T data, String message, String reasonCode) {
+	public InstatonResponse(InstatonReturnCode rc, T data, String message, String reasonCode) {
 		super();
 		this.returnCode = rc.getCode();
 		this.reasonCode = reasonCode;

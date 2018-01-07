@@ -8,7 +8,6 @@ function translationStorageProvider($cookies, $log, LANGUAGES) {
 
   function get(name) {
     if (LANGUAGES.indexOf($cookies.getObject(name)) === -1) {
-      $log.info('Resetting invalid cookie language "' + $cookies.getObject(name) + '" to preferred language "tr"');
       $cookies.putObject(name, 'tr');
     }
     return $cookies.getObject(name);

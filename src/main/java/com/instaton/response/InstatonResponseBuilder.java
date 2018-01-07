@@ -1,20 +1,20 @@
 package com.instaton.response;
 
-import com.instaton.exception.LoyaltyReturnCode;
+import com.instaton.exception.InstatonReturnCode;
 
-public class LoyaltyResponseBuilder {
+public class InstatonResponseBuilder {
 
-	private static LoyaltyResponseBuilder instance = null;
+	private static InstatonResponseBuilder instance = null;
 
-	private LoyaltyResponse loyaltyResponse = null;
+	private InstatonResponse loyaltyResponse = null;
 
-	private LoyaltyResponseBuilder() {
-		loyaltyResponse = new LoyaltyResponse<>();
+	private InstatonResponseBuilder() {
+		loyaltyResponse = new InstatonResponse<>();
 	}
 
-	public static <T> LoyaltyResponseBuilder begin() {
-		LoyaltyResponseBuilder __ins = getInstance();
-		__ins.loyaltyResponse = new LoyaltyResponse<T>();
+	public static <T> InstatonResponseBuilder begin() {
+		InstatonResponseBuilder __ins = getInstance();
+		__ins.loyaltyResponse = new InstatonResponse<T>();
 		return __ins;
 	}
 
@@ -25,17 +25,17 @@ public class LoyaltyResponseBuilder {
 	// return new LoyaltyResponse<>(LoyaltyReturnCode.get(response.getResponseHeader().getReturnCode()), response.getResponseData(), response.getResponseHeader().getResponseMessage(), response.getResponseHeader().getReasonCode());
 	// }
 
-	public static <T> LoyaltyResponse<T> buildSuccessResponseData(T response) {
-		return LoyaltyResponseBuilder.begin().code(LoyaltyReturnCode.SUCCESS).data(response).message("İşleminiz başarı ile gerçekleştirilmiştir.").build();
+	public static <T> InstatonResponse<T> buildSuccessResponseData(T response) {
+		return InstatonResponseBuilder.begin().code(InstatonReturnCode.SUCCESS).data(response).message("İşleminiz başarı ile gerçekleştirilmiştir.").build();
 	}
 	//
 	// public static <T> LoyaltyResponse<T> emptyResponse(GTResponse<T> response) {
 	// return new LoyaltyResponse<>(LoyaltyReturnCode.get(response.getResponseHeader().getReturnCode()), response.getResponseHeader().getResponseMessage());
 	// }
 
-	public static LoyaltyResponseBuilder getInstance() {
+	public static InstatonResponseBuilder getInstance() {
 		if (instance == null) {
-			instance = new LoyaltyResponseBuilder();
+			instance = new InstatonResponseBuilder();
 		}
 
 		return instance;
@@ -45,11 +45,11 @@ public class LoyaltyResponseBuilder {
 	// return Objects.isNull(response.getResponseData());
 	// }
 
-	public LoyaltyResponse build() {
+	public InstatonResponse build() {
 		return loyaltyResponse;
 	}
 
-	public LoyaltyResponseBuilder code(LoyaltyReturnCode rc) {
+	public InstatonResponseBuilder code(InstatonReturnCode rc) {
 		loyaltyResponse.setReturnCode(rc.getCode());
 
 		loyaltyResponse.setReturnKey(rc.getKey());
@@ -58,17 +58,17 @@ public class LoyaltyResponseBuilder {
 		return this;
 	}
 
-	public LoyaltyResponseBuilder data(Object data) {
+	public InstatonResponseBuilder data(Object data) {
 		loyaltyResponse.setData(data);
 		return this;
 	}
 
-	public LoyaltyResponseBuilder message(String message) {
+	public InstatonResponseBuilder message(String message) {
 		loyaltyResponse.setMessage(message);
 		return this;
 	}
 
-	public LoyaltyResponseBuilder modal(boolean showInModal) {
+	public InstatonResponseBuilder modal(boolean showInModal) {
 		loyaltyResponse.setShowInModal(showInModal);
 		return this;
 	}

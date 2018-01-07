@@ -4,40 +4,48 @@ var source = require('vinyl-source-stream');
 var concat = require('gulp-concat');
 var replace = require('gulp-replace');
 var rev = require('gulp-rev');
-var buffer = require('gulp-buffer');
 var revReplace = require('gulp-rev-replace');
 var gulpif = require('gulp-if');
 var eslint = require('gulp-eslint');
 var htmlhint = require('gulp-htmlhint');
-var beautify = require('gulp-jsbeautifier');
 var sass = require('gulp-sass');
 var templateCache = require('gulp-angular-templatecache');
 var htmlmin = require('gulp-htmlmin');
+var pump = require('pump');
+var uglify = require('gulp-uglify');
 
-
-gulp.task('htmlCache', ['htmlhint', 'eslint'], function() {
-  // return gulp.src('./app/**/*.html')
-  //     .pipe(htmlmin({
-  //         collapseWhitespace: true
-  //     }))
-  //     .pipe(templateCache(
-  //         'partnerloyalty.template.js', {
-  //             templateHeader: 'angular.module("partnerloyalty.template", []).run(["$templateCache", function($templateCache) {',
-  //             standAlone: false,
-  //             moduleSystem: 'Browserify',
-  //             transformUrl: function(url) {
-  //                 return 'assets/tpl/' + url;
-  //             }
-  //         }
-  //     )).pipe(gulp.dest('./app'));
+gulp.task('htmlCache', ['htmlhint', 'lint'], function() {
+  return gulp.src('./app/**/*.html')
+    .pipe(htmlmin({
+      collapseWhitespace: true
+    }))
+    .pipe(templateCache(
+      'instaton.template.js', {
+        templateHeader: 'angular.module("instaton.app.template", []).run(["$templateCache", function($templateCache) {',
+        standAlone: false,
+        moduleSystem: 'Browserify',
+        transformUrl: function(url) {
+          return url;
+        }
+      }
+    )).pipe(gulp.dest('./app'));
 });
 
-gulp.task('eslint', function() {
+gulp.task('lint', function() {
   // ESLint ignores files with 'node_modules' paths.
   // So, it's best to have gulp ignore the directory as well.
   // Also, Be sure to return the stream from the task;
   // Otherwise, the task may end before the stream has finished.
-  return gulp.src(['./app/**/*.js', '!./app/translate/*', '!./app/partnerloyalty.template.js', '!./app/content/reports/components/report-filter/report-excel-download/*', '!./app/content/components/date-picker/templates/*'])
+  return gulp.src([
+      './app/**/*.js',
+      '!./app/content/reports/components/report-filter/daterange-picker/**/*.js',
+      '!./app/content/reports/components/report-filter/date-picker/**/*.js',
+      '!./app/content/reports/components/report-filter/date-period-filter/*.js',
+
+      '!./app/instaton.template.js',
+      '!./app/content/reports/components/report-filter/report-excel-download/*',
+      '!./app/content/components/date-picker/templates/*'
+    ])
     // eslint() attaches the lint output to the 'eslint' property
     // of the file object so it can be used by other modules.
     .pipe(
@@ -54,14 +62,20 @@ gulp.task('eslint', function() {
 });
 
 gulp.task('htmlhint', function() {
-  return gulp.src(['./app/**/*.html', '!./app/translate/*'])
+  return gulp.src(
+      [
+        './app/**/*.html',
+        '!./app/content/reports/components/report-filter/daterange-picker/**/*.html',
+        '!./app/content/reports/components/report-filter/date-picker/**/*.html',
+        '!./app/content/reports/components/report-filter/date-period-filter/*.html',
+      ])
     .pipe(
       htmlhint('./app/.htmlhintrc')
     )
     .pipe(htmlhint.failReporter());
 });
 
-gulp.task('copy-views', ['eslint'], function() {
+gulp.task('copy-views', ['lint'], function() {
   gulp.src('./app/index.html')
     .pipe(replace(/LoyaltyBuildTime/g, 'LoyaltyBuildTime: ' + (new Date()).toLocaleString()))
     .pipe(gulp.dest('../webapp/'));
@@ -71,7 +85,7 @@ gulp.task('copy-views', ['eslint'], function() {
 
 });
 
-gulp.task('build-js', ['htmlCache', 'eslint'], function() {
+gulp.task('build-js', ['htmlCache', 'lint'], function() {
 
   var b = browserify({
     entries: './app/main.js',
@@ -107,19 +121,28 @@ gulp.task('copy-static', function() {
   gulp.src('./static/img/**')
     .pipe(gulp.dest('../webapp/assets/img/'));
 
-  gulp.src('./app/translate/**')
-    .pipe(gulp.dest('../webapp/assets/translate/'));
-
   gulp.src('./app/**/*.jsp')
     .pipe(gulp.dest('../webapp/WEB-INF/jsp'));
 });
 
-gulp.task('revfiles', ['copy-views', 'build-styles', 'build-js'], function() {
+gulp.task('compress', ['copy-views', 'build-styles', 'build-js'], function(cb) {
+  pump([
+      gulp.src('../webapp/assets/js/instaton.js'),
+      uglify({
+        mangle: false
+      }),
+      gulp.dest('../webapp/assets/min')
+    ],
+    cb
+  );
+});
+
+gulp.task('revfiles', ['compress'], function() {
   return gulp
     .src([
       '../webapp/assets/css/instaton.css',
-      '../webapp/assets/css/styles.all.css',
-      '../webapp/assets/js/instaton.js'
+      // '../webapp/assets/min/instaton.js',
+      '../webapp/assets/img/favicon.ico',
     ])
     .pipe(rev())
     .pipe(gulp.dest('../webapp/rev')) // write rev'd assets to build dir
@@ -130,9 +153,10 @@ gulp.task('revfiles', ['copy-views', 'build-styles', 'build-js'], function() {
 gulp.task('copyrevfiles', ['revfiles'], function() {
   gulp.src('../webapp/rev/*.css')
     .pipe(gulp.dest('../webapp/assets/css'));
-  gulp.src('../webapp/rev/*.js')
+  gulp.src('../webapp/assets/min/*.js')
     .pipe(gulp.dest('../webapp/assets/js'));
-  return;
+  gulp.src('../webapp/rev/*.ico')
+    .pipe(gulp.dest('../webapp/assets/img'));
 });
 
 gulp.task('revreplace', ['copyrevfiles', 'revfiles', 'copy-views'], function() {
