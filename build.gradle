@@ -3,16 +3,25 @@ buildscript {
 		springBootVersion = '1.5.9.RELEASE'
 	}
 	repositories {
-		mavenCentral()
-		maven { url "https://repo.spring.io/release" }
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url "http://repo.spring.io/plugins-release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2/" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5.1'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
 
 group = 'com.instaton'
@@ -20,8 +29,12 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
-	maven { url "https://repo.spring.io/release" }
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url "http://repo.spring.io/plugins-release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2/" }
 }
 
 
@@ -31,19 +44,20 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-cache')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
-	compile('org.springframework.boot:spring-boot-starter-hateoas')
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.session:spring-session')
 	compile('org.springframework.boot:spring-boot-starter-social-facebook')
 	compile('org.springframework.boot:spring-boot-starter-social-linkedin')
 	compile('org.springframework.boot:spring-boot-starter-social-twitter')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter'
+	runtime('org.springframework.boot:spring-boot-devtools')
+	
 	
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
 	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
 	
-	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('org.postgresql:postgresql')
 	
 	compile 'net.sf.ehcache:ehcache:2.10.2.2.21'

@@ -4,6 +4,7 @@ moment = require('moment');
 require('angular');
 require('bootstrap/dist/js/bootstrap');
 require('./instaton');
+require('./middleware');
 require('./content');
 require('./footer');
 require('./header');

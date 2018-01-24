@@ -23,7 +23,7 @@
   "title-require": true,
   "head-script-disabled": true,
   "doctype-html5": true,
-  "style-disabled": true,
+  "style-disabled": false, //todo
   "inline-script-disabled": true,
   "id-class-ad-disabled": true,
   "href-abs-or-rel": true,

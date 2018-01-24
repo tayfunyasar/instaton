@@ -2,4 +2,6 @@
 
 	<cache name="PARAMETER_LIST" maxEntriesLocalHeap="200" timeToLiveSeconds="43200"></cache>
 
+	<cache name="TWITTER_PROFILE_SERVICE_CURRENT" maxEntriesLocalHeap="200" timeToLiveSeconds="300"></cache>
+
 </ehcache>

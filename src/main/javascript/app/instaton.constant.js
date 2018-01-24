@@ -4,6 +4,7 @@ angular.module('instaton.app', [
     'instaton.app.footer',
     'instaton.app.utils',
     'instaton.app.template',
+    'instaton.app.middleware'
   ])
   .constant('InstatonConfig', {
     GUEST_ENDPOINT_URL: '/api/guest',

@@ -35,23 +35,23 @@ public class CustomKeyGenerators {
 		};
 	}
 
-	@Bean
-	@Qualifier(KeyGeneratorConstants.LOGIN_LEVEL_BASED_CACHE)
-	public KeyGenerator loginLevelBasedCacheKeyGenerator() {
-		return new KeyGenerator() {
-
-			@Override
-			public Object generate(Object target, Method method, Object... params) {
-				List<Object> hashArray = CustomCacheKeyGeneratorHelper.cacheKeyGenerator(params);
-
-				// if (partnerAuthenticationService.getCurrentAuthentication() != null)
-				// hashArray.add(partnerAuthenticationService.getCurrentAuthentication().getLoginLevel());
-				// else
-				// hashArray.add("00");
-				return Arrays.deepHashCode(hashArray.toArray());
-			}
-		};
-	}
+	// @Bean
+	// @Qualifier(KeyGeneratorConstants.LOGIN_LEVEL_BASED_CACHE)
+	// public KeyGenerator loginLevelBasedCacheKeyGenerator() {
+	// return new KeyGenerator() {
+	//
+	// @Override
+	// public Object generate(Object target, Method method, Object... params) {
+	// List<Object> hashArray = CustomCacheKeyGeneratorHelper.cacheKeyGenerator(params);
+	//
+	// // if (partnerAuthenticationService.getCurrentAuthentication() != null)
+	// // hashArray.add(partnerAuthenticationService.getCurrentAuthentication().getLoginLevel());
+	// // else
+	// // hashArray.add("00");
+	// return Arrays.deepHashCode(hashArray.toArray());
+	// }
+	// };
+	// }
 
 	@Bean
 	@Qualifier(KeyGeneratorConstants.USER_BASED_CACHE_KEY_GENERATOR)

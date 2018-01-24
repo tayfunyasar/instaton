@@ -1,24 +1,39 @@
 package com.instaton.controller.social.mvc;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.twitter.api.BlockOperations;
+import javax.inject.Inject;
+
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/connecttwitter")
+@RequestMapping("/test")
 public class SocialLoginController {
-	
-	@Autowired
+
 	private Twitter twitter;
 
-	@RequestMapping(method = RequestMethod.GET)
+	private ConnectionRepository connectionRepository;
+
+	@Inject
+	public SocialLoginController(Twitter twitter, ConnectionRepository connectionRepository) {
+		this.twitter = twitter;
+		this.connectionRepository = connectionRepository;
+	}
+
+    @RequestMapping(method=RequestMethod.GET, value="/test")
 	public String helloTwitter(Model model) {
-		BlockOperations blockOperations = twitter.blockOperations();
-		
-		return "redirect:/connect/twitter";
+		if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+			return "redirect:/connect/twitter";
+		}
+
+		model.addAttribute(twitter.userOperations().getUserProfile());
+		CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
+		model.addAttribute("friends", friends);
+		return "hello";
 	}
 }

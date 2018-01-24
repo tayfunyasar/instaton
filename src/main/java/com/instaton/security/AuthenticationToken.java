@@ -1,7 +1,6 @@
 package com.instaton.security;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.security.core.GrantedAuthority;
 

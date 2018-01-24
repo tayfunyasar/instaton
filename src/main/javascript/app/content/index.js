@@ -1,11 +1,11 @@
 // parent
 require('./config');
-require('./controller');
+require('./content.controller');
 
 // dirs
 // settings
 require('./components');
 
 // pages
-require('./dashboard');
 require('./login');
+require('./dashboard');

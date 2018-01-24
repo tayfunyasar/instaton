@@ -7,17 +7,17 @@ function config($stateProvider) {
     controllerAs: 'self',
   });
 
-  $stateProvider.state('content.dashboard', {
-    url: '/dashboard',
-    templateUrl: 'content/dashboard/tpl.html',
-    controller: 'ContentDashboardController',
-    controllerAs: 'self',
-  });
-
   $stateProvider.state('content.login', {
     url: '/',
     templateUrl: 'content/login/tpl.html',
-    controller: 'ContentDashboardController',
+    controller: 'LoginController',
+    controllerAs: 'self',
+  });
+
+  $stateProvider.state('content.dashboard', {
+    url: '/dashboard',
+    templateUrl: 'content/dashboard/tpl.html',
+    controller: 'DashboardController',
     controllerAs: 'self',
   });
 }

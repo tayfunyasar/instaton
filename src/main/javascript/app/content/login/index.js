@@ -1,1 +1,1 @@
-require('./controller');
+require('./login.controller');
