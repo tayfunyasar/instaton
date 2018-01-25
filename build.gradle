@@ -1,3 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.instaton'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.5' 
+}
+
 buildscript {
 	ext {
 		springBootVersion = '1.5.9.RELEASE'
@@ -15,19 +36,6 @@ buildscript {
 	}
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.5.1'
-}
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.springframework.boot'
-
-group = 'com.instaton'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
 repositories {
         mavenLocal()
         mavenCentral()
@@ -36,7 +44,6 @@ repositories {
         maven { url "http://repo.spring.io/milestone" }
         maven { url "https://plugins.gradle.org/m2/" }
 }
-
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
@@ -53,7 +60,6 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter'
 	runtime('org.springframework.boot:spring-boot-devtools')
-	
 	
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
 	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
