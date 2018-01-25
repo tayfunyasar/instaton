@@ -26,6 +26,6 @@
   "style-disabled": false, //todo
   "inline-script-disabled": true,
   "id-class-ad-disabled": true,
-  "href-abs-or-rel": true,
+  "href-abs-or-rel": false, //todo
   "attr-unsafe-chars": true
 }

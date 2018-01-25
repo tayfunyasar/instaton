@@ -9,6 +9,12 @@ function ProfileFactory($http) {
     });
   };
 
+  self.getSearch = function (postData) {
+    return $http.get('/api/search/current').then(function (response) {
+      return response.data;
+    });
+  };
+
   return self;
 }
 

@@ -7,6 +7,10 @@ function ProfileService(ProfileFactory) {
     return ProfileFactory.getProfile(postData);
   };
 
+  self.getSearch = function (postData) {
+    return ProfileFactory.getSearch(postData);
+  };
+
   return self;
 }
 
