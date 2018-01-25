@@ -1,7 +1,14 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd">
 
-	<cache name="PARAMETER_LIST" maxEntriesLocalHeap="200" timeToLiveSeconds="43200"></cache>
+	<cache name="PARAMETER_LIST" maxEntriesLocalHeap="200"
+		timeToLiveSeconds="43200"></cache>
 
-	<cache name="TWITTER_PROFILE_SERVICE_CURRENT" maxEntriesLocalHeap="200" timeToLiveSeconds="300"></cache>
+	<cache name="TWITTER_PROFILE_SERVICE_CURRENT"
+		maxEntriesLocalHeap="200" timeToLiveSeconds="300"></cache>
+
+
+	<cache name="TWITTER_SEARCH"
+		maxEntriesLocalHeap="200" timeToLiveSeconds="600"></cache>
 
 </ehcache>
