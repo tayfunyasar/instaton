@@ -219,6 +219,7 @@
                         <img ng-src="{{tweet.profileImageUrl.replace('_normal','')}}" alt="tweet.fromUser">
                         <h4><a target="_blank" href="{{tweet.user.profileUrl}}">{{tweet.user.name}}</a></h4>
                         <p ng-bind-html="tweet.text"></p>
+                        <button type="button" class="btn btn-info" ng-click="self.hideUser(tweet)">Hide</button>
                   </article>
             </section>
             <hr>

@@ -1,6 +1,8 @@
-DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService'];
+var _ = require('underscore');
 
-function DashboardController(ProfileService, BlackHashTagEntityService) {
+DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'BlackUserIdEntityService'];
+
+function DashboardController(ProfileService, BlackHashTagEntityService, BlackUserIdEntityService) {
   var self = this;
 
   self.tagFilterList = [];
@@ -20,6 +22,17 @@ function DashboardController(ProfileService, BlackHashTagEntityService) {
       keyword: tag,
     };
     BlackHashTagEntityService.add(postData);
+  };
+
+  self.hideUser = function (tweet) {
+    self.searchResult.filteredTweets = _.reject(self.searchResult.filteredTweets, function (filteredTweet) {
+      return filteredTweet == tweet;
+    });
+
+    var postData = {
+      userId: tweet.user.id,
+    };
+    BlackUserIdEntityService.add(postData);
   };
 }
 

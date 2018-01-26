@@ -10,4 +10,6 @@ public class EndpointConstant {
 
 	public static final String API_ENDPOINT_BLACKKEYWORD = "/api/blackhashtagentity/**";
 
+	public static final String API_ENDPOINT_BLACKUSERID = "/api/blackuseridentity/**";
+
 }

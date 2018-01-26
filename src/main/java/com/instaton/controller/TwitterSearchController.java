@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.instaton.entity.black.blackhashtagentity.BlackHashTagEntity;
+import com.instaton.entity.black.blackuserid.BlackUserIdEntity;
 import com.instaton.entity.twitter.CustomSearchResults;
 import com.instaton.service.database.BlackHashTagEntityService;
+import com.instaton.service.database.BlackUserIdEntityService;
 import com.instaton.service.twitter.TwitterProfileService;
 
 @RestController
@@ -27,10 +29,14 @@ public class TwitterSearchController {
 	@Autowired
 	private BlackHashTagEntityService blackKeywordService;
 
+	@Autowired
+	private BlackUserIdEntityService blackUserIdENtityService;
+
 	@GetMapping("/current")
 	public CustomSearchResults getCurrent() {
 		final SearchResults search = this.twitterProfileService.getSearch();
 		final List<BlackHashTagEntity> blackKeywordList = this.blackKeywordService.findAll();
+		final List<BlackUserIdEntity> blackUserIdList = this.blackUserIdENtityService.findAll();
 
 		final CustomSearchResults customSearchResults = new CustomSearchResults(search);
 
@@ -43,6 +49,12 @@ public class TwitterSearchController {
 					if (StringUtils.equalsIgnoreCase(blackKeywordItem.getKeyword(), hashTagEntity.getText())) {
 						isContains = true;
 					}
+				}
+			}
+
+			for (final BlackUserIdEntity blackUserIdEntity : blackUserIdList) {
+				if (blackUserIdEntity.getUserId() == tweet.getUser().getId()) {
+					isContains = true;
 				}
 			}
 			if (!isContains) {
