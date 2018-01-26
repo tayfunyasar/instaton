@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.HashTagEntity;
@@ -17,40 +16,48 @@ import com.instaton.util.SortUtil;
 
 public class CustomSearchResults extends SearchResults {
 
-	private SearchResults wrapped;
+	private final SearchResults wrapped;
 
-	private List<HashTagEntity> allHashTags = new ArrayList<>();
+	private List<String> filteredMostUsedHashTags = new ArrayList<>();
+	private List<Tweet> filteredTweets = new ArrayList<>();
 
-	public CustomSearchResults(SearchResults original) {
+	public CustomSearchResults(final SearchResults original) {
 		super(original.getTweets(), original.getSearchMetadata());
 		this.wrapped = original;
 	}
 
+	public List<String> getFilteredMostUsedHashTags() {
+		return this.filteredMostUsedHashTags;
+	}
+
+	public List<Tweet> getFilteredTweets() {
+		return this.filteredTweets;
+	}
+
 	public Set<String> getMostUsedHashTags() {
-		Map<String, Integer> map = new HashMap<>();
+		final Map<String, Integer> map = new HashMap<>();
 
-		for (Tweet tweet : wrapped.getTweets()) {
-			Entities entities = tweet.getEntities();
-			List<HashTagEntity> hashTags = entities.getHashTags();
+		for (final Tweet tweet : this.wrapped.getTweets()) {
+			final Entities entities = tweet.getEntities();
+			final List<HashTagEntity> hashTags = entities.getHashTags();
 
-			for (HashTagEntity hashTagEntity : hashTags) {
-				String tag = hashTagEntity.getText();
-				Integer count = map.get(tag);
-				map.put(tag, (count == null) ? 1 : count + 1);
+			for (final HashTagEntity hashTagEntity : hashTags) {
+				final String tag = hashTagEntity.getText();
+				final Integer count = map.get(tag);
+				map.put(tag, count == null ? 1 : count + 1);
 			}
 		}
 
-		Map<String, Integer> treeMap = new TreeMap<>(map);
+		final Map<String, Integer> treeMap = new TreeMap<>(map);
 
 		return SortUtil.sortByValue(treeMap);
 	}
 
-	public List<HashTagEntity> getAllHashTags() {
-		return allHashTags;
+	public void setFilteredMostUsedHashTags(final List<String> filteredMostUsedHashTags) {
+		this.filteredMostUsedHashTags = filteredMostUsedHashTags;
 	}
 
-	public void setAllHashTags(List<HashTagEntity> allHashTags) {
-		this.allHashTags = allHashTags;
+	public void setFilteredTweets(final List<Tweet> filteredTweets) {
+		this.filteredTweets = filteredTweets;
 	}
-
 }

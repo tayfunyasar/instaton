@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.instaton.service.TwitterProfileService;
+import com.instaton.service.twitter.TwitterProfileService;
 
 @RestController
 @RequestMapping("/api/profile")

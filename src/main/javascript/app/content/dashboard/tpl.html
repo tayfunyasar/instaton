@@ -199,7 +199,7 @@
             <div class="row">
                   <div class="col-sm-8 col-sm-offset-2">
                         <div class="btn-group" data-toggle="buttons">
-                              <label class="btn btn-primary" ng-repeat="tag in self.searchResult.mostUsedHashTags | limitTo: 20" ng-click="self.addTagFilter(tag)">
+                              <label class="btn btn-primary" ng-repeat="tag in self.searchResult.filteredMostUsedHashTags" ng-click="self.addTagFilter(tag)">
                                     <input type="checkbox" checked autocomplete="off" >{{tag}}
                               </label>
                         </div>
@@ -215,9 +215,9 @@
 
             <hr>
             <section id="pinBoot">
-                  <article class="white-panel" ng-repeat="tweet in self.searchResult.tweets | filterByTags: self.tagFilterList">
-                        <img ng-src="{{tweet.profileImageUrl}}" alt="tweet.fromUser">
-                        <h4><a href="#">Title 1</a></h4>
+                  <article class="white-panel" ng-repeat="tweet in self.searchResult.filteredTweets | filterByTags: self.tagFilterList">
+                        <img ng-src="{{tweet.profileImageUrl.replace('_normal','')}}" alt="tweet.fromUser">
+                        <h4><a target="_blank" href="{{tweet.user.profileUrl}}">{{tweet.user.name}}</a></h4>
                         <p ng-bind-html="tweet.text"></p>
                   </article>
             </section>
