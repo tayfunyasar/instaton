@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.instaton.service.twitter.TwitterProfileService;
+import com.instaton.service.twitter.impl.TwitterServiceImpl;
 
 @RestController
 @RequestMapping("/api/profile")
 public class TwitterProfileController {
 
 	@Autowired
-	private TwitterProfileService twitterProfileService;
+	private TwitterServiceImpl twitterProfileService;
 
 	@GetMapping("/current")
 	public TwitterProfile getCurrent() {

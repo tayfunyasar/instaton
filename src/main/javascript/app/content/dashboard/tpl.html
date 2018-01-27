@@ -203,6 +203,11 @@
                                     <input type="checkbox" checked autocomplete="off" >{{tag}}
                               </label>
                         </div>
+                        <div class="btn-group" data-toggle="buttons">
+                              <label class="btn btn-warning" ng-repeat="tag in self.searchResult.mostMentionUsers">
+                                    <input type="checkbox" checked autocomplete="off" >{{tag}}
+                              </label>
+                        </div>
                         <button type="button" class="btn btn-default">Default</button>
                         <button type="button" class="btn btn-primary">Primary</button>
                         <button type="button" class="btn btn-success">Success</button>
@@ -217,9 +222,18 @@
             <section id="pinBoot">
                   <article class="white-panel" ng-repeat="tweet in self.searchResult.filteredTweets | filterByTags: self.tagFilterList">
                         <img ng-src="{{tweet.profileImageUrl.replace('_normal','')}}" alt="tweet.fromUser">
-                        <h4><a target="_blank" href="{{tweet.user.profileUrl}}">{{tweet.user.name}}</a></h4>
+                        <h4>
+                          <a target="_blank" href="{{tweet.user.profileUrl}}">{{tweet.user.name}}</a>
+                          <button type="button" class="btn btn-info" ng-click="self.hideUser(tweet)">Hide</button>
+                        </h4>
                         <p ng-bind-html="tweet.text"></p>
-                        <button type="button" class="btn btn-info" ng-click="self.hideUser(tweet)">Hide</button>
+                        <img ng-repeat="media in tweet.entities.media" ng-src="{{media.mediaUrl}}" alt="tweet.fromUser">
+
+                        <div ng-show="tweet.user.gender == null">
+                              <button type="button" class="btn btn-default" ng-click="self.markUserAsFemale(tweet);">FEMALE</button>
+                              <button type="button" class="btn btn-warning" ng-click="self.markUserAsBot(tweet);">BOT</button>
+                              <button type="button" class="btn btn-danger pull-right" ng-click="self.markUserAsMale(tweet);">MALE</button>
+                        </div>
                   </article>
             </section>
             <hr>

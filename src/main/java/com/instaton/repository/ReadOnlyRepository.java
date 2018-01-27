@@ -1,4 +1,4 @@
-package com.instaton.repository.base;
+package com.instaton.repository;
 
 import java.io.Serializable;
 import java.util.List;

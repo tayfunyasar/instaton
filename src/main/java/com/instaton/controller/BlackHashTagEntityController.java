@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.instaton.constant.EndpointConstant;
 import com.instaton.entity.black.blackhashtagentity.BlackHashTagEntity;
 import com.instaton.exception.InstatonException;
-import com.instaton.service.database.BlackHashTagEntityService;
+import com.instaton.service.twitter.BlackHashTagEntityService;
 
 @RestController
 @RequestMapping(EndpointConstant.API_ENDPOINT_BLACKKEYWORD)

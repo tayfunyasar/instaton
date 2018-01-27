@@ -15,7 +15,7 @@ import com.instaton.entity.generic.parameter.ParameterListInputData;
 import com.instaton.entity.generic.parameter.ParameterListItem;
 import com.instaton.entity.generic.parameter.ParameterListOutput;
 import com.instaton.exception.InstatonException;
-import com.instaton.service.proxy.GenericDataService;
+import com.instaton.service.database.GenericDataService;
 
 @Service
 public class GenericService extends BaseService {

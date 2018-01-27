@@ -1,4 +1,4 @@
-package com.instaton.service.database;
+package com.instaton.service.twitter;
 
 import java.util.List;
 
@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.instaton.entity.black.blackhashtagentity.BlackHashTagEntity;
-import com.instaton.repository.BlackHashTagEntityRepository;
+import com.instaton.repository.twitter.BlackHashTagEntityRepository;
+import com.instaton.service.database.BaseService;
 
 @Service
 public class BlackHashTagEntityService implements BaseService {

@@ -1,4 +1,4 @@
-package com.instaton.service.proxy;
+package com.instaton.service.database;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,7 +13,7 @@ import com.instaton.constant.CacheConstants;
 import com.instaton.entity.generic.parameter.ParameterListItem;
 import com.instaton.entity.generic.parameter.ParameterListOutput;
 import com.instaton.exception.InstatonException;
-import com.instaton.repository.ParameterRepository;
+import com.instaton.repository.twitter.ParameterRepository;
 
 @Service
 public class GenericDataService {

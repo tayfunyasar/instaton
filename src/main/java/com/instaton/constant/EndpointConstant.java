@@ -12,4 +12,6 @@ public class EndpointConstant {
 
 	public static final String API_ENDPOINT_BLACKUSERID = "/api/blackuseridentity/**";
 
+	public static final String API_ENDPOINT_TWITTERUSER = "/api/twitteruser/**";
+
 }

@@ -1,4 +1,4 @@
-package com.instaton.repository;
+package com.instaton.repository.twitter;
 
 import java.util.List;
 

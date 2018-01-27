@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.instaton.constant.EndpointConstant;
-import com.instaton.entity.black.blackuserid.BlackUserIdEntity;
+import com.instaton.entity.twitter.TwitterUser;
 import com.instaton.exception.InstatonException;
-import com.instaton.service.twitter.BlackUserIdEntityService;
+import com.instaton.service.twitter.TwitterUserService;
 
 @RestController
-@RequestMapping(EndpointConstant.API_ENDPOINT_BLACKUSERID)
-public class BlackUserIdEntityController {
+@RequestMapping(EndpointConstant.API_ENDPOINT_TWITTERUSER)
+public class TwitterUserController {
 
 	@Autowired
-	private BlackUserIdEntityService service;
+	private TwitterUserService service;
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(@RequestBody final BlackUserIdEntity input) throws InstatonException {
+	public void add(@RequestBody final TwitterUser input) throws InstatonException {
 
 		this.service.save(input);
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public List<BlackUserIdEntity> list() throws InstatonException {
+	public List<TwitterUser> list() throws InstatonException {
 
 		return this.service.findAll();
 	}

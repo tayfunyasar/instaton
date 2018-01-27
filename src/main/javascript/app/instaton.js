@@ -106,25 +106,25 @@ function config(
   $translatePartialLoaderProvider.addPart('common');
 
   // loading
-  cfpLoadingBarProvider.spinnerTemplate = '\n' +
-    '<div class=\'spinner-bg\'> \n' +
-    '<section class=\'wrapper\'>\n' +
-    '<div class=\'uil-default-css\' style=\'transform:scale(0.65);\'>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
-    '</div>\n' +
-    '</section>\n' +
-    '</div>\n';
+  // cfpLoadingBarProvider.spinnerTemplate = '\n' +
+  //   '<div class=\'spinner-bg\'> \n' +
+  //   '<section class=\'wrapper\'>\n' +
+  //   '<div class=\'uil-default-css\' style=\'transform:scale(0.65);\'>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '<div style=\'top:77px;left:91px;width:18px;height:46px;background:#00743a;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:8px;position:absolute;\'></div>\n' +
+  //   '</div>\n' +
+  //   '</section>\n' +
+  //   '</div>\n';
   cfpLoadingBarProvider.latencyThreshold = 0;
   cfpLoadingBarProvider.includeBar = true;
   cfpLoadingBarProvider.parentSelector = '#loading-bar-container';

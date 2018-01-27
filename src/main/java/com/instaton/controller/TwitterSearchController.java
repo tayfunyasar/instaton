@@ -15,16 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.instaton.entity.black.blackhashtagentity.BlackHashTagEntity;
 import com.instaton.entity.black.blackuserid.BlackUserIdEntity;
 import com.instaton.entity.twitter.CustomSearchResults;
-import com.instaton.service.database.BlackHashTagEntityService;
-import com.instaton.service.database.BlackUserIdEntityService;
-import com.instaton.service.twitter.TwitterProfileService;
+import com.instaton.entity.twitter.TwitterUser;
+import com.instaton.service.twitter.BlackHashTagEntityService;
+import com.instaton.service.twitter.BlackUserIdEntityService;
+import com.instaton.service.twitter.TwitterUserService;
+import com.instaton.service.twitter.impl.TwitterServiceImpl;
 
 @RestController
 @RequestMapping("/api/search")
 public class TwitterSearchController {
 
 	@Autowired
-	private TwitterProfileService twitterProfileService;
+	private TwitterServiceImpl twitterProfileService;
 
 	@Autowired
 	private BlackHashTagEntityService blackKeywordService;
@@ -32,11 +34,15 @@ public class TwitterSearchController {
 	@Autowired
 	private BlackUserIdEntityService blackUserIdENtityService;
 
+	@Autowired
+	private TwitterUserService twitterUserService;
+
 	@GetMapping("/current")
 	public CustomSearchResults getCurrent() {
 		final SearchResults search = this.twitterProfileService.getSearch();
 		final List<BlackHashTagEntity> blackKeywordList = this.blackKeywordService.findAll();
 		final List<BlackUserIdEntity> blackUserIdList = this.blackUserIdENtityService.findAll();
+		final List<TwitterUser> findAllByGenderMale = this.twitterUserService.findAllByGenderMale();
 
 		final CustomSearchResults customSearchResults = new CustomSearchResults(search);
 
@@ -54,6 +60,12 @@ public class TwitterSearchController {
 
 			for (final BlackUserIdEntity blackUserIdEntity : blackUserIdList) {
 				if (blackUserIdEntity.getUserId() == tweet.getUser().getId()) {
+					isContains = true;
+				}
+			}
+
+			for (final TwitterUser twitterUser : findAllByGenderMale) {
+				if (tweet.getUser().getId() == twitterUser.getUserId()) {
 					isContains = true;
 				}
 			}
