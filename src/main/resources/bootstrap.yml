@@ -1,7 +1,10 @@
 logging:
   level:
-    org.springframework: DEBUG
-    
+    root: INFO
+    org.springframework: INFO
+    org.hibernate: ERROR
+    o.h.engine.jdbc.spi: INFO
+
 spring:
   jpa:
     show-sql: true

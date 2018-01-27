@@ -14,7 +14,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
@@ -24,23 +23,17 @@ public class WebMvcResourcesConfiguration extends WebMvcConfigurerAdapter {
 
 	ResourceProperties resourceProperties = new ResourceProperties();
 
-	// http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx
-	// JSON Vulnerability Protection
 	@Override
-	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converters.add(converter);
-	}
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		if (!registry.hasMappingForPattern("/**/index.html")) {
 			registry.addResourceHandler("/**/index.html").addResourceLocations("/index.html");
 		}
 
-		Integer cachePeriod = Integer.valueOf(10/* environment.getProperty("spring.resources.cache-period") */);
+		final Integer cachePeriod = Integer.valueOf(10/* environment.getProperty("spring.resources.cache-period") */);
 
-		final String[] staticLocations = resourceProperties.getStaticLocations();
+		final String[] staticLocations = this.resourceProperties.getStaticLocations();
 		final String[] indexLocations = new String[staticLocations.length];
 		for (int i = 0; i < staticLocations.length; i++) {
 			indexLocations[i] = staticLocations[i] + "index.html";
@@ -50,15 +43,23 @@ public class WebMvcResourcesConfiguration extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/**").addResourceLocations(indexLocations).setCachePeriod(cachePeriod).resourceChain(true).addResolver(new PathResourceResolver() {
 
 			@Override
-			protected Resource getResource(String resourcePath, Resource location) throws IOException {
+			protected Resource getResource(final String resourcePath, final Resource location) throws IOException {
 				return location.exists() && location.isReadable() ? location : null;
 			}
 		});
 	}
 
+	// http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx
+	// JSON Vulnerability Protection
+	@Override
+	public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
+		final MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		converters.add(converter);
+	}
+
 	@Bean
 	public MultipartConfigElement multipartConfigElement() {
-		MultipartConfigFactory factory = new MultipartConfigFactory();
+		final MultipartConfigFactory factory = new MultipartConfigFactory();
 		factory.setMaxFileSize("60MB");
 		factory.setMaxRequestSize("60MB");
 		return factory.createMultipartConfig();
