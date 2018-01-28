@@ -11,49 +11,54 @@ import com.instaton.entity.AbstractEntity;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ParameterListItem extends AbstractEntity {
 
+	@Override
+	public String toString() {
+		return "ParameterListItem [parameterNameText=" + parameterNameText + ", parameterCode=" + parameterCode + ", parameterValue=" + parameterValue + ", orderNum=" + orderNum + ", parameterType=" + parameterType + "]";
+	}
+
 	private String parameterNameText;
 	private String parameterCode;
 	private String parameterValue;
 	private Integer orderNum;
 	private Integer parameterType;
 
-	public Integer getOrderNum() {
-		return this.orderNum;
-	}
-
-	public String getParameterCode() {
-		return this.parameterCode;
-	}
-
 	public String getParameterNameText() {
-		return this.parameterNameText;
+		return parameterNameText;
 	}
 
-	public Integer getParameterType() {
-		return this.parameterType;
-	}
-
-	public String getParameterValue() {
-		return this.parameterValue;
-	}
-
-	public void setOrderNum(final Integer orderNum) {
-		this.orderNum = orderNum;
-	}
-
-	public void setParameterCode(final String parameterCode) {
-		this.parameterCode = parameterCode;
-	}
-
-	public void setParameterNameText(final String parameterNameText) {
+	public void setParameterNameText(String parameterNameText) {
 		this.parameterNameText = parameterNameText;
 	}
 
-	public void setParameterType(final Integer parameterType) {
-		this.parameterType = parameterType;
+	public String getParameterCode() {
+		return parameterCode;
 	}
 
-	public void setParameterValue(final String parameterValue) {
+	public void setParameterCode(String parameterCode) {
+		this.parameterCode = parameterCode;
+	}
+
+	public String getParameterValue() {
+		return parameterValue;
+	}
+
+	public void setParameterValue(String parameterValue) {
 		this.parameterValue = parameterValue;
+	}
+
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	public Integer getParameterType() {
+		return parameterType;
+	}
+
+	public void setParameterType(Integer parameterType) {
+		this.parameterType = parameterType;
 	}
 }

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.twitter.api.GeoCode;
 import org.springframework.social.twitter.api.SearchParameters;
-import org.springframework.social.twitter.api.SearchParameters.ResultType;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
@@ -48,8 +47,8 @@ public class TwitterServiceImpl {
 		// @Eataly_ist
 		// @thehousecafethc
 		final GeoCode geoCode = new GeoCode(41.1191937694787, 29.041500091552734, 50);
-		// final SearchParameters searchParameters = new SearchParameters(" ").geoCode(geoCode).lang("tr").count(1000);
-		final SearchParameters searchParameters = new SearchParameters("yeniprofilresmi").count(5).includeEntities(true).resultType(ResultType.RECENT);
+		final SearchParameters searchParameters = new SearchParameters(" ").geoCode(geoCode).lang("tr").count(1000);
+		// final SearchParameters searchParameters = new SearchParameters("haciosman").count(100).includeEntities(true).resultType(ResultType.RECENT);
 
 		return this.twitter.searchOperations().search(searchParameters);
 	}

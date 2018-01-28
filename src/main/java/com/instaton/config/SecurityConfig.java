@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,35 +22,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private Http403AccessDeniedEntryPoint accessDeniedEntryPoint;
 
-	protected void authorizeRequests(final HttpSecurity http) throws Exception {
-
-		http.csrf().disable();
-
-		http.authorizeRequests().anyRequest().permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/").permitAll();
-		http.headers().httpStrictTransportSecurity().disable();
-		http.headers().addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsMode.SAMEORIGIN));
-		http.sessionManagement().sessionFixation().newSession();
-
-//		//@formatter:off
-//		http.authorizeRequests()
-//			.antMatchers(EndpointConstant.API_ENDPOINT_GUEST_PATTERN).permitAll()
-//			.antMatchers(EndpointConstant.API_ENDPOINT_GENERIC_PATTERN).permitAll()
-//			.anyRequest().permitAll()
-//			.antMatchers(EndpointConstant.API_ENDPOINT_PATTERN).authenticated();
-
-		http.exceptionHandling()
-			.authenticationEntryPoint(this.authenticationEntryPoint)
-			.accessDeniedHandler(this.accessDeniedEntryPoint);
-		//@formatter:on
-	}
+	// // ignore static resources such as CSS or JS files.
+	// @Override
+	// public void configure(WebSecurity web) throws Exception {
+	// web.ignoring().antMatchers("/assets/**", "/logon/**", "/logon/**.jsp");
+	// }
 
 	@Override
-	protected void configure(final HttpSecurity http) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {
 
 		SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
 
-		this.authorizeRequests(http);
+		authorizeRequests(http);
 
 		// http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class).csrf().csrfTokenRepository(csrfTokenRepository());
 		//
@@ -72,14 +54,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 
-	// // ignore static resources such as CSS or JS files.
-	@Override
-	public void configure(final WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/assets/**", "/logon/**", "/logon/**.jsp");
+	protected void authorizeRequests(HttpSecurity http) throws Exception {
+
+		http.csrf().disable();
+
+		http.authorizeRequests().anyRequest().permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/").permitAll();
+		http.headers().httpStrictTransportSecurity().disable();
+		http.headers().addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsMode.SAMEORIGIN));
+		http.sessionManagement().sessionFixation().newSession();
+
+//		//@formatter:off
+//		http.authorizeRequests()
+//			.antMatchers(EndpointConstant.API_ENDPOINT_GUEST_PATTERN).permitAll()
+//			.antMatchers(EndpointConstant.API_ENDPOINT_GENERIC_PATTERN).permitAll()
+//			.anyRequest().permitAll()
+//			.antMatchers(EndpointConstant.API_ENDPOINT_PATTERN).authenticated();
+		
+		http.exceptionHandling()
+			.authenticationEntryPoint(authenticationEntryPoint)
+			.accessDeniedHandler(accessDeniedEntryPoint);
+		//@formatter:on
 	}
 
 	private CsrfTokenRepository csrfTokenRepository() {
-		final HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 		repository.setHeaderName("X-XSRF-TOKEN");
 		return repository;
 	}

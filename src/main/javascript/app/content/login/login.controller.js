@@ -1,12 +1,4 @@
-LoginController.$inject = ['$window', '$state'];
-
-function LoginController($window, $state) {
-  var self = this;
-
-  self.redirectToTwitter = function () {
-    // $window.location.href = '/connect/twitter';
-    $state.go('content.dashboard');
-  };
+function LoginController() {
 
 }
 
