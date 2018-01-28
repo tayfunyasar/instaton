@@ -3,6 +3,7 @@ package com.instaton.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import org.springframework.social.config.annotation.SocialConfigurer;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 @Configuration
 @EnableSocial
@@ -22,10 +24,16 @@ public class SocialConfig implements SocialConfigurer {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	@Value("${spring.social.twitter.consumer-key}")
+	private String consumerKey;
+
+	@Value("${spring.social.twitter.consumer-secret}")
+	private String consumerSecret;
 
 	@Override
 	public void addConnectionFactories(final ConnectionFactoryConfigurer connectionFactoryConfigurer, final Environment environment) {
-
+            connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(consumerKey, consumerSecret));
 	}
 
 	@Override
