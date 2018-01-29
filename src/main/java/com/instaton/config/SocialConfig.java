@@ -18,12 +18,17 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
+import com.instaton.service.AccountConnectionSignUpService;
+
 @Configuration
 @EnableSocial
 public class SocialConfig implements SocialConfigurer {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private AccountConnectionSignUpService accountConnectionSignUpService;
 	
 	@Value("${spring.social.twitter.consumer-key}")
 	private String consumerKey;
@@ -49,6 +54,8 @@ public class SocialConfig implements SocialConfigurer {
 
 	@Override
 	public UsersConnectionRepository getUsersConnectionRepository(final ConnectionFactoryLocator connectionFactoryLocator) {
-		return new JdbcUsersConnectionRepository(this.dataSource, connectionFactoryLocator, Encryptors.noOpText());
-	}
+		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource,connectionFactoryLocator, Encryptors.noOpText());
+        repository.setConnectionSignUp(accountConnectionSignUpService);
+        return repository;	
+    }
 }

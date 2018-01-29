@@ -26,8 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		http.authorizeRequests().anyRequest().permitAll();
+		
+		http.headers().frameOptions().disable();
 	
-		 http.formLogin().and().apply(new SpringSocialConfigurer());
+		http.formLogin().and().apply(new SpringSocialConfigurer());
 		 
 		http.exceptionHandling()
 			.authenticationEntryPoint(this.authenticationEntryPoint)
