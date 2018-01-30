@@ -65,6 +65,8 @@ dependencies {
 	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
 	
 	runtime('org.postgresql:postgresql')
+    compile('com.h2database:h2')
+	
 	
 	compile 'net.sf.ehcache:ehcache:2.10.2.2.21'
 	compile 'org.springframework:spring-context'
