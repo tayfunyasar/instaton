@@ -2,6 +2,8 @@ database:
       image: postgres:instaton
       hostname: "database"
       restart: always
+      volumes:
+        - ~/postgres-data:/var/lib/postgresql/data
       ports:
         - "5432:5432"
       environment:
