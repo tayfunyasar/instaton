@@ -13,13 +13,13 @@ import com.instaton.constant.CacheConstants;
 import com.instaton.entity.generic.parameter.ParameterListItem;
 import com.instaton.entity.generic.parameter.ParameterListOutput;
 import com.instaton.exception.InstatonException;
-import com.instaton.repository.twitter.ParameterRepository;
+import com.instaton.repository.twitter.ParameterListItemRepository;
 
 @Service
 public class GenericDataService {
 
 	@Autowired
-	private ParameterRepository parameterRepository;
+	private ParameterListItemRepository parameterRepository;
 
 	@Cacheable(cacheNames = CacheConstants.PARAMETER_LIST, keyGenerator = KeyGeneratorConstants.INPUT_BASED_CACHE_KEY_GENERATOR)
 	public ParameterListOutput getAllParameterList() throws InstatonException {
