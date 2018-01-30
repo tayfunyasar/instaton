@@ -22,11 +22,11 @@ public class TwitterUserService implements BaseService {
 		return this.repository.findAll();
 	}
 
-	public List<TwitterUser> findAllByGenderMale() {
+	public List<TwitterUser> findAllByNotFemale() {
 		final List<TwitterUser> users = new ArrayList<>();
 
 		for (final TwitterUser twitterUser : this.findAll()) {
-			if (twitterUser.getGender() == GenderEnum.MALE) {
+			if (twitterUser.getGender() != GenderEnum.FEMALE) {
 				users.add(twitterUser);
 			}
 		}
