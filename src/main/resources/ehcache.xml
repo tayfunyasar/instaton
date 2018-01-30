@@ -9,6 +9,6 @@
 
 
 	<cache name="TWITTER_SEARCH"
-		maxEntriesLocalHeap="200" timeToLiveSeconds="600"></cache>
+		maxEntriesLocalHeap="200" timeToLiveSeconds="30"></cache>
 
 </ehcache>

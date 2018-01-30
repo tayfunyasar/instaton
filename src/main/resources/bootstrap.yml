@@ -1,6 +1,7 @@
 logging:
   level:
     org.springframework: DEBUG
+    org.hibernate: ERROR
     
 spring:
   jpa:
