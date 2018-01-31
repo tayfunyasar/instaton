@@ -22,7 +22,7 @@ task wrapper(type: Wrapper) {
 
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.M7'
+		springBootVersion = '1.5.9.RELEASE'
 		springSocialVersion = '2.0.0.M4'
 	}
 	repositories {

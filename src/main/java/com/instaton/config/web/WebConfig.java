@@ -1,4 +1,4 @@
-package com.instaton.config;
+package com.instaton.config.web;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,20 +12,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
 @Configuration
 @EnableWebMvc
-public class WebMvcResourcesConfiguration extends DelegatingWebMvcConfiguration {
+public class WebConfig extends WebMvcConfigurerAdapter {
 
 	ResourceProperties resourceProperties = new ResourceProperties();
 
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 
 		if (!registry.hasMappingForPattern("/**/index.html")) {
 			registry.addResourceHandler("/**/index.html").addResourceLocations("/index.html");

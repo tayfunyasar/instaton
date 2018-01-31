@@ -1,4 +1,4 @@
-package com.instaton.config;
+package com.instaton.config.web;
 
 import java.io.IOException;
 
