@@ -17,19 +17,17 @@ import com.instaton.service.twitter.BlackUserIdEntityService;
 @RequestMapping(EndpointConstant.API_ENDPOINT_BLACKUSERID)
 public class BlackUserIdEntityController {
 
-	@Autowired
-	private BlackUserIdEntityService service;
+  @Autowired private BlackUserIdEntityService service;
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(@RequestBody final BlackUserIdEntity input) throws InstatonException {
+  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  public void add(@RequestBody final BlackUserIdEntity input) throws InstatonException {
 
-		this.service.save(input);
-	}
+    this.service.save(input);
+  }
 
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public List<BlackUserIdEntity> list() throws InstatonException {
+  @RequestMapping(value = "/list", method = RequestMethod.POST)
+  public List<BlackUserIdEntity> list() throws InstatonException {
 
-		return this.service.findAll();
-	}
-
+    return this.service.findAll();
+  }
 }

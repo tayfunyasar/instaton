@@ -10,7 +10,6 @@ import com.instaton.entity.black.blackhashtagentity.BlackHashTagEntity;
 @Repository
 public interface BlackHashTagEntityRepository extends CrudRepository<BlackHashTagEntity, Long> {
 
-	@Override
-	List<BlackHashTagEntity> findAll();
-
+  @Override
+  List<BlackHashTagEntity> findAll();
 }

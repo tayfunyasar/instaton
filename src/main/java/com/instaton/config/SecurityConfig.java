@@ -21,52 +21,48 @@ import com.instaton.config.web.Http403AccessDeniedEntryPoint;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private Http401UnauthorizedEntryPoint authenticationEntryPoint;
+  @Autowired private Http401UnauthorizedEntryPoint authenticationEntryPoint;
 
-	@Autowired
-	private Http403AccessDeniedEntryPoint accessDeniedEntryPoint;
+  @Autowired private Http403AccessDeniedEntryPoint accessDeniedEntryPoint;
 
-	protected void authorizeRequests(final HttpSecurity http) throws Exception {
+  protected void authorizeRequests(final HttpSecurity http) throws Exception {
 
-		//@formatter:off
-		http.csrf().disable();
+    //@formatter:off
+    http.csrf().disable();
 
-		http.authorizeRequests().anyRequest().permitAll();
+    http.authorizeRequests().anyRequest().permitAll();
 
-		http.headers().frameOptions().disable();
+    http.headers().frameOptions().disable();
 
-		http.formLogin().and().apply(new SpringSocialConfigurer());
+    http.formLogin().and().apply(new SpringSocialConfigurer());
 
-		http.exceptionHandling()
-			.authenticationEntryPoint(this.authenticationEntryPoint)
-			.accessDeniedHandler(this.accessDeniedEntryPoint);
-		//@formatter:on
-	}
+    http.exceptionHandling()
+        .authenticationEntryPoint(this.authenticationEntryPoint)
+        .accessDeniedHandler(this.accessDeniedEntryPoint);
+    //@formatter:on
+  }
 
-	@Override
-	protected void configure(final HttpSecurity http) throws Exception {
+  @Override
+  protected void configure(final HttpSecurity http) throws Exception {
 
-		SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
+    SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
 
-		this.authorizeRequests(http);
+    this.authorizeRequests(http);
+  }
 
-	}
+  // // ignore static resources such as CSS or JS files.
+  @Override
+  public void configure(final WebSecurity web) throws Exception {
+    web.ignoring().antMatchers("/assets/**", "/logon/**", "/logon/**.jsp");
+  }
 
-	// // ignore static resources such as CSS or JS files.
-	@Override
-	public void configure(final WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/assets/**", "/logon/**", "/logon/**.jsp");
-	}
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
-	@Bean
-	public SocialUserDetailsService socialUsersDetailService() {
-		return new InstatonSocialUserDetailsService(this.userDetailsService());
-	}
-
+  @Bean
+  public SocialUserDetailsService socialUsersDetailService() {
+    return new InstatonSocialUserDetailsService(this.userDetailsService());
+  }
 }

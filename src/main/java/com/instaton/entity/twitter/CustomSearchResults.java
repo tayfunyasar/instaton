@@ -17,66 +17,66 @@ import com.instaton.util.SortUtil;
 
 public class CustomSearchResults extends SearchResults {
 
-	private final SearchResults wrapped;
+  private final SearchResults wrapped;
 
-	private List<String> filteredMostUsedHashTags = new ArrayList<>();
-	private List<Tweet> filteredTweets = new ArrayList<>();
+  private List<String> filteredMostUsedHashTags = new ArrayList<>();
+  private List<Tweet> filteredTweets = new ArrayList<>();
 
-	public CustomSearchResults(final SearchResults original) {
-		super(original.getTweets(), original.getSearchMetadata());
-		this.wrapped = original;
-	}
+  public CustomSearchResults(final SearchResults original) {
+    super(original.getTweets(), original.getSearchMetadata());
+    this.wrapped = original;
+  }
 
-	public List<String> getFilteredMostUsedHashTags() {
-		return this.filteredMostUsedHashTags;
-	}
+  public List<String> getFilteredMostUsedHashTags() {
+    return this.filteredMostUsedHashTags;
+  }
 
-	public List<Tweet> getFilteredTweets() {
-		return this.filteredTweets;
-	}
+  public List<Tweet> getFilteredTweets() {
+    return this.filteredTweets;
+  }
 
-	public Set<String> getMostMentionUsers() {
-		final Map<String, Integer> map = new HashMap<>();
+  public Set<String> getMostMentionUsers() {
+    final Map<String, Integer> map = new HashMap<>();
 
-		for (final Tweet tweet : this.wrapped.getTweets()) {
-			final List<MentionEntity> hashTags = tweet.getEntities().getMentions();
+    for (final Tweet tweet : this.wrapped.getTweets()) {
+      final List<MentionEntity> hashTags = tweet.getEntities().getMentions();
 
-			for (final MentionEntity hashTagEntity : hashTags) {
-				final String tag = hashTagEntity.getScreenName();
-				final Integer count = map.get(tag);
-				map.put(tag, count == null ? 1 : count + 1);
-			}
-		}
+      for (final MentionEntity hashTagEntity : hashTags) {
+        final String tag = hashTagEntity.getScreenName();
+        final Integer count = map.get(tag);
+        map.put(tag, count == null ? 1 : count + 1);
+      }
+    }
 
-		final Map<String, Integer> treeMap = new TreeMap<>(map);
+    final Map<String, Integer> treeMap = new TreeMap<>(map);
 
-		return SortUtil.sortByValue(treeMap);
-	}
+    return SortUtil.sortByValue(treeMap);
+  }
 
-	public Set<String> getMostUsedHashTags() {
-		final Map<String, Integer> map = new HashMap<>();
+  public Set<String> getMostUsedHashTags() {
+    final Map<String, Integer> map = new HashMap<>();
 
-		for (final Tweet tweet : this.wrapped.getTweets()) {
-			final Entities entities = tweet.getEntities();
-			final List<HashTagEntity> hashTags = entities.getHashTags();
+    for (final Tweet tweet : this.wrapped.getTweets()) {
+      final Entities entities = tweet.getEntities();
+      final List<HashTagEntity> hashTags = entities.getHashTags();
 
-			for (final HashTagEntity hashTagEntity : hashTags) {
-				final String tag = hashTagEntity.getText();
-				final Integer count = map.get(tag);
-				map.put(tag, count == null ? 1 : count + 1);
-			}
-		}
+      for (final HashTagEntity hashTagEntity : hashTags) {
+        final String tag = hashTagEntity.getText();
+        final Integer count = map.get(tag);
+        map.put(tag, count == null ? 1 : count + 1);
+      }
+    }
 
-		final Map<String, Integer> treeMap = new TreeMap<>(map);
+    final Map<String, Integer> treeMap = new TreeMap<>(map);
 
-		return SortUtil.sortByValue(treeMap);
-	}
+    return SortUtil.sortByValue(treeMap);
+  }
 
-	public void setFilteredMostUsedHashTags(final List<String> filteredMostUsedHashTags) {
-		this.filteredMostUsedHashTags = filteredMostUsedHashTags;
-	}
+  public void setFilteredMostUsedHashTags(final List<String> filteredMostUsedHashTags) {
+    this.filteredMostUsedHashTags = filteredMostUsedHashTags;
+  }
 
-	public void setFilteredTweets(final List<Tweet> filteredTweets) {
-		this.filteredTweets = filteredTweets;
-	}
+  public void setFilteredTweets(final List<Tweet> filteredTweets) {
+    this.filteredTweets = filteredTweets;
+  }
 }

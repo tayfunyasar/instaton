@@ -10,7 +10,6 @@ import com.instaton.entity.black.blackuserid.BlackUserIdEntity;
 @Repository
 public interface BlackUserIdEntityRepository extends CrudRepository<BlackUserIdEntity, Long> {
 
-	@Override
-	List<BlackUserIdEntity> findAll();
-
+  @Override
+  List<BlackUserIdEntity> findAll();
 }

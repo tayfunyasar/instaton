@@ -12,11 +12,10 @@ import com.instaton.service.twitter.impl.TwitterServiceImpl;
 @RequestMapping("/api/profile")
 public class TwitterProfileController {
 
-	@Autowired
-	private TwitterServiceImpl twitterProfileService;
+  @Autowired private TwitterServiceImpl twitterProfileService;
 
-	@GetMapping("/current")
-	public TwitterProfile getCurrent() {
-		return twitterProfileService.getCurrent();
-	}
+  @GetMapping("/current")
+  public TwitterProfile getCurrent() {
+    return twitterProfileService.getCurrent();
+  }
 }

@@ -10,7 +10,6 @@ import com.instaton.entity.twitter.TwitterUser;
 @Repository
 public interface TwitterUserRepository extends CrudRepository<TwitterUser, Long> {
 
-	@Override
-	List<TwitterUser> findAll();
-
+  @Override
+  List<TwitterUser> findAll();
 }

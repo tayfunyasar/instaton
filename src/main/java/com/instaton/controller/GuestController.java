@@ -14,27 +14,26 @@ import com.instaton.constant.EndpointConstant;
 @RequestMapping(EndpointConstant.API_ENDPOINT_GUEST_PATTERN)
 public class GuestController {
 
-	private static Logger logger = LoggerFactory.getLogger(GuestController.class);
+  private static Logger logger = LoggerFactory.getLogger(GuestController.class);
 
-	@Autowired
-	private HttpServletRequest request;
+  @Autowired private HttpServletRequest request;
 
-	// @RequestMapping(value = "/jserrorlogger", method = { RequestMethod.POST })
-	// public InstatonResponse<Boolean> logJSErrors(@RequestBody JSErrorInputData inputData) {
-	//
-	// Authentication authentication = authenticationService.getCurrentAuthentication();
-	//
-	// if (authentication != null && authentication instanceof AuthenticationToken) {
-	// AuthenticationToken currentAuthentication = (AuthenticationToken) authentication;
-	//
-	// logger.error("JSErrorController currentAuthentication = {} inputData = {}", currentAuthentication.toString(), inputData.toString());
-	// }
-	// else {
-	// String remoteAddr = request.getRemoteAddr();
-	//
-	// logger.error("JSErrorController remoteAddr = {} inputData = {}", remoteAddr, inputData.toString());
-	// }
-	//
-	// return InstatonResponseBuilder.buildSuccessResponseData(Boolean.TRUE);
-	// }
+  // @RequestMapping(value = "/jserrorlogger", method = { RequestMethod.POST })
+  // public InstatonResponse<Boolean> logJSErrors(@RequestBody JSErrorInputData inputData) {
+  //
+  // Authentication authentication = authenticationService.getCurrentAuthentication();
+  //
+  // if (authentication != null && authentication instanceof AuthenticationToken) {
+  // AuthenticationToken currentAuthentication = (AuthenticationToken) authentication;
+  //
+  // logger.error("JSErrorController currentAuthentication = {} inputData = {}", currentAuthentication.toString(), inputData.toString());
+  // }
+  // else {
+  // String remoteAddr = request.getRemoteAddr();
+  //
+  // logger.error("JSErrorController remoteAddr = {} inputData = {}", remoteAddr, inputData.toString());
+  // }
+  //
+  // return InstatonResponseBuilder.buildSuccessResponseData(Boolean.TRUE);
+  // }
 }

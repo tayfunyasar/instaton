@@ -14,28 +14,26 @@ import com.instaton.service.database.BaseService;
 @Service
 public class TwitterUserService implements BaseService {
 
-	@Autowired
-	private TwitterUserRepository repository;
+  @Autowired private TwitterUserRepository repository;
 
-	@Override
-	public List<TwitterUser> findAll() {
-		return this.repository.findAll();
-	}
+  @Override
+  public List<TwitterUser> findAll() {
+    return this.repository.findAll();
+  }
 
-	public List<TwitterUser> findAllByNotFemale() {
-		final List<TwitterUser> users = new ArrayList<>();
+  public List<TwitterUser> findAllByNotFemale() {
+    final List<TwitterUser> users = new ArrayList<>();
 
-		for (final TwitterUser twitterUser : this.findAll()) {
-			if (twitterUser.getGender() != GenderEnum.FEMALE) {
-				users.add(twitterUser);
-			}
-		}
-		return users;
-	}
+    for (final TwitterUser twitterUser : this.findAll()) {
+      if (twitterUser.getGender() != GenderEnum.FEMALE) {
+        users.add(twitterUser);
+      }
+    }
+    return users;
+  }
 
-	public void save(final TwitterUser input) {
+  public void save(final TwitterUser input) {
 
-		this.repository.save(input);
-	}
-
+    this.repository.save(input);
+  }
 }

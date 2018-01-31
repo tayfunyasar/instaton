@@ -18,22 +18,24 @@ import com.instaton.repository.twitter.ParameterListItemRepository;
 @Service
 public class GenericDataService {
 
-	@Autowired
-	private ParameterListItemRepository parameterRepository;
+  @Autowired private ParameterListItemRepository parameterRepository;
 
-	@Cacheable(cacheNames = CacheConstants.PARAMETER_LIST, keyGenerator = KeyGeneratorConstants.INPUT_BASED_CACHE_KEY_GENERATOR)
-	public ParameterListOutput getAllParameterList() throws InstatonException {
-		Iterable<ParameterListItem> findAll = parameterRepository.findAll();
+  @Cacheable(
+    cacheNames = CacheConstants.PARAMETER_LIST,
+    keyGenerator = KeyGeneratorConstants.INPUT_BASED_CACHE_KEY_GENERATOR
+  )
+  public ParameterListOutput getAllParameterList() throws InstatonException {
+    Iterable<ParameterListItem> findAll = parameterRepository.findAll();
 
-		ParameterListOutput output = new ParameterListOutput();
-		List<ParameterListItem> parameterList = new ArrayList<>();
+    ParameterListOutput output = new ParameterListOutput();
+    List<ParameterListItem> parameterList = new ArrayList<>();
 
-		Iterator<ParameterListItem> iterator = findAll.iterator();
-		while (iterator.hasNext()) {
-			parameterList.add(iterator.next());
-		}
+    Iterator<ParameterListItem> iterator = findAll.iterator();
+    while (iterator.hasNext()) {
+      parameterList.add(iterator.next());
+    }
 
-		output.setParameterList(parameterList);
-		return output;
-	}
+    output.setParameterList(parameterList);
+    return output;
+  }
 }

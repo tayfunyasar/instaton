@@ -1,8 +1,8 @@
 package com.instaton.entity;
 
 public enum GenderEnum {
-	MALE,
-	FEMALE,
-	BOT,
-	UNKNOWN;
+  MALE,
+  FEMALE,
+  BOT,
+  UNKNOWN;
 }

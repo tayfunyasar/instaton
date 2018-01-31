@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class InstatonApplication {
 
-	public static void main(final String[] args) {
-		SpringApplication.run(InstatonApplication.class, args);
-	}
+  public static void main(final String[] args) {
+    SpringApplication.run(InstatonApplication.class, args);
+  }
 }

@@ -18,43 +18,40 @@ import com.instaton.service.twitter.impl.TwitterServiceImpl;
 @RequestMapping(EndpointConstant.API_ENDPOINT_TWITTERUSER)
 public class TwitterUserController {
 
-	@Autowired
-	private TwitterUserService service;
+  @Autowired private TwitterUserService service;
 
-	@Autowired
-	private TwitterServiceImpl twitterService;
+  @Autowired private TwitterServiceImpl twitterService;
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(@RequestBody final TwitterUser input) throws InstatonException {
+  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  public void add(@RequestBody final TwitterUser input) throws InstatonException {
 
-		// final SearchResults search = this.twitterService.getSearch();
+    // final SearchResults search = this.twitterService.getSearch();
 
-		// TwitterProfile currentUser = null;
-		// for (final Tweet tweet : search.getTweets()) {
-		// final TwitterProfile user = tweet.getUser();
-		//
-		// if (user.getId() == input.getUserId()) {
-		// currentUser = user;
-		// break;
-		// }
-		// if (StringUtils.equals(user.getScreenName(), input.getScreenName())) {
-		// currentUser = user;
-		// break;
-		// }
-		// }
-		// final TwitterUser convert = ConvertUtil.convert(currentUser);
-		// convert.setGender(input.getGender());
-		// convert.setUserId(input.getUserId());
-		final TwitterUser convert = new TwitterUser();
-		convert.setScreenName(input.getScreenName());
+    // TwitterProfile currentUser = null;
+    // for (final Tweet tweet : search.getTweets()) {
+    // final TwitterProfile user = tweet.getUser();
+    //
+    // if (user.getId() == input.getUserId()) {
+    // currentUser = user;
+    // break;
+    // }
+    // if (StringUtils.equals(user.getScreenName(), input.getScreenName())) {
+    // currentUser = user;
+    // break;
+    // }
+    // }
+    // final TwitterUser convert = ConvertUtil.convert(currentUser);
+    // convert.setGender(input.getGender());
+    // convert.setUserId(input.getUserId());
+    final TwitterUser convert = new TwitterUser();
+    convert.setScreenName(input.getScreenName());
 
-		this.service.save(convert);
-	}
+    this.service.save(convert);
+  }
 
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public List<TwitterUser> list() throws InstatonException {
+  @RequestMapping(value = "/list", method = RequestMethod.POST)
+  public List<TwitterUser> list() throws InstatonException {
 
-		return this.service.findAll();
-	}
-
+    return this.service.findAll();
+  }
 }

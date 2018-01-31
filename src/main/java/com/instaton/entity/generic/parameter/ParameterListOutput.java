@@ -8,14 +8,14 @@ import com.instaton.entity.ResponseData;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ParameterListOutput extends ResponseData {
 
-	private static final long serialVersionUID = 1L;
-	private List<ParameterListItem> parameterList;
+  private static final long serialVersionUID = 1L;
+  private List<ParameterListItem> parameterList;
 
-	public List<ParameterListItem> getParameterList() {
-		return parameterList;
-	}
+  public List<ParameterListItem> getParameterList() {
+    return parameterList;
+  }
 
-	public void setParameterList(List<ParameterListItem> parameterList) {
-		this.parameterList = parameterList;
-	}
+  public void setParameterList(List<ParameterListItem> parameterList) {
+    this.parameterList = parameterList;
+  }
 }

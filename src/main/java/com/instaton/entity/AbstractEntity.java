@@ -16,13 +16,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  Long id;
 
-	@CreatedDate
-	LocalDateTime createdDate;
+  @CreatedDate LocalDateTime createdDate;
 
-	@LastModifiedDate
-	LocalDateTime modifiedDate;
+  @LastModifiedDate LocalDateTime modifiedDate;
 }

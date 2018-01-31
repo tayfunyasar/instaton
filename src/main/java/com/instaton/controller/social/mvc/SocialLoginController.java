@@ -15,25 +15,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/test")
 public class SocialLoginController {
 
-	private Twitter twitter;
+  private Twitter twitter;
 
-	private ConnectionRepository connectionRepository;
+  private ConnectionRepository connectionRepository;
 
-	@Inject
-	public SocialLoginController(Twitter twitter, ConnectionRepository connectionRepository) {
-		this.twitter = twitter;
-		this.connectionRepository = connectionRepository;
-	}
+  @Inject
+  public SocialLoginController(Twitter twitter, ConnectionRepository connectionRepository) {
+    this.twitter = twitter;
+    this.connectionRepository = connectionRepository;
+  }
 
-    @RequestMapping(method=RequestMethod.GET, value="/test")
-	public String helloTwitter(Model model) {
-		if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
-			return "redirect:/connect/twitter";
-		}
+  @RequestMapping(method = RequestMethod.GET, value = "/test")
+  public String helloTwitter(Model model) {
+    if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+      return "redirect:/connect/twitter";
+    }
 
-		model.addAttribute(twitter.userOperations().getUserProfile());
-		CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
-		model.addAttribute("friends", friends);
-		return "hello";
-	}
+    model.addAttribute(twitter.userOperations().getUserProfile());
+    CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
+    model.addAttribute("friends", friends);
+    return "hello";
+  }
 }

@@ -8,14 +8,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebConstants {
 
-	public static final String PAGE_ERROR_ACCESSDENIED = "/error/access-denied";
-	public static final String PAGE_ERROR_UNAUTHORIZED = "/error/un-authorized";
+  public static final String PAGE_ERROR_ACCESSDENIED = "/error/access-denied";
+  public static final String PAGE_ERROR_UNAUTHORIZED = "/error/un-authorized";
 
-	@Value("#{'${instaton.twitter.searchkeywords}'.split(',')}")
-	private List<String> keywordList;
+  @Value("#{'${instaton.twitter.searchkeywords}'.split(',')}")
+  private List<String> keywordList;
 
-	public List<String> getKeywordList() {
-		return this.keywordList;
-	}
-
+  public List<String> getKeywordList() {
+    return this.keywordList;
+  }
 }

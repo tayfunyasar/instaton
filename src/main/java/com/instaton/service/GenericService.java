@@ -20,26 +20,28 @@ import com.instaton.service.database.GenericDataService;
 @Service
 public class GenericService extends BaseService {
 
-	private static final Logger logger = LoggerFactory.getLogger(GenericService.class);
+  private static final Logger logger = LoggerFactory.getLogger(GenericService.class);
 
-	@Autowired
-	private GenericDataService genericDataService;
+  @Autowired private GenericDataService genericDataService;
 
-	@Cacheable(cacheNames = CacheConstants.PARAMETER_LIST, keyGenerator = KeyGeneratorConstants.INPUT_BASED_CACHE_KEY_GENERATOR)
-	public ParameterListOutput getParameterList(ParameterListInputData inputData) throws InstatonException {
-		ParameterListOutput allParameterList = genericDataService.getAllParameterList();
+  @Cacheable(
+    cacheNames = CacheConstants.PARAMETER_LIST,
+    keyGenerator = KeyGeneratorConstants.INPUT_BASED_CACHE_KEY_GENERATOR
+  )
+  public ParameterListOutput getParameterList(ParameterListInputData inputData)
+      throws InstatonException {
+    ParameterListOutput allParameterList = genericDataService.getAllParameterList();
 
-		List<ParameterListItem> parameterList = allParameterList.getParameterList();
+    List<ParameterListItem> parameterList = allParameterList.getParameterList();
 
-		List<ParameterListItem> responseParameterList = new ArrayList<>();
-		for (ParameterListItem item : parameterList) {
-			if (inputData.getParameterType() == item.getParameterType()) {
-				responseParameterList.add(item);
-			}
-		}
-		ParameterListOutput response = new ParameterListOutput();
-		response.setParameterList(responseParameterList);
-		return response;
-	}
-
+    List<ParameterListItem> responseParameterList = new ArrayList<>();
+    for (ParameterListItem item : parameterList) {
+      if (inputData.getParameterType() == item.getParameterType()) {
+        responseParameterList.add(item);
+      }
+    }
+    ParameterListOutput response = new ParameterListOutput();
+    response.setParameterList(responseParameterList);
+    return response;
+  }
 }

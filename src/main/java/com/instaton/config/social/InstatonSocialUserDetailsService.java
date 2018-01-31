@@ -10,18 +10,20 @@ import org.springframework.social.security.SocialUserDetailsService;
 
 public class InstatonSocialUserDetailsService implements SocialUserDetailsService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(InstatonSocialUserDetailsService.class);
-	private UserDetailsService userDetailsService;
+  private static final Logger LOGGER =
+      LoggerFactory.getLogger(InstatonSocialUserDetailsService.class);
+  private UserDetailsService userDetailsService;
 
-	public InstatonSocialUserDetailsService(final UserDetailsService userDetailsService) {
-		this.userDetailsService = userDetailsService;
-	}
+  public InstatonSocialUserDetailsService(final UserDetailsService userDetailsService) {
+    this.userDetailsService = userDetailsService;
+  }
 
-	@Override
-	public SocialUserDetails loadUserByUserId(final String userId) {
-		LOGGER.debug("Loading user by user id: {}", userId);
+  @Override
+  public SocialUserDetails loadUserByUserId(final String userId) {
+    LOGGER.debug("Loading user by user id: {}", userId);
 
-		final UserDetails userDetails = this.userDetailsService.loadUserByUsername(userId);
-		return new SocialUser(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
-	}
+    final UserDetails userDetails = this.userDetailsService.loadUserByUsername(userId);
+    return new SocialUser(
+        userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+  }
 }

@@ -12,17 +12,15 @@ import com.instaton.service.database.BaseService;
 @Service
 public class BlackHashTagEntityService implements BaseService {
 
-	@Autowired
-	private BlackHashTagEntityRepository repository;
+  @Autowired private BlackHashTagEntityRepository repository;
 
-	@Override
-	public List<BlackHashTagEntity> findAll() {
-		return this.repository.findAll();
-	}
+  @Override
+  public List<BlackHashTagEntity> findAll() {
+    return this.repository.findAll();
+  }
 
-	public void save(BlackHashTagEntity blackKeywordItem) {
+  public void save(BlackHashTagEntity blackKeywordItem) {
 
-		this.repository.save(blackKeywordItem);
-	}
-
+    this.repository.save(blackKeywordItem);
+  }
 }

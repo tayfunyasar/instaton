@@ -6,21 +6,20 @@ import com.instaton.entity.BaseInput;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ParameterListInput extends BaseInput {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private ParameterListInputData requestData;
+  private ParameterListInputData requestData;
 
-	public ParameterListInputData getRequestData() {
-		return requestData;
-	}
+  public ParameterListInputData getRequestData() {
+    return requestData;
+  }
 
-	public void setRequestData(ParameterListInputData requestData) {
-		this.requestData = requestData;
-	}
+  public void setRequestData(ParameterListInputData requestData) {
+    this.requestData = requestData;
+  }
 
-	@Override
-	public String toString() {
-		return "ParameterListInput [requestData=" + requestData + "]";
-	}
-
+  @Override
+  public String toString() {
+    return "ParameterListInput [requestData=" + requestData + "]";
+  }
 }

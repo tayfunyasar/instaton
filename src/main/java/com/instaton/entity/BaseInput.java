@@ -10,36 +10,35 @@ import com.instaton.util.BaseInputUtils;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseInput implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private RequestHeader requestHeader;
+  private static final long serialVersionUID = 1L;
+  private RequestHeader requestHeader;
 
-	@Override
-	public boolean equals(Object obj) {
+  @Override
+  public boolean equals(Object obj) {
 
-		if (obj == null) {
-			return false;
-		}
+    if (obj == null) {
+      return false;
+    }
 
-		return hashCode() == obj.hashCode();
-	}
+    return hashCode() == obj.hashCode();
+  }
 
-	public String generateCacheKey() {
-		return String.valueOf(hashCode());
-	}
+  public String generateCacheKey() {
+    return String.valueOf(hashCode());
+  }
 
-	public RequestHeader getRequestHeader() {
-		return requestHeader;
-	}
+  public RequestHeader getRequestHeader() {
+    return requestHeader;
+  }
 
-	@Override
-	public int hashCode() {
-		HashCodeBuilder builder = new HashCodeBuilder();
-		builder.append(BaseInputUtils.getCurrTst());
-		return builder.toHashCode();
-	}
+  @Override
+  public int hashCode() {
+    HashCodeBuilder builder = new HashCodeBuilder();
+    builder.append(BaseInputUtils.getCurrTst());
+    return builder.toHashCode();
+  }
 
-	public void setRequestHeader(RequestHeader requestHeader) {
-		this.requestHeader = requestHeader;
-	}
-
+  public void setRequestHeader(RequestHeader requestHeader) {
+    this.requestHeader = requestHeader;
+  }
 }

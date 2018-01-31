@@ -15,21 +15,20 @@ import java.util.UUID;
 @Service
 public class AccountConnectionSignUpService implements ConnectionSignUp {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AccountConnectionSignUpService.class);
-    
-    @Autowired
-    private TwitterUserProfileRepository twitterUserProfileRepository;
+  private static final Logger LOG = LoggerFactory.getLogger(AccountConnectionSignUpService.class);
 
-    public String execute(Connection<?> connection) {
-        org.springframework.social.connect.UserProfile profile = connection.fetchUserProfile();
-        String userId = UUID.randomUUID().toString();
-        // TODO: Or simply use: r = new Random(); r.nextInt(); ???
-        LOG.debug("Created user-id: " + profile.getId());
-        
-        UserProfile userProfile = new UserProfile(userId, profile);
-        
-        twitterUserProfileRepository.save(userProfile);
-        
-        return userId;
-    }
+  @Autowired private TwitterUserProfileRepository twitterUserProfileRepository;
+
+  public String execute(Connection<?> connection) {
+    org.springframework.social.connect.UserProfile profile = connection.fetchUserProfile();
+    String userId = UUID.randomUUID().toString();
+    // TODO: Or simply use: r = new Random(); r.nextInt(); ???
+    LOG.debug("Created user-id: " + profile.getId());
+
+    UserProfile userProfile = new UserProfile(userId, profile);
+
+    twitterUserProfileRepository.save(userProfile);
+
+    return userId;
+  }
 }

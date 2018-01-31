@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.instaton.entity.generic.parameter.ParameterListItem;
 
 @Repository
-public interface ParameterListItemRepository extends PagingAndSortingRepository<ParameterListItem, Long> {
-
-}
+public interface ParameterListItemRepository
+    extends PagingAndSortingRepository<ParameterListItem, Long> {}

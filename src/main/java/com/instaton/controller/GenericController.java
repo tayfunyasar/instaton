@@ -16,14 +16,14 @@ import com.instaton.service.GenericService;
 @RequestMapping(EndpointConstant.API_ENDPOINT_GENERIC_PATTERN)
 public class GenericController {
 
-	@Autowired
-	private GenericService genericService;
+  @Autowired private GenericService genericService;
 
-	@RequestMapping(value = "/parameters", method = RequestMethod.POST)
-	public ParameterListOutput getParameterList(@RequestBody ParameterListInputData inputData) throws InstatonException {
+  @RequestMapping(value = "/parameters", method = RequestMethod.POST)
+  public ParameterListOutput getParameterList(@RequestBody ParameterListInputData inputData)
+      throws InstatonException {
 
-		ParameterListOutput parameterList = this.genericService.getParameterList(inputData);
+    ParameterListOutput parameterList = this.genericService.getParameterList(inputData);
 
-		return parameterList;
-	}
+    return parameterList;
+  }
 }

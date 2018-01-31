@@ -9,22 +9,22 @@ import com.instaton.entity.AbstractEntity;
 @Table(name = "blackuseridentity")
 public class BlackUserIdEntity extends AbstractEntity {
 
-	private long userId;
-	private String screenName;
+  private long userId;
+  private String screenName;
 
-	public String getScreenName() {
-		return this.screenName;
-	}
+  public String getScreenName() {
+    return this.screenName;
+  }
 
-	public long getUserId() {
-		return this.userId;
-	}
+  public long getUserId() {
+    return this.userId;
+  }
 
-	public void setScreenName(final String screenName) {
-		this.screenName = screenName;
-	}
+  public void setScreenName(final String screenName) {
+    this.screenName = screenName;
+  }
 
-	public void setUserId(final long userId) {
-		this.userId = userId;
-	}
+  public void setUserId(final long userId) {
+    this.userId = userId;
+  }
 }

@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class SearchController {
 
-	@Autowired
-	private TwitterTemplate twitterTemplate;
+  @Autowired private TwitterTemplate twitterTemplate;
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public SearchResults search() {
-		SearchResults search = twitterTemplate.searchOperations().search("istinyepark", 500);
+  @RequestMapping(value = "/search", method = RequestMethod.GET)
+  public SearchResults search() {
+    SearchResults search = twitterTemplate.searchOperations().search("istinyepark", 500);
 
-		return search;
-	}
+    return search;
+  }
 }

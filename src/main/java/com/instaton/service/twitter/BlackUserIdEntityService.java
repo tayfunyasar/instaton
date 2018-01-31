@@ -12,17 +12,15 @@ import com.instaton.service.database.BaseService;
 @Service
 public class BlackUserIdEntityService implements BaseService {
 
-	@Autowired
-	private BlackUserIdEntityRepository repository;
+  @Autowired private BlackUserIdEntityRepository repository;
 
-	@Override
-	public List<BlackUserIdEntity> findAll() {
-		return this.repository.findAll();
-	}
+  @Override
+  public List<BlackUserIdEntity> findAll() {
+    return this.repository.findAll();
+  }
 
-	public void save(final BlackUserIdEntity input) {
+  public void save(final BlackUserIdEntity input) {
 
-		this.repository.save(input);
-	}
-
+    this.repository.save(input);
+  }
 }

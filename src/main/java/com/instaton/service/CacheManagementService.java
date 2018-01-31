@@ -12,29 +12,26 @@ import net.sf.ehcache.Ehcache;
 @Service
 public class CacheManagementService {
 
-	@Autowired
-	private net.sf.ehcache.CacheManager cacheManager;
+  @Autowired private net.sf.ehcache.CacheManager cacheManager;
 
-	public Boolean clearAllCaches() {
-		String[] names = cacheManager.getCacheNames();
-		ArrayList<String> namesArray = new ArrayList<>(Arrays.asList(names));
-		for (String name : namesArray) {
-			Ehcache cache = cacheManager.getEhcache(name);
-			if (cache != null)
-				cache.removeAll();
-		}
-		return true;
-	}
+  public Boolean clearAllCaches() {
+    String[] names = cacheManager.getCacheNames();
+    ArrayList<String> namesArray = new ArrayList<>(Arrays.asList(names));
+    for (String name : namesArray) {
+      Ehcache cache = cacheManager.getEhcache(name);
+      if (cache != null) cache.removeAll();
+    }
+    return true;
+  }
 
-	public List<String> getCacheNames() {
-		String[] names = cacheManager.getCacheNames();
-		return new ArrayList<>(Arrays.asList(names));
-	}
+  public List<String> getCacheNames() {
+    String[] names = cacheManager.getCacheNames();
+    return new ArrayList<>(Arrays.asList(names));
+  }
 
-	public Boolean clearCacheByName(String name) {
-		Ehcache cache = cacheManager.getEhcache(name);
-		if (cache != null)
-			cache.removeAll();
-		return true;
-	}
+  public Boolean clearCacheByName(String name) {
+    Ehcache cache = cacheManager.getEhcache(name);
+    if (cache != null) cache.removeAll();
+    return true;
+  }
 }

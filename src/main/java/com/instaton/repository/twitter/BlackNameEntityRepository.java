@@ -10,7 +10,6 @@ import com.instaton.entity.black.blacknameentity.BlackNameEntity;
 @Repository
 public interface BlackNameEntityRepository extends CrudRepository<BlackNameEntity, Long> {
 
-	@Override
-	List<BlackNameEntity> findAll();
-
+  @Override
+  List<BlackNameEntity> findAll();
 }

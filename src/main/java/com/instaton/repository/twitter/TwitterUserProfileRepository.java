@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.instaton.entity.twitter.UserProfile;
 
 @Repository
-public interface TwitterUserProfileRepository extends CrudRepository<UserProfile, String> {
-
-}
+public interface TwitterUserProfileRepository extends CrudRepository<UserProfile, String> {}

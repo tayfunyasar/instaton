@@ -14,17 +14,19 @@ import com.instaton.constant.CacheConstants;
 @Service
 public class TwitterServiceImpl {
 
-	@Autowired
-	private Twitter twitter;
+  @Autowired private Twitter twitter;
 
-	@Cacheable(cacheNames = CacheConstants.TWITTER_PROFILE_SERVICE_CURRENT, keyGenerator = KeyGeneratorConstants.USER_BASED_CACHE_KEY_GENERATOR)
-	public TwitterProfile getCurrent() {
-		return this.twitter.userOperations().getUserProfile();
-	}
+  @Cacheable(
+    cacheNames = CacheConstants.TWITTER_PROFILE_SERVICE_CURRENT,
+    keyGenerator = KeyGeneratorConstants.USER_BASED_CACHE_KEY_GENERATOR
+  )
+  public TwitterProfile getCurrent() {
+    return this.twitter.userOperations().getUserProfile();
+  }
 
-	// @Cacheable(cacheNames = CacheConstants.TWITTER_SEARCH_CURRENT, keyGenerator = KeyGeneratorConstants.USER_BASED_CACHE_KEY_GENERATOR)
-	public SearchResults getSearch(final SearchParameters searchParameters) {
+  // @Cacheable(cacheNames = CacheConstants.TWITTER_SEARCH_CURRENT, keyGenerator = KeyGeneratorConstants.USER_BASED_CACHE_KEY_GENERATOR)
+  public SearchResults getSearch(final SearchParameters searchParameters) {
 
-		return this.twitter.searchOperations().search(searchParameters);
-	}
+    return this.twitter.searchOperations().search(searchParameters);
+  }
 }

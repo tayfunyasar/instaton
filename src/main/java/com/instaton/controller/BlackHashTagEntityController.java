@@ -17,19 +17,17 @@ import com.instaton.service.twitter.BlackHashTagEntityService;
 @RequestMapping(EndpointConstant.API_ENDPOINT_BLACKKEYWORD)
 public class BlackHashTagEntityController {
 
-	@Autowired
-	private BlackHashTagEntityService service;
+  @Autowired private BlackHashTagEntityService service;
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(@RequestBody final BlackHashTagEntity inputData) throws InstatonException {
+  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  public void add(@RequestBody final BlackHashTagEntity inputData) throws InstatonException {
 
-		this.service.save(inputData);
-	}
+    this.service.save(inputData);
+  }
 
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public List<BlackHashTagEntity> list() throws InstatonException {
+  @RequestMapping(value = "/list", method = RequestMethod.POST)
+  public List<BlackHashTagEntity> list() throws InstatonException {
 
-		return this.service.findAll();
-	}
-
+    return this.service.findAll();
+  }
 }

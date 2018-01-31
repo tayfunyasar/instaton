@@ -14,26 +14,33 @@ import com.instaton.response.InstatonResponseBuilder;
 @ControllerAdvice
 public class ExceptionHandlingController extends ResponseEntityExceptionHandler {
 
-	private final Log log = LogFactory.getLog(ExceptionHandlingController.class);
+  private final Log log = LogFactory.getLog(ExceptionHandlingController.class);
 
-	private final String errorMessage = "Operation Failed";
+  private final String errorMessage = "Operation Failed";
 
-	@SuppressWarnings("unchecked")
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<InstatonResponse<Object>> handleException(final Exception exception) {
-		this.log.error(this.errorMessage, exception);
-		final InstatonResponse<Object> response = InstatonResponseBuilder.begin().code(InstatonReturnCode.GENERIC_ERROR).message(exception.getMessage()).build();
+  @SuppressWarnings("unchecked")
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<InstatonResponse<Object>> handleException(final Exception exception) {
+    this.log.error(this.errorMessage, exception);
+    final InstatonResponse<Object> response =
+        InstatonResponseBuilder.begin()
+            .code(InstatonReturnCode.GENERIC_ERROR)
+            .message(exception.getMessage())
+            .build();
 
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
+    return new ResponseEntity<>(response, HttpStatus.OK);
+  }
 
-	@SuppressWarnings("rawtypes")
-	@ExceptionHandler(InstatonException.class)
-	public ResponseEntity<InstatonResponse> handleException(final InstatonException exception) {
-		this.log.error(this.errorMessage, exception);
-		final InstatonResponse response = InstatonResponseBuilder.begin().code(exception.getReturnCode()).message(exception.getResponseMessage()).build();
+  @SuppressWarnings("rawtypes")
+  @ExceptionHandler(InstatonException.class)
+  public ResponseEntity<InstatonResponse> handleException(final InstatonException exception) {
+    this.log.error(this.errorMessage, exception);
+    final InstatonResponse response =
+        InstatonResponseBuilder.begin()
+            .code(exception.getReturnCode())
+            .message(exception.getResponseMessage())
+            .build();
 
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
-
+    return new ResponseEntity<>(response, HttpStatus.OK);
+  }
 }
