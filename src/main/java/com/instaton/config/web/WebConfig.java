@@ -1,4 +1,4 @@
-package com.instaton.config;
+package com.instaton.config.web;
 
 import java.io.IOException;
 
@@ -6,24 +6,19 @@ import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
 @Configuration
 @EnableWebMvc
-public class WebMvcResourcesConfiguration implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
 
 	ResourceProperties resourceProperties = new ResourceProperties();
 
 	@Override
-	public void configureViewResolvers(ViewResolverRegistry registry) {
-		registry.jsp("/WEB-INF/jsp/", ".jsp");
-	}
-
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 
 		if (!registry.hasMappingForPattern("/assets/**")) {
 			registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
@@ -41,9 +36,9 @@ public class WebMvcResourcesConfiguration implements WebMvcConfigurer {
 			registry.addResourceHandler("/logon/**").addResourceLocations("/logon/");
 		}
 
-		Integer cachePeriod = Integer.valueOf(10/* environment.getProperty("spring.resources.cache-period") */);
+		final Integer cachePeriod = Integer.valueOf(10/* environment.getProperty("spring.resources.cache-period") */);
 
-		final String[] staticLocations = resourceProperties.getStaticLocations();
+		final String[] staticLocations = this.resourceProperties.getStaticLocations();
 		final String[] indexLocations = new String[staticLocations.length];
 		for (int i = 0; i < staticLocations.length; i++) {
 			indexLocations[i] = staticLocations[i] + "index.html";
@@ -53,25 +48,16 @@ public class WebMvcResourcesConfiguration implements WebMvcConfigurer {
 		registry.addResourceHandler("/**").addResourceLocations(indexLocations).setCachePeriod(cachePeriod).resourceChain(true).addResolver(new PathResourceResolver() {
 
 			@Override
-			protected Resource getResource(String resourcePath, Resource location) throws IOException {
+			protected Resource getResource(final String resourcePath, final Resource location) throws IOException {
 				return location.exists() && location.isReadable() ? location : null;
 			}
 		});
-		}
 
-	// http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx
-	// JSON Vulnerability Protection
-	@Override
-	public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
-		final MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converters.add(converter);
 	}
 
-	@Bean
-	public MultipartConfigElement multipartConfigElement() {
-		final MultipartConfigFactory factory = new MultipartConfigFactory();
-		factory.setMaxFileSize("60MB");
-		factory.setMaxRequestSize("60MB");
-		return factory.createMultipartConfig();
-		}
+	@Override
+	public void configureViewResolvers(final ViewResolverRegistry registry) {
+		registry.jsp("/WEB-INF/jsp/", ".jsp");
+	}
+
 }

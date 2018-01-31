@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.social.security.SpringSocialConfigurer;
 
@@ -31,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	protected void authorizeRequests(final HttpSecurity http) throws Exception {
 
+		//@formatter:off
 		http.csrf().disable();
 
 		http.authorizeRequests().anyRequest().permitAll();
@@ -39,7 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.formLogin().and().apply(new SpringSocialConfigurer());
 
-		http.exceptionHandling().authenticationEntryPoint(this.authenticationEntryPoint).accessDeniedHandler(this.accessDeniedEntryPoint);
+		http.exceptionHandling()
+			.authenticationEntryPoint(this.authenticationEntryPoint)
+			.accessDeniedHandler(this.accessDeniedEntryPoint);
 		//@formatter:on
 	}
 
@@ -58,16 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/assets/**", "/logon/**", "/logon/**.jsp");
 	}
 
-	private CsrfTokenRepository csrfTokenRepository() {
-		final HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-		repository.setHeaderName("X-XSRF-TOKEN");
-		return repository;
-	}
-
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		final PasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
+		return new BCryptPasswordEncoder();
 	}
 
 	@Bean

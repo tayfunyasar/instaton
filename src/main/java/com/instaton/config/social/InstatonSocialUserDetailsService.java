@@ -2,10 +2,8 @@ package com.instaton.config.social;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.social.security.SocialUser;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
@@ -20,7 +18,7 @@ public class InstatonSocialUserDetailsService implements SocialUserDetailsServic
 	}
 
 	@Override
-	public SocialUserDetails loadUserByUserId(final String userId) throws UsernameNotFoundException, DataAccessException {
+	public SocialUserDetails loadUserByUserId(final String userId) {
 		LOGGER.debug("Loading user by user id: {}", userId);
 
 		final UserDetails userDetails = this.userDetailsService.loadUserByUsername(userId);

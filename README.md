@@ -4,6 +4,7 @@ Steps to run instaton
 
 1-)
 ```
+./gradlew cleanEclipse eclipse assemble build
 cd docker
 ./run.sh
 ```
