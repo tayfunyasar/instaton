@@ -18,10 +18,23 @@ function DashboardController(ProfileService, BlackHashTagEntityService, BlackUse
 
       _.each(self.searchResult.filteredTweets, function (tweet, index) {
         _.each(self.twitterUserList, function (twitterUser) {
+          if (tweet.user.screenName == twitterUser.screenName) {
+            self.searchResult.filteredTweets[index].user.gender = twitterUser.gender;
+          }
           if (tweet.user.id == twitterUser.userId) {
             self.searchResult.filteredTweets[index].user.gender = twitterUser.gender;
           }
+          if (tweet.user.id.toString().startsWith(twitterUser.userId.toString())) {
+            self.searchResult.filteredTweets[index].user.gender = twitterUser.gender;
+          }
+          if (twitterUser.userId.toString().startsWith(tweet.user.id.toString())) {
+            self.searchResult.filteredTweets[index].user.gender = twitterUser.gender;
+          }
         });
+      });
+
+      self.searchResult.filteredTweets = _.uniq(self.searchResult.filteredTweets, function (tweet) {
+        return tweet.user.screenName;
       });
     });
   };
@@ -41,7 +54,7 @@ function DashboardController(ProfileService, BlackHashTagEntityService, BlackUse
     });
 
     var postData = {
-      userId: tweet.user.id,
+      screenName: tweet.user.screenName,
     };
     BlackUserIdEntityService.add(postData);
   };
@@ -49,12 +62,12 @@ function DashboardController(ProfileService, BlackHashTagEntityService, BlackUse
   self.markUserAsMale = function (tweet) {
     tweet.user.gender = 'MALE';
     self.searchResult.filteredTweets = _.reject(self.searchResult.filteredTweets, function (filteredTweet) {
-      return filteredTweet.user.id == tweet.user.id;
+      return filteredTweet.user.screenName == tweet.user.screenName;
     });
 
     var postData = {
       gender: 'MALE',
-      userId: tweet.user.id,
+      screenName: tweet.user.screenName,
     };
     TwitterUserService.add(postData);
   };
@@ -63,7 +76,7 @@ function DashboardController(ProfileService, BlackHashTagEntityService, BlackUse
     tweet.user.gender = 'FEMALE';
     var postData = {
       gender: 'FEMALE',
-      userId: tweet.user.id,
+      screenName: tweet.user.screenName,
     };
     TwitterUserService.add(postData);
   };
@@ -71,14 +84,22 @@ function DashboardController(ProfileService, BlackHashTagEntityService, BlackUse
   self.markUserAsBot = function (tweet) {
     tweet.user.gender = 'BOT';
     self.searchResult.filteredTweets = _.reject(self.searchResult.filteredTweets, function (filteredTweet) {
-      return filteredTweet.user.id == tweet.user.id;
+      return filteredTweet.user.screenName == tweet.user.screenName;
     });
 
     var postData = {
       gender: 'BOT',
-      userId: tweet.user.id,
+      screenName: tweet.user.screenName,
     };
     TwitterUserService.add(postData);
+  };
+
+  self.hideAll = function () {
+    _.each(self.searchResult.filteredTweets, function (tweet) {
+      if (tweet.user.gender != 'FEMALE') {
+        self.hideUser(tweet);
+      }
+    });
   };
 }
 

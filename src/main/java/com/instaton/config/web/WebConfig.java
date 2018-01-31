@@ -57,8 +57,21 @@ public class WebMvcResourcesConfiguration implements WebMvcConfigurer {
 				return location.exists() && location.isReadable() ? location : null;
 			}
 		});
+		}
 
+	// http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx
+	// JSON Vulnerability Protection
+	@Override
+	public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
+		final MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		converters.add(converter);
 	}
 
-
+	@Bean
+	public MultipartConfigElement multipartConfigElement() {
+		final MultipartConfigFactory factory = new MultipartConfigFactory();
+		factory.setMaxFileSize("60MB");
+		factory.setMaxRequestSize("60MB");
+		return factory.createMultipartConfig();
+		}
 }

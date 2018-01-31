@@ -1,9 +1,8 @@
-package com.instaton.config;
+package com.instaton.config.social;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
@@ -16,7 +15,6 @@ import org.springframework.social.config.annotation.SocialConfigurer;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 import com.instaton.service.AccountConnectionSignUpService;
 
@@ -26,19 +24,19 @@ public class SocialConfig implements SocialConfigurer {
 
 	@Autowired
 	private DataSource dataSource;
-	
+
 	@Autowired
 	private AccountConnectionSignUpService accountConnectionSignUpService;
-	
-	@Value("${spring.social.twitter.consumer-key}")
-	private String consumerKey;
 
-	@Value("${spring.social.twitter.consumer-secret}")
-	private String consumerSecret;
+	// @Value("${spring.social.twitter.consumer-key}")
+	// private String consumerKey;
+	//
+	// @Value("${spring.social.twitter.consumer-secret}")
+	// private String consumerSecret;
 
 	@Override
 	public void addConnectionFactories(final ConnectionFactoryConfigurer connectionFactoryConfigurer, final Environment environment) {
-            connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(consumerKey, consumerSecret));
+		// connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(this.consumerKey, this.consumerSecret));
 	}
 
 	@Override
@@ -54,8 +52,8 @@ public class SocialConfig implements SocialConfigurer {
 
 	@Override
 	public UsersConnectionRepository getUsersConnectionRepository(final ConnectionFactoryLocator connectionFactoryLocator) {
-		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource,connectionFactoryLocator, Encryptors.noOpText());
-        repository.setConnectionSignUp(accountConnectionSignUpService);
-        return repository;	
-    }
+		final JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(this.dataSource, connectionFactoryLocator, Encryptors.noOpText());
+		repository.setConnectionSignUp(this.accountConnectionSignUpService);
+		return repository;
+	}
 }

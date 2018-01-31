@@ -6,13 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.instaton.entity.AbstractEntity;
 import com.instaton.entity.GenderEnum;
 
 @Entity
-@Table(name = "twitteruser", uniqueConstraints = { @UniqueConstraint(columnNames = { "userId" }) })
+@Table(name = "twitteruser")
 public class TwitterUser extends AbstractEntity {
 
 	@Enumerated(EnumType.STRING)
@@ -168,6 +167,10 @@ public class TwitterUser extends AbstractEntity {
 
 	public String getUrl() {
 		return this.url;
+	}
+
+	public Date getUserCreatedDate() {
+		return this.userCreatedDate;
 	}
 
 	public long getUserId() {
@@ -346,6 +349,10 @@ public class TwitterUser extends AbstractEntity {
 		this.useBackgroundImage = useBackgroundImage;
 	}
 
+	public void setUserCreatedDate(final Date userCreatedDate) {
+		this.userCreatedDate = userCreatedDate;
+	}
+
 	public void setUserId(final long userId) {
 		this.userId = userId;
 	}
@@ -356,14 +363,6 @@ public class TwitterUser extends AbstractEntity {
 
 	public void setVerified(final Boolean verified) {
 		this.verified = verified;
-	}
-
-	public Date getUserCreatedDate() {
-		return userCreatedDate;
-	}
-
-	public void setUserCreatedDate(Date userCreatedDate) {
-		this.userCreatedDate = userCreatedDate;
 	}
 
 }

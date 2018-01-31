@@ -1,4 +1,4 @@
-package com.instaton.config;
+package com.instaton.config.social;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ public class TwitterConfigurationTemplate {
 
 	@Bean
 	public TwitterTemplate twitterTemplate() {
-		TwitterTemplate twitterOperations = new TwitterTemplate(consumerKey, consumerSecret, accessToken, accessTokenSecret);
+		final TwitterTemplate twitterOperations = new TwitterTemplate(this.consumerKey, this.consumerSecret, this.accessToken, this.accessTokenSecret);
 		return twitterOperations;
 	}
 
