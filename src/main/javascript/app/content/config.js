@@ -20,6 +20,13 @@ function config($stateProvider) {
     controller: 'DashboardController',
     controllerAs: 'self',
   });
+
+  $stateProvider.state('content.messages', {
+    url: '/ss',
+    templateUrl: 'content/messages/tpl.html',
+    controller: 'MessagesController',
+    controllerAs: 'self',
+  });
 }
 
 angular.module('instaton.app.content', []).config(config);

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.MentionEntity;
@@ -21,6 +22,7 @@ public class CustomSearchResults extends SearchResults {
 
   private List<String> filteredMostUsedHashTags = new ArrayList<>();
   private List<Tweet> filteredTweets = new ArrayList<>();
+  private List<String> filteredMostUsedWords = new ArrayList<>();
 
   public CustomSearchResults(final SearchResults original) {
     super(original.getTweets(), original.getSearchMetadata());
@@ -29,6 +31,10 @@ public class CustomSearchResults extends SearchResults {
 
   public List<String> getFilteredMostUsedHashTags() {
     return this.filteredMostUsedHashTags;
+  }
+
+  public List<String> getFilteredMostUsedWords() {
+    return this.filteredMostUsedWords;
   }
 
   public List<Tweet> getFilteredTweets() {
@@ -72,8 +78,32 @@ public class CustomSearchResults extends SearchResults {
     return SortUtil.sortByValue(treeMap);
   }
 
+  public Set<String> getMostUsedWords() {
+    final Map<String, Integer> map = new HashMap<>();
+
+    for (final Tweet tweet : this.getFilteredTweets()) {
+      final String text = tweet.getText();
+
+      final String[] textList = text.split("\\s+");
+      for (final String word : textList) {
+        if (StringUtils.isNotBlank(word) && word.length() > 4) {
+          final Integer count = map.get(word);
+          map.put(word, count == null ? 1 : count + 1);
+        }
+      }
+    }
+
+    final Map<String, Integer> treeMap = new TreeMap<>(map);
+
+    return SortUtil.sortByValue(treeMap);
+  }
+
   public void setFilteredMostUsedHashTags(final List<String> filteredMostUsedHashTags) {
     this.filteredMostUsedHashTags = filteredMostUsedHashTags;
+  }
+
+  public void setFilteredMostUsedWords(final List<String> filteredMostUsedWords) {
+    this.filteredMostUsedWords = filteredMostUsedWords;
   }
 
   public void setFilteredTweets(final List<Tweet> filteredTweets) {

@@ -5,6 +5,7 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,15 +22,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.base.Optional;
+import com.instaton.constant.ApiConstants;
 import com.instaton.constant.WebConstants;
 import com.instaton.entity.black.blackhashtagentity.BlackHashTagEntity;
 import com.instaton.entity.black.blacknameentity.BlackNameEntity;
 import com.instaton.entity.black.blackuserid.BlackUserIdEntity;
+import com.instaton.entity.black.blackwordentity.BlackWordEntity;
 import com.instaton.entity.twitter.CustomSearchResults;
 import com.instaton.entity.twitter.TwitterUser;
 import com.instaton.service.twitter.BlackHashTagEntityService;
 import com.instaton.service.twitter.BlackNameEntityService;
 import com.instaton.service.twitter.BlackUserIdEntityService;
+import com.instaton.service.twitter.BlackWordEntityService;
 import com.instaton.service.twitter.TwitterUserService;
 import com.instaton.service.twitter.impl.TwitterServiceImpl;
 import com.optimaize.langdetect.LanguageDetector;
@@ -127,12 +131,14 @@ public class TwitterSearchController {
 
   @Autowired private BlackNameEntityService blackNameEntityService;
 
+  @Autowired private BlackWordEntityService blackWordEntityService;
+
   @Autowired private WebConstants webConstants;
 
   @GetMapping("/current")
   public CustomSearchResults getCurrent() throws IOException {
 
-    final List<String> terms = this.webConstants.getKeywordList();
+    final List<String> terms = ApiConstants.ALL;
 
     final List<SearchParameters> params = new ArrayList<>();
 
@@ -142,13 +148,17 @@ public class TwitterSearchController {
     final SearchParameters param1 =
         new SearchParameters(excludedKeywords).geoCode(geoCode).lang("tr").count(100);
     params.add(param1);
+
     final SearchParameters param2 =
-        new SearchParameters(excludedKeywords)
-            .lang("tr")
-            .count(100)
-            .includeEntities(true)
-            .resultType(ResultType.RECENT);
+        new SearchParameters(excludedKeywords).geoCode(geoCode).lang("en").count(100);
     params.add(param2);
+    //    final SearchParameters param2 =
+    //        new SearchParameters(excludedKeywords)
+    //            .lang("tr")
+    //            .count(100)
+    //            .includeEntities(true)
+    //            .resultType(ResultType.RECENT);
+    //    params.add(param2);
 
     final ArrayList<Tweet> tweets = new ArrayList<>();
     for (final String term : terms) {
@@ -173,17 +183,42 @@ public class TwitterSearchController {
     final List<BlackUserIdEntity> blackUserIdList = this.blackUserIdENtityService.findAll();
     final List<TwitterUser> findAllByNotFemale = this.twitterUserService.findAll();
     final List<BlackNameEntity> blackNameEntityList = this.blackNameEntityService.findAll();
+    final List<BlackWordEntity> blackWordEntityList = this.blackWordEntityService.findAll();
 
-    final List<String> blackLanguageList = Arrays.asList("ar", "tt", "pt");
+    final List<String> blackLanguageList = Arrays.asList("ar", "tt", "pt", "es");
 
     final CustomSearchResults customSearchResults = new CustomSearchResults(search);
 
+    final Set<String> mostUsedKeywords = customSearchResults.getMostUsedWords();
+
     final List<Tweet> filteredTweets = new ArrayList<>();
     for (final Tweet tweet : search.getTweets()) {
+      boolean isContains = false;
+
+      final String text = tweet.getText();
+      final String[] words = text.split("\\s+");
+
+      for (final String word : words) {
+
+        if (StringUtils.isNotBlank(word)) {
+          for (final BlackWordEntity blackWordEntity : blackWordEntityList) {
+            if (StringUtils.equalsIgnoreCase(blackWordEntity.getWord(), word)) {
+              isContains = true;
+            }
+          }
+
+          if (!isContains) {
+            for (final String keyword : mostUsedKeywords) {
+              if (StringUtils.equalsIgnoreCase(keyword, word)) {
+                isContains = true;
+              }
+            }
+          }
+        }
+      }
+
       final String screenName = tweet.getUser().getScreenName();
       final String name = tweet.getUser().getName();
-
-      boolean isContains = false;
 
       for (final HashTagEntity hashTagEntity : tweet.getEntities().getHashTags()) {
         for (final BlackHashTagEntity blackKeywordItem : blackKeywordList) {
@@ -262,6 +297,20 @@ public class TwitterSearchController {
       }
     }
     customSearchResults.setFilteredMostUsedHashTags(filteredMostUsedHashTags);
+
+    final List<String> filteredMostUsedWords = new ArrayList<>();
+    for (final String word : customSearchResults.getMostUsedWords()) {
+      boolean isContains = false;
+      for (final BlackWordEntity blackWordEntity : blackWordEntityList) {
+        if (StringUtils.equalsIgnoreCase(blackWordEntity.getWord(), word)) {
+          isContains = true;
+        }
+      }
+      if (!isContains) {
+        filteredMostUsedWords.add(word);
+      }
+    }
+    customSearchResults.setFilteredMostUsedWords(filteredMostUsedWords);
 
     return customSearchResults;
   }
