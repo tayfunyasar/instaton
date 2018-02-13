@@ -10,5 +10,7 @@
 
 	<cache name="TWITTER_SEARCH"
 		maxEntriesLocalHeap="200" timeToLiveSeconds="30"></cache>
-
+	
+	<cache name="INSTAGRAM_MESSAGES"
+		maxEntriesLocalHeap="200" timeToLiveSeconds="600"></cache>
 </ehcache>

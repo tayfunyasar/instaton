@@ -4,17 +4,18 @@
 	<!-- BUNLARA ELINIZI SURMEYIN -->
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
 	<property name="LOG_FILE"
-		value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}loyalty-default.log}" />
+		value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}instaton-default.log}" />
 	<include
 		resource="org/springframework/boot/logging/logback/console-appender.xml" />
 	<include resource="org/springframework/boot/logging/logback/file-appender.xml" />
 	<!-- BUNLARA ELINIZI SURMEYIN -->
 
-	<logger name="net.sf.ehcache" level="INFO">
+	<logger name="org.hibernate" level="ERROR">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILE" />
 	</logger>
-	<logger name="org.hibernate" level="ERROR">
+		
+	<logger name="org.springframework.social" level="DEBUG">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILE" />
 	</logger>
@@ -23,7 +24,7 @@
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILE" />
 	</logger>
-	<root level="DEBUG">
+	<root level="INFO">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILE" />
 	</root>

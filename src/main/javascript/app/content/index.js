@@ -9,3 +9,4 @@ require('./components');
 // pages
 require('./login');
 require('./dashboard');
+require('./messages');

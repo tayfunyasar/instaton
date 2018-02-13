@@ -8,14 +8,14 @@ function config($stateProvider) {
   });
 
   $stateProvider.state('content.login', {
-    url: '/',
+    url: '/ss',
     templateUrl: 'content/login/tpl.html',
     controller: 'LoginController',
     controllerAs: 'self',
   });
 
   $stateProvider.state('content.dashboard', {
-    url: '/dashboard',
+    url: '/',
     templateUrl: 'content/dashboard/tpl.html',
     controller: 'DashboardController',
     controllerAs: 'self',

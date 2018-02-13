@@ -1,8 +1,8 @@
 var _ = require('underscore');
 
-DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'BlackUserIdEntityService', 'TwitterUserService'];
+DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'BlackUserIdEntityService', 'TwitterUserService', 'BlackWordEntityService'];
 
-function DashboardController(ProfileService, BlackHashTagEntityService, BlackUserIdEntityService, TwitterUserService) {
+function DashboardController(ProfileService, BlackHashTagEntityService, BlackUserIdEntityService, TwitterUserService, BlackWordEntityService) {
   var self = this;
 
   self.tagFilterList = [];
@@ -100,6 +100,17 @@ function DashboardController(ProfileService, BlackHashTagEntityService, BlackUse
         self.hideUser(tweet);
       }
     });
+  };
+
+  self.addWordFilter = function (word) {
+    self.searchResult.filteredTweets = _.reject(self.searchResult.filteredTweets, function (filteredTweet) {
+      return filteredTweet.text.indexOf(word) > -1;
+    });
+
+    var postData = {
+      word: word,
+    };
+    BlackWordEntityService.add(postData);
   };
 }
 

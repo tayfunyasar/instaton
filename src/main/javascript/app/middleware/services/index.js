@@ -5,3 +5,4 @@ require('./blackhashtagentity.service');
 require('./blackuseridentity.service');
 require('./twitteruser.service');
 require('./blackwordentity.service');
+require('./instagrammessage.service');
