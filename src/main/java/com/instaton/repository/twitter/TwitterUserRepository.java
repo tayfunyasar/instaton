@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.instaton.entity.twitter.TwitterUser;
+import com.instaton.entity.twitter.TwitterProfileEntity;
 
 @Repository
-public interface TwitterUserRepository extends CrudRepository<TwitterUser, Long> {
+public interface TwitterUserRepository extends CrudRepository<TwitterProfileEntity, Long> {
 
   @Override
-  List<TwitterUser> findAll();
+  List<TwitterProfileEntity> findAll();
 }

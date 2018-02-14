@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.instaton.constant.EndpointConstant;
-import com.instaton.entity.black.blackuserid.BlackUserIdEntity;
+import com.instaton.entity.black.BlackUserIdEntity;
 import com.instaton.exception.InstatonException;
 import com.instaton.service.twitter.BlackUserIdEntityService;
 

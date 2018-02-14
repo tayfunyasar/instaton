@@ -1,4 +1,4 @@
-package com.instaton.entity.black.blackhashtagentity;
+package com.instaton.entity.black;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

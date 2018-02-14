@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.instaton.entity.black.blacknameentity.BlackNameEntity;
+import com.instaton.entity.black.BlackNameEntity;
 
 @Repository
 public interface BlackNameEntityRepository extends CrudRepository<BlackNameEntity, Long> {

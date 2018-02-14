@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.instaton.entity.black.blacknameentity.BlackNameEntity;
+import com.instaton.entity.black.BlackNameEntity;
 import com.instaton.repository.twitter.BlackNameEntityRepository;
 import com.instaton.service.database.BaseService;
 

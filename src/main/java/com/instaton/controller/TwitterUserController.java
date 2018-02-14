@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.instaton.constant.EndpointConstant;
-import com.instaton.entity.twitter.TwitterUser;
+import com.instaton.entity.twitter.TwitterProfileEntity;
 import com.instaton.exception.InstatonException;
 import com.instaton.service.twitter.TwitterUserService;
 import com.instaton.service.twitter.impl.TwitterServiceImpl;
@@ -23,7 +23,7 @@ public class TwitterUserController {
   @Autowired private TwitterServiceImpl twitterService;
 
   @RequestMapping(value = "/add", method = RequestMethod.POST)
-  public void add(@RequestBody final TwitterUser input) throws InstatonException {
+  public void add(@RequestBody final TwitterProfileEntity input) throws InstatonException {
 
     // final SearchResults search = this.twitterService.getSearch();
 
@@ -43,14 +43,14 @@ public class TwitterUserController {
     // final TwitterUser convert = ConvertUtil.convert(currentUser);
     // convert.setGender(input.getGender());
     // convert.setUserId(input.getUserId());
-    final TwitterUser convert = new TwitterUser();
+    final TwitterProfileEntity convert = new TwitterProfileEntity();
     convert.setScreenName(input.getScreenName());
 
     this.service.save(convert);
   }
 
   @RequestMapping(value = "/list", method = RequestMethod.POST)
-  public List<TwitterUser> list() throws InstatonException {
+  public List<TwitterProfileEntity> list() throws InstatonException {
 
     return this.service.findAll();
   }

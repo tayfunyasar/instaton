@@ -12,7 +12,7 @@ import com.instaton.entity.GenderEnum;
 
 @Entity
 @Table(name = "twitteruser")
-public class TwitterUser extends AbstractEntity {
+public class TwitterProfileEntity extends AbstractEntity {
 
   @Enumerated(EnumType.STRING)
   private GenderEnum gender;

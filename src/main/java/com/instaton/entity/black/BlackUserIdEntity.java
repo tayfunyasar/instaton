@@ -1,4 +1,4 @@
-package com.instaton.entity.black.blackuserid;
+package com.instaton.entity.black;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
