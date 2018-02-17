@@ -141,7 +141,11 @@ public class TweetFilter {
             "bolu",
             "nevşehir",
             "ısparta",
-            "alanya");
+            "alanya",
+            "chile",
+            "elazığ",
+            "çorum",
+            "keçiören");
     final String userLocation = tweet.getUser().getLocation();
 
     for (final String location : blackLocationList) {

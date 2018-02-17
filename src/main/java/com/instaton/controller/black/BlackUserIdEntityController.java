@@ -1,4 +1,4 @@
-package com.instaton.controller;
+package com.instaton.controller.black;
 
 import java.util.List;
 

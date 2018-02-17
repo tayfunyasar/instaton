@@ -1,4 +1,4 @@
-package com.instaton.controller;
+package com.instaton.controller.black;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
