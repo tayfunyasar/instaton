@@ -1,4 +1,4 @@
-package com.instaton.entity.twitter;
+package com.instaton.dto.twitter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

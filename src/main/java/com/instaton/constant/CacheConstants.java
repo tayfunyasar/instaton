@@ -8,6 +8,12 @@ public class CacheConstants {
 
   public static final String INSTAGRAM_MESSAGES = "INSTAGRAM_MESSAGES";
 
+  public static final String BLACK_HASHTAG = "BLACK_HASHTAG";
+  public static final String BLACK_NAME = "BLACK_NAME";
+  public static final String BLACK_WORD = "BLACK_WORD";
+  public static final String TWITTER_USER = "TWITTER_USER";
+  public static final String BLACK_USER_ID = "BLACK_USER_ID";
+
   // public static final List<String> CACHE_LIST;
 
   private CacheConstants() {}

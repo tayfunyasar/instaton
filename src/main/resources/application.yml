@@ -1,0 +1,41 @@
+
+logging:
+  level:
+    root: ERROR
+    org:
+      springframework.social: DEBUG
+      hibernate:
+        SQL: ERROR
+    net.sf.ehcache: DEBUG
+
+
+spring:
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+
+spring.session.store-type: none
+
+spring.social.auto-connection-views: true
+
+spring.social.twitter.consumer-key: VbVDIOaKC3YRyCaSH7paZKHAG
+spring.social.twitter.consumer-secret: IUBYhULQBzGGTl2HLzgWVTMY5vZFeyrJqGw5eAemzZirQocPsH
+spring.social.twitter.access-token: 83438083-OGdtrFnOzoDOn93nRZOVvMA7NLnmMujUiuUyle1cB
+spring.social.twitter.access-token-secret: 5KDj2oeZIiMWlYg1IiL3MgumtdpcCjxroxF59CNuBt1wH
+
+spring.social.twitter.appId: VbVDIOaKC3YRyCaSH7paZKHAG
+spring.social.twitter.appSecret: IUBYhULQBzGGTl2HLzgWVTMY5vZFeyrJqGw5eAemzZirQocPsH
+
+xspring.social.twitter.appId: XbclilkanE9GQuGewabc1yEWb
+xspring.social.twitter.appSecret: 8uBNuqJ9rnYSUDCkXwz0Hi1INfl9qEoid5qk4BIEu1Qabm5t5D
+
+
+spring.datasource.url: jdbc:postgresql://localhost/instaton
+spring.datasource.username: docker
+spring.datasource.password: docker
+spring.jpa.generate-ddl: true
+
+
+
+instaton.twitter.searchkeywords: istanbul,manisa
+instaton.twitter.excluded-query: -izmir -kocaeli -izmit -adana -ankara -mersin -trabzon -haber -spor -radyo -galatasaray -fenerbahçe -gazete AND -filter:retweets AND -filter:replies

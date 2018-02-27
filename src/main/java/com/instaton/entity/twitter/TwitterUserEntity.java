@@ -6,18 +6,25 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.instaton.entity.AbstractEntity;
 import com.instaton.entity.GenderEnum;
 
 @Entity
-@Table(name = "twitteruser")
-public class TwitterProfileEntity extends AbstractEntity {
+@Table(
+  name = "twitteruser",
+  uniqueConstraints = {@UniqueConstraint(columnNames = {"screenName"})}
+)
+public class TwitterUserEntity extends AbstractEntity {
 
   @Enumerated(EnumType.STRING)
   private GenderEnum gender;
 
-  private long userId;
+  //  @OneToMany(mappedBy = "user")
+  //  private List<TweetEntity> tweets;
+
+  private String userId;
 
   private String screenName;
 
@@ -141,6 +148,10 @@ public class TwitterProfileEntity extends AbstractEntity {
     return this.profileImageUrl;
   }
 
+  public String getProfileUrl() {
+    return "http://twitter.com/" + this.screenName;
+  }
+
   public String getScreenName() {
     return this.screenName;
   }
@@ -173,7 +184,7 @@ public class TwitterProfileEntity extends AbstractEntity {
     return this.userCreatedDate;
   }
 
-  public long getUserId() {
+  public String getUserId() {
     return this.userId;
   }
 
@@ -353,7 +364,7 @@ public class TwitterProfileEntity extends AbstractEntity {
     this.userCreatedDate = userCreatedDate;
   }
 
-  public void setUserId(final long userId) {
+  public void setUserId(final String userId) {
     this.userId = userId;
   }
 

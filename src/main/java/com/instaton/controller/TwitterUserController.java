@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.instaton.constant.EndpointConstant;
-import com.instaton.entity.twitter.TwitterProfileEntity;
+import com.instaton.entity.twitter.TwitterUserEntity;
 import com.instaton.exception.InstatonException;
 import com.instaton.service.twitter.TwitterUserService;
-import com.instaton.service.twitter.impl.TwitterServiceImpl;
 
 @RestController
 @RequestMapping(EndpointConstant.API_ENDPOINT_TWITTERUSER)
@@ -20,38 +19,18 @@ public class TwitterUserController {
 
   @Autowired private TwitterUserService service;
 
-  @Autowired private TwitterServiceImpl twitterService;
-
   @RequestMapping(value = "/add", method = RequestMethod.POST)
-  public void add(@RequestBody final TwitterProfileEntity input) throws InstatonException {
+  public void add(@RequestBody final TwitterUserEntity input) throws InstatonException {
 
-    // final SearchResults search = this.twitterService.getSearch();
+    final TwitterUserEntity findByScreenName = this.service.findByScreenName(input.getScreenName());
+    findByScreenName.setGender(input.getGender());
 
-    // TwitterProfile currentUser = null;
-    // for (final Tweet tweet : search.getTweets()) {
-    // final TwitterProfile user = tweet.getUser();
-    //
-    // if (user.getId() == input.getUserId()) {
-    // currentUser = user;
-    // break;
-    // }
-    // if (StringUtils.equals(user.getScreenName(), input.getScreenName())) {
-    // currentUser = user;
-    // break;
-    // }
-    // }
-    // final TwitterUser convert = ConvertUtil.convert(currentUser);
-    // convert.setGender(input.getGender());
-    // convert.setUserId(input.getUserId());
-    final TwitterProfileEntity convert = new TwitterProfileEntity();
-    convert.setScreenName(input.getScreenName());
-
-    this.service.save(convert);
+    this.service.save(findByScreenName);
   }
 
   @RequestMapping(value = "/list", method = RequestMethod.POST)
-  public List<TwitterProfileEntity> list() throws InstatonException {
+  public List<TwitterUserEntity> list() throws InstatonException {
 
-    return this.service.findAll();
+    return this.service.findTop10ByGenderIsNullOrderById();
   }
 }

@@ -1,0 +1,42 @@
+<div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+            <button type="button" class="btn btn-default">Default</button>
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-success">Success</button>
+            <button type="button" class="btn btn-info">Info</button>
+            <button type="button" class="btn btn-warning">Warning</button>
+            <button type="button" class="btn btn-danger">Danger</button>
+            <button type="button" class="btn btn-link">Link</button>
+            <button type="button" class="btn btn-danger pull-right" ng-click="self.hideAll()">HİDE ALL</button>
+      </div>
+</div>
+<div class="row">
+      <div class="col-sm-2" ng-repeat="user in self.twitterUserList">
+            <div class="thumbnail">
+                  <img ng-src="{{user.profileImageUrl.replace('_normal','')}}" alt="fromUser">
+                  <h4>
+                    <a target="_blank" href="{{user.profileUrl}}">{{user.name}}</a>
+                    <button type="button" class="btn btn-info" ng-click="self.hideUser(user)">Hide</button>
+                  </h4>
+
+                  <div class="caption" ng-show="user.gender == null">
+                        <p ng-bind-html="user.description"></p>
+                        <a type="button" class="btn btn-default" ng-click="self.markUserAsFemale(user);" target="_blank" href="{{user.profileUrl}}">FEMALE</a>
+                        <button type="button" class="btn btn-warning" ng-click="self.markUserAsBot(user);">BOT</button>
+                        <button type="button" class="btn btn-danger pull-right" ng-click="self.markUserAsMale(user);">MALE</button>
+                  </div>
+            </div>
+      </div>
+</div>
+<div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+            <button type="button" class="btn btn-default">Default</button>
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-success">Success</button>
+            <button type="button" class="btn btn-info">Info</button>
+            <button type="button" class="btn btn-warning">Warning</button>
+            <button type="button" class="btn btn-danger">Danger</button>
+            <button type="button" class="btn btn-link">Link</button>
+            <button type="button" class="btn btn-danger pull-right" ng-click="self.hideAll()">HİDE ALL</button>
+      </div>
+</div>

@@ -25,6 +25,11 @@ http://localhost:5000/
 ```
 
 ## TODOs
+
+### Architecture
+* Print request logs
+
+### Instagram
 * Implement Instagram API
 ** Save credentials into db
 * List private messages & send DMs using instagram4j
@@ -32,4 +37,4 @@ http://localhost:5000/
 ** Add notes, save phone number, add order with units for each users
 ** Configure auto reply templates if user sends spesific keywords
 
-Happy Coding.
+Happy coding.

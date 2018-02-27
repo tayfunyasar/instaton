@@ -15,4 +15,12 @@ public class EndpointConstant {
   public static final String API_ENDPOINT_BLACKWORD = "/api/blackwordentity/**";
 
   public static final String API_ENDPOINT_TWITTERUSER = "/api/twitteruser/**";
+
+  public static final String API_ENDPOINT_PROFILE = "/api/profile/**";
+
+  public static final String API_ENDPOINT_SEARCH = "/api/search/**";
+
+  private EndpointConstant() {
+    throw new IllegalAccessError();
+  }
 }

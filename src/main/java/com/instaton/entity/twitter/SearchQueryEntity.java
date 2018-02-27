@@ -1,20 +1,25 @@
 package com.instaton.entity.twitter;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.instaton.entity.AbstractEntity;
 
+@Entity
+@Table(name = "searchquery")
 public class SearchQueryEntity extends AbstractEntity {
 
   private String query;
   private int interval;
-  private Date lastVisit;
+  private LocalDateTime lastVisit;
 
   public int getInterval() {
     return this.interval;
   }
 
-  public Date getLastVisit() {
+  public LocalDateTime getLastVisit() {
     return this.lastVisit;
   }
 
@@ -26,7 +31,7 @@ public class SearchQueryEntity extends AbstractEntity {
     this.interval = interval;
   }
 
-  public void setLastVisit(final Date lastVisit) {
+  public void setLastVisit(final LocalDateTime lastVisit) {
     this.lastVisit = lastVisit;
   }
 

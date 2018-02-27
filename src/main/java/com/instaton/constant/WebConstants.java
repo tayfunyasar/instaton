@@ -14,6 +14,13 @@ public class WebConstants {
   @Value("#{'${instaton.twitter.searchkeywords}'.split(',')}")
   private List<String> keywordList;
 
+  @Value("${instaton.twitter.excluded-query}")
+  private String excludedQuery;
+
+  public String getExcludedQuery() {
+    return this.excludedQuery;
+  }
+
   public List<String> getKeywordList() {
     return this.keywordList;
   }

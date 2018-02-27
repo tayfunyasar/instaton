@@ -162,7 +162,7 @@
                   #pinBoot {
                         position: relative;
                         max-width: 100%;
-                        width: 100%;
+                        width: 95%;
                   }
 
                   img {
@@ -198,7 +198,7 @@
 
             <div class="row">
                   <div class="col-sm-8 col-sm-offset-2">
-                        <div class="btn-group" data-toggle="buttons">
+                        <!-- <div class="btn-group" data-toggle="buttons">
                               <label class="btn btn-primary" ng-repeat="tag in self.searchResult.mostUsedHashTags" ng-click="self.addTagFilter(tag)">
                                     <input type="checkbox" checked autocomplete="off" >{{tag}}
                               </label>
@@ -207,7 +207,7 @@
                               <label class="btn btn-warning" ng-repeat="word in self.searchResult.filteredMostUsedWords" ng-click="self.addWordFilter(word)">
                                     <input type="checkbox" checked autocomplete="off" >{{word}}
                               </label>
-                        </div>
+                        </div> -->
                         <button type="button" class="btn btn-default">Default</button>
                         <button type="button" class="btn btn-primary">Primary</button>
                         <button type="button" class="btn btn-success">Success</button>
@@ -222,19 +222,18 @@
 
             <hr>
             <section id="pinBoot">
-                  <article class="white-panel" ng-repeat="tweet in self.searchResult.filteredTweets | filterByTags: self.tagFilterList">
-                        <img ng-src="{{tweet.profileImageUrl.replace('_normal','')}}" alt="tweet.fromUser">
+                  <article class="white-panel" ng-repeat="user in self.twitterUserList">
+                        <img ng-src="{{user.profileImageUrl.replace('_normal','')}}" alt="fromUser">
                         <h4>
-                          <a target="_blank" href="{{tweet.user.profileUrl}}">{{tweet.user.name}}</a>
-                          <button type="button" class="btn btn-info" ng-click="self.hideUser(tweet)">Hide</button>
+                          <a target="_blank" href="{{user.profileUrl}}">{{user.name}}</a>
+                          <button type="button" class="btn btn-info" ng-click="self.hideUser(user)">Hide</button>
                         </h4>
-                        <p ng-bind-html="tweet.text"></p>
-                        <img ng-repeat="media in tweet.entities.media" ng-src="{{media.mediaUrl}}" alt="tweet.fromUser">
+                        <p ng-bind-html="user.description"></p>
 
-                        <div ng-show="tweet.user.gender == null">
-                              <button type="button" class="btn btn-default" ng-click="self.markUserAsFemale(tweet);">FEMALE</button>
-                              <button type="button" class="btn btn-warning" ng-click="self.markUserAsBot(tweet);">BOT</button>
-                              <button type="button" class="btn btn-danger pull-right" ng-click="self.markUserAsMale(tweet);">MALE</button>
+                        <div ng-show="user.gender == null">
+                              <button type="button" class="btn btn-default" ng-click="self.markUserAsFemale(user);">FEMALE</button>
+                              <button type="button" class="btn btn-warning" ng-click="self.markUserAsBot(user);">BOT</button>
+                              <button type="button" class="btn btn-danger pull-right" ng-click="self.markUserAsMale(user);">MALE</button>
                         </div>
                   </article>
             </section>

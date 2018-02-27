@@ -1,117 +1,90 @@
 var _ = require('underscore');
 
-DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'BlackUserIdEntityService', 'TwitterUserService', 'BlackWordEntityService'];
+DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'TwitterUserService', 'BlackWordEntityService', '$window'];
 
-function DashboardController(ProfileService, BlackHashTagEntityService, BlackUserIdEntityService, TwitterUserService, BlackWordEntityService) {
+function DashboardController(ProfileService, BlackHashTagEntityService, TwitterUserService, BlackWordEntityService, $window) {
   var self = this;
 
   self.tagFilterList = [];
 
   self.$onInit = function () {
-
-    ProfileService.getSearch().then(function (response) {
-      self.searchResult = response;
-
-      return TwitterUserService.list();
-    }).then(function (response) {
+    TwitterUserService.list().then(function (response) {
       self.twitterUserList = response;
-
-      _.each(self.searchResult.filteredTweets, function (tweet, index) {
-        _.each(self.twitterUserList, function (twitterUser) {
-          if (tweet.user.screenName == twitterUser.screenName) {
-            self.searchResult.filteredTweets[index].user.gender = twitterUser.gender;
-          }
-          if (tweet.user.id == twitterUser.userId) {
-            self.searchResult.filteredTweets[index].user.gender = twitterUser.gender;
-          }
-          if (tweet.user.id.toString().startsWith(twitterUser.userId.toString())) {
-            self.searchResult.filteredTweets[index].user.gender = twitterUser.gender;
-          }
-          if (twitterUser.userId.toString().startsWith(tweet.user.id.toString())) {
-            self.searchResult.filteredTweets[index].user.gender = twitterUser.gender;
-          }
-        });
-      });
-
-      self.searchResult.filteredTweets = _.uniq(self.searchResult.filteredTweets, function (tweet) {
-        return tweet.user.screenName;
-      });
     });
   };
 
-  self.addTagFilter = function (tag) {
-    self.tagFilterList.push(tag);
+  // self.addTagFilter = function (tag) {
+  //   self.tagFilterList.push(tag);
+  //
+  //   var postData = {
+  //     keyword: tag,
+  //   };
+  //   BlackHashTagEntityService.add(postData);
+  // };
 
-    var postData = {
-      keyword: tag,
-    };
-    BlackHashTagEntityService.add(postData);
-  };
-
-  self.hideUser = function (tweet) {
-    self.searchResult.filteredTweets = _.reject(self.searchResult.filteredTweets, function (filteredTweet) {
-      return filteredTweet == tweet;
+  var addTwitterUserService = function (postData) {
+    self.twitterUserList = _.reject(self.twitterUserList, function (filteredTweet) {
+      return filteredTweet.screenName == postData.screenName;
     });
 
-    var postData = {
-      screenName: tweet.user.screenName,
-    };
-    BlackUserIdEntityService.add(postData);
-  };
-
-  self.markUserAsMale = function (tweet) {
-    tweet.user.gender = 'MALE';
-    self.searchResult.filteredTweets = _.reject(self.searchResult.filteredTweets, function (filteredTweet) {
-      return filteredTweet.user.screenName == tweet.user.screenName;
-    });
-
-    var postData = {
-      gender: 'MALE',
-      screenName: tweet.user.screenName,
-    };
     TwitterUserService.add(postData);
   };
 
-  self.markUserAsFemale = function (tweet) {
-    tweet.user.gender = 'FEMALE';
+  self.hideUser = function (twitterUser) {
+    twitterUser.gender = 'BOT';
     var postData = {
-      gender: 'FEMALE',
-      screenName: tweet.user.screenName,
+      gender: twitterUser.gender,
+      screenName: twitterUser.screenName,
     };
-    TwitterUserService.add(postData);
+    addTwitterUserService(postData);
   };
 
-  self.markUserAsBot = function (tweet) {
-    tweet.user.gender = 'BOT';
-    self.searchResult.filteredTweets = _.reject(self.searchResult.filteredTweets, function (filteredTweet) {
-      return filteredTweet.user.screenName == tweet.user.screenName;
-    });
-
+  self.markUserAsMale = function (twitterUser) {
+    twitterUser.gender = 'MALE';
     var postData = {
-      gender: 'BOT',
-      screenName: tweet.user.screenName,
+      gender: twitterUser.gender,
+      screenName: twitterUser.screenName,
     };
-    TwitterUserService.add(postData);
+    addTwitterUserService(postData);
+  };
+
+  self.markUserAsFemale = function (twitterUser) {
+    twitterUser.gender = 'FEMALE';
+    var postData = {
+      gender: twitterUser.gender,
+      screenName: twitterUser.screenName,
+    };
+    addTwitterUserService(postData);
+  };
+
+  self.markUserAsBot = function (twitterUser) {
+    twitterUser.gender = 'BOT';
+    var postData = {
+      gender: twitterUser.gender,
+      screenName: twitterUser.screenName,
+    };
+    addTwitterUserService(postData);
   };
 
   self.hideAll = function () {
-    _.each(self.searchResult.filteredTweets, function (tweet) {
-      if (tweet.user.gender != 'FEMALE') {
-        self.hideUser(tweet);
+    _.each(self.twitterUserList, function (user) {
+      if (user.gender != 'FEMALE') {
+        self.hideUser(user);
       }
     });
+    $window.location.reload();
   };
 
-  self.addWordFilter = function (word) {
-    self.searchResult.filteredTweets = _.reject(self.searchResult.filteredTweets, function (filteredTweet) {
-      return filteredTweet.text.indexOf(word) > -1;
-    });
-
-    var postData = {
-      word: word,
-    };
-    BlackWordEntityService.add(postData);
-  };
+  // self.addWordFilter = function (word) {
+  //   self.twitterUserList = _.reject(self.twitterUserList, function (filteredTweet) {
+  //     return filteredTweet.text.indexOf(word) > -1;
+  //   });
+  //
+  //   var postData = {
+  //     word: word,
+  //   };
+  //   BlackWordEntityService.add(postData);
+  // };
 }
 
 angular.module('instaton.app.content').controller('DashboardController', DashboardController);

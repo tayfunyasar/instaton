@@ -7,10 +7,24 @@
 	<cache name="TWITTER_PROFILE_SERVICE_CURRENT"
 		maxEntriesLocalHeap="200" timeToLiveSeconds="300"></cache>
 
+	<cache name="TWITTER_SEARCH" maxEntriesLocalHeap="200"
+		timeToLiveSeconds="30"></cache>
 
-	<cache name="TWITTER_SEARCH"
-		maxEntriesLocalHeap="200" timeToLiveSeconds="30"></cache>
-	
-	<cache name="INSTAGRAM_MESSAGES"
-		maxEntriesLocalHeap="200" timeToLiveSeconds="600"></cache>
+	<cache name="INSTAGRAM_MESSAGES" maxEntriesLocalHeap="200"
+		timeToLiveSeconds="600"></cache>
+
+	<cache name="BLACK_HASHTAG" maxEntriesLocalHeap="200"
+		timeToLiveSeconds="600"></cache>
+
+	<cache name="BLACK_NAME" maxEntriesLocalHeap="200"
+		timeToLiveSeconds="600"></cache>
+
+	<cache name="BLACK_WORD" maxEntriesLocalHeap="200"
+		timeToLiveSeconds="600"></cache>
+
+	<cache name="TWITTER_USER" maxEntriesLocalHeap="200"
+		timeToLiveSeconds="600"></cache>
+		
+	<cache name="BLACK_USER_ID" maxEntriesLocalHeap="200"
+		timeToLiveSeconds="600"></cache>
 </ehcache>

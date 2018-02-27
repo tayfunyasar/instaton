@@ -9,9 +9,8 @@ import org.springframework.social.twitter.api.Tweet;
 
 import com.instaton.entity.black.BlackHashTagEntity;
 import com.instaton.entity.black.BlackNameEntity;
-import com.instaton.entity.black.BlackUserIdEntity;
 import com.instaton.entity.black.BlackWordEntity;
-import com.instaton.entity.twitter.TwitterProfileEntity;
+import com.instaton.entity.twitter.TwitterUserEntity;
 import com.instaton.util.LanguageUtil;
 import com.instaton.util.TurkishUtils;
 
@@ -82,21 +81,6 @@ public class TweetFilter {
     return false;
   }
 
-  public static boolean checkIfBlocked(
-      final List<BlackUserIdEntity> blackUserIdList, final Tweet tweet) {
-    for (final BlackUserIdEntity blackUserIdEntity : blackUserIdList) {
-      final String screenName = tweet.getUser().getScreenName();
-
-      if (blackUserIdEntity.getUserId() == tweet.getUser().getId()) {
-        return true;
-      }
-      if (TurkishUtils.equalsIgnoreCase(blackUserIdEntity.getScreenName(), screenName)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   public static boolean checkIfLocationBlacklisted(final Tweet tweet) {
     final List<String> blackLocationList =
         Arrays.asList(
@@ -145,7 +129,16 @@ public class TweetFilter {
             "chile",
             "elazığ",
             "çorum",
-            "keçiören");
+            "keçiören",
+            "kastamonu",
+            "nilufer",
+            "balıkesir",
+            "amasya",
+            "iskenderun",
+            "osmaniye",
+            "adıyaman",
+            "sapanca",
+            "aksaray");
     final String userLocation = tweet.getUser().getLocation();
 
     for (final String location : blackLocationList) {
@@ -158,19 +151,30 @@ public class TweetFilter {
   }
 
   public static boolean checkIfNotVisitedBefore(
-      final List<TwitterProfileEntity> twitterUserList, final Tweet tweet) {
+      final List<TwitterUserEntity> twitterUserList, final Tweet tweet) {
 
-    final String screenName = tweet.getUser().getScreenName();
-    for (final TwitterProfileEntity twitterUser : twitterUserList) {
-      if (tweet.getUser().getId() == twitterUser.getUserId()) {
-        return true;
-      }
-      if (TurkishUtils.equalsIgnoreCase(twitterUser.getScreenName(), screenName)) {
+    for (final TwitterUserEntity twitterUser : twitterUserList) {
+      if (String.valueOf(tweet.getUser().getId()).equals(twitterUser.getUserId())) {
         return true;
       }
     }
     return false;
   }
+
+  //  public static boolean checkIfTweetEntityContains(
+  //      final List<TweetEntity> tweetEntityList, final Tweet tweet) {
+  //
+  //    final String screenName = tweet.getUser().getScreenName();
+  //    for (final TweetEntity tweetEntity : tweetEntityList) {
+  //      if (String.valueOf(tweet.getUser().getId()).equals(tweetEntity.getUser().getUserId())) {
+  //        return true;
+  //      }
+  //      if (TurkishUtils.equalsIgnoreCase(tweetEntity.getUser().getScreenName(), screenName)) {
+  //        return true;
+  //      }
+  //    }
+  //    return false;
+  //  }
 
   public static boolean isBlacklistedLanguage(final Tweet tweet) {
     final String name = tweet.getUser().getName();

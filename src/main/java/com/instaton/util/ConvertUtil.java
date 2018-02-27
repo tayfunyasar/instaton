@@ -2,14 +2,14 @@ package com.instaton.util;
 
 import org.springframework.social.twitter.api.TwitterProfile;
 
-import com.instaton.entity.twitter.TwitterProfileEntity;
+import com.instaton.entity.twitter.TwitterUserEntity;
 
 public class ConvertUtil {
 
-  public static TwitterProfileEntity convert(final TwitterProfile input) {
-    final TwitterProfileEntity output = new TwitterProfileEntity();
+  public static TwitterUserEntity convert(final TwitterProfile input) {
+    final TwitterUserEntity output = new TwitterUserEntity();
 
-    output.setUserId(input.getId());
+    output.setUserId(String.valueOf(input.getId()));
     output.setScreenName(input.getScreenName());
     output.setName(input.getName());
     output.setUrl(input.getUrl());

@@ -16,7 +16,7 @@ function config($stateProvider) {
 
   $stateProvider.state('content.dashboard', {
     url: '/',
-    templateUrl: 'content/dashboard/tpl.html',
+    templateUrl: 'content/dashboard/tpl0.html',
     controller: 'DashboardController',
     controllerAs: 'self',
   });
