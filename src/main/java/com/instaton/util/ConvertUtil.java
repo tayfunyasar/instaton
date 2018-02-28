@@ -2,7 +2,7 @@ package com.instaton.util;
 
 import org.springframework.social.twitter.api.TwitterProfile;
 
-import com.instaton.entity.twitter.TwitterUserEntity;
+import com.instaton.entity.social.twitter.TwitterUserEntity;
 
 public class ConvertUtil {
 

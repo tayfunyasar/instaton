@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.instaton.config.exception.InstatonException;
 import com.instaton.constant.EndpointConstant;
-import com.instaton.entity.black.BlackWordEntity;
-import com.instaton.exception.InstatonException;
+import com.instaton.entity.social.BlackWordEntity;
 import com.instaton.service.twitter.BlackWordEntityService;
 
 @RestController

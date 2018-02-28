@@ -7,10 +7,10 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.instaton.cache.KeyGeneratorConstants;
+import com.instaton.config.cache.KeyGeneratorConstants;
 import com.instaton.constant.CacheConstants;
-import com.instaton.entity.twitter.TwitterUserEntity;
-import com.instaton.repository.twitter.TwitterUserRepository;
+import com.instaton.entity.social.twitter.TwitterUserEntity;
+import com.instaton.repository.social.twitter.TwitterUserRepository;
 import com.instaton.service.database.BaseService;
 
 @Service
@@ -39,9 +39,9 @@ public class TwitterUserService implements BaseService {
     return this.repository.findByScreenName(screenName);
   }
 
-  public List<TwitterUserEntity> findTop10ByGenderIsNullOrderById() {
+  public List<TwitterUserEntity> findTop100ByGenderIsNullOrderByUserId() {
 
-    return this.repository.findTop100ByGenderIsNullOrderById();
+    return this.repository.findTop100ByGenderIsNullOrderByUserId();
   }
 
   public void save(final TwitterUserEntity input) {

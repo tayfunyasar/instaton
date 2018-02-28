@@ -7,10 +7,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.Tweet;
 
-import com.instaton.entity.black.BlackHashTagEntity;
-import com.instaton.entity.black.BlackNameEntity;
-import com.instaton.entity.black.BlackWordEntity;
-import com.instaton.entity.twitter.TwitterUserEntity;
+import com.instaton.entity.social.BlackHashTagEntity;
+import com.instaton.entity.social.BlackNameEntity;
+import com.instaton.entity.social.BlackWordEntity;
+import com.instaton.entity.social.twitter.TwitterUserEntity;
 import com.instaton.util.LanguageUtil;
 import com.instaton.util.TurkishUtils;
 

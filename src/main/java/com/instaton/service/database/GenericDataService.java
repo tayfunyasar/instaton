@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.instaton.cache.KeyGeneratorConstants;
+import com.instaton.config.cache.KeyGeneratorConstants;
+import com.instaton.config.exception.InstatonException;
 import com.instaton.constant.CacheConstants;
 import com.instaton.entity.generic.parameter.ParameterListItem;
 import com.instaton.entity.generic.parameter.ParameterListOutput;
-import com.instaton.exception.InstatonException;
-import com.instaton.repository.twitter.ParameterListItemRepository;
+import com.instaton.repository.social.twitter.ParameterListItemRepository;
 
 @Service
 public class GenericDataService {

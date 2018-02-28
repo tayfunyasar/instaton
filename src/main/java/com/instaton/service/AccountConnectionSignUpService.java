@@ -7,8 +7,8 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.stereotype.Service;
 
-import com.instaton.entity.twitter.UserProfile;
-import com.instaton.repository.twitter.TwitterUserProfileRepository;
+import com.instaton.entity.social.twitter.UserProfile;
+import com.instaton.repository.social.twitter.TwitterUserProfileRepository;
 
 import java.util.UUID;
 

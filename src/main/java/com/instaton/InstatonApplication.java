@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import com.instaton.component.QueryScheduler;
+import com.instaton.component.TwitterQueryScheduler;
 import com.instaton.service.twitter.BlackHashTagEntityService;
 import com.instaton.service.twitter.BlackNameEntityService;
 import com.instaton.service.twitter.BlackWordEntityService;
@@ -26,6 +26,6 @@ public class InstatonApplication extends SpringBootServletInitializer {
     context.getBean(BlackNameEntityService.class).findAll();
     context.getBean(BlackWordEntityService.class).findAll();
 
-    context.getBean(QueryScheduler.class).schedule();
+    context.getBean(TwitterQueryScheduler.class).schedule();
   }
 }

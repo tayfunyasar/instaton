@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.instaton.config.exception.InstatonException;
 import com.instaton.constant.EndpointConstant;
 import com.instaton.entity.generic.parameter.ParameterListInputData;
 import com.instaton.entity.generic.parameter.ParameterListOutput;
-import com.instaton.exception.InstatonException;
 import com.instaton.service.GenericService;
 
 @RestController

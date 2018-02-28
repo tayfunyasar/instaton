@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.instaton.constant.EndpointConstant;
-import com.instaton.service.twitter.impl.TwitterServiceImpl;
+import com.instaton.service.impl.twitter.TwitterServiceImpl;
 
 @RestController
 @RequestMapping(EndpointConstant.API_ENDPOINT_PROFILE)

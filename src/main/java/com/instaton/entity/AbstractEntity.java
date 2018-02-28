@@ -20,7 +20,7 @@ public abstract class AbstractEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long id;
 
-  @CreatedDate LocalDateTime createdDate;
+  @CreatedDate LocalDateTime createdDate = LocalDateTime.now();
 
-  @LastModifiedDate LocalDateTime modifiedDate;
+  @LastModifiedDate LocalDateTime modifiedDate = LocalDateTime.now();
 }

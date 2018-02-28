@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.instaton.config.exception.InstatonException;
 import com.instaton.constant.EndpointConstant;
-import com.instaton.entity.black.BlackHashTagEntity;
-import com.instaton.exception.InstatonException;
+import com.instaton.entity.social.BlackHashTagEntity;
 import com.instaton.service.twitter.BlackHashTagEntityService;
 
 @RestController

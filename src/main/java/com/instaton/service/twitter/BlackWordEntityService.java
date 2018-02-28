@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.instaton.cache.KeyGeneratorConstants;
+import com.instaton.config.cache.KeyGeneratorConstants;
 import com.instaton.constant.CacheConstants;
-import com.instaton.entity.black.BlackWordEntity;
-import com.instaton.repository.twitter.BlackWordEntityRepository;
+import com.instaton.entity.social.BlackWordEntity;
+import com.instaton.repository.social.twitter.BlackWordEntityRepository;
 import com.instaton.service.database.BaseService;
 
 @Service
