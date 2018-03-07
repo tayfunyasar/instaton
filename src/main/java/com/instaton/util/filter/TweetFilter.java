@@ -81,6 +81,29 @@ public class TweetFilter {
     return false;
   }
 
+  public static boolean checkIfHasUnexpectedFollowersAndFriendsCount(final Tweet tweet) {
+    final int followersCount = tweet.getUser().getFollowersCount();
+    if (followersCount < 20) {
+      return true;
+    }
+
+    final int friendsCount = tweet.getUser().getFriendsCount();
+    if (friendsCount > 3000) {
+      return true;
+    }
+
+    if (friendsCount > 2000 && followersCount < 1000) {
+      return true;
+    }
+
+    final boolean isBot = friendsCount > followersCount * 5;
+    if (friendsCount > 600 && isBot) {
+      return true;
+    }
+
+    return false;
+  }
+
   public static boolean checkIfLocationBlacklisted(final Tweet tweet) {
     final List<String> blackLocationList =
         Arrays.asList(
@@ -138,7 +161,10 @@ public class TweetFilter {
             "osmaniye",
             "adıyaman",
             "sapanca",
-            "aksaray");
+            "aksaray",
+            "erzurum",
+            "kütahya",
+            "fethiye");
     final String userLocation = tweet.getUser().getLocation();
 
     for (final String location : blackLocationList) {

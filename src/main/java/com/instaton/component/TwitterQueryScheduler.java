@@ -60,14 +60,18 @@ public class TwitterQueryScheduler {
 
       final SearchParameters searchParameters =
           new SearchParameters(query).count(100).resultType(ResultType.RECENT);
-      final SearchResults search = TwitterQueryScheduler.this.twitterService.getSearch(searchParameters);
-      final List<Tweet> filterTweets =
+      final SearchResults search =
+          TwitterQueryScheduler.this.twitterService.getSearch(searchParameters);
+      final List<Tweet> filterTweets1 =
           TwitterQueryScheduler.this.twitterService.filterTweets(search.getTweets());
+
+      final List<Tweet> filterTweets =
+          TwitterQueryScheduler.this.twitterService.filterUsers(filterTweets1);
 
       final double tweetSize = search.getTweets().size();
       final double filteredSize = filterTweets.size();
       final double percentage = filteredSize / tweetSize;
-      final double failurePercentage = 1.0 - percentage - 0.7;
+      final double failurePercentage = 1.0 - percentage - 0.9;
       final int interval = this.searchQueryEntity.getInterval();
       final int d = (int) (interval + Math.round(interval * failurePercentage));
       this.searchQueryEntity.setInterval(d);
@@ -87,6 +91,7 @@ public class TwitterQueryScheduler {
 
       for (final Tweet tweet : filterTweets) {
         final TwitterUserEntity user = TwitterUserConverter.convert(tweet.getUser());
+        user.setSearchQuery(this.searchQueryEntity);
 
         TwitterQueryScheduler.this.twitterUserService.save(user);
       }

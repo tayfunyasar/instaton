@@ -6,9 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.instaton.entity.AbstractEntity;
 import com.instaton.entity.enums.GenderEnum;
 
@@ -17,14 +20,16 @@ import com.instaton.entity.enums.GenderEnum;
   name = "twitter_user",
   uniqueConstraints = {@UniqueConstraint(columnNames = {"screenName"})}
 )
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TwitterUserEntity extends AbstractEntity {
+
+  @ManyToOne
+  @JoinColumn(name = "search_query_id")
+  private SearchQueryEntity searchQuery;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private GenderEnum gender;
-
-  //  @OneToMany(mappedBy = "user")
-  //  private List<TweetEntity> tweets;
 
   @Column(nullable = false)
   private String userId;
@@ -158,6 +163,10 @@ public class TwitterUserEntity extends AbstractEntity {
 
   public String getScreenName() {
     return this.screenName;
+  }
+
+  public SearchQueryEntity getSearchQuery() {
+    return this.searchQuery;
   }
 
   public String getSidebarBorderColor() {
@@ -328,6 +337,10 @@ public class TwitterUserEntity extends AbstractEntity {
     this.screenName = screenName;
   }
 
+  public void setSearchQuery(final SearchQueryEntity searchQuery) {
+    this.searchQuery = searchQuery;
+  }
+
   public void setShowAllInlineMedia(final Boolean showAllInlineMedia) {
     this.showAllInlineMedia = showAllInlineMedia;
   }
@@ -378,5 +391,20 @@ public class TwitterUserEntity extends AbstractEntity {
 
   public void setVerified(final Boolean verified) {
     this.verified = verified;
+  }
+
+  @Override
+  public String toString() {
+    return "TwitterUserEntity [searchQuery="
+        + this.searchQuery
+        + ", screenName="
+        + this.screenName
+        + ", name="
+        + this.name
+        + ", description="
+        + this.description
+        + ", location="
+        + this.location
+        + "]";
   }
 }

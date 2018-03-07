@@ -39,27 +39,15 @@ public class TwitterServiceImpl {
 
   public List<Tweet> filterTweets(final List<Tweet> tweets) {
     final List<BlackHashTagEntity> blackKeywordList = this.blackKeywordService.findAll();
-    final List<TwitterUserEntity> allTwitterUserList = this.twitterUserService.findAll();
     final List<BlackNameEntity> blackNameEntityList = this.blackNameEntityService.findAll();
     final List<BlackWordEntity> blackWordEntityList = this.blackWordEntityService.findAll();
 
     final List<Tweet> filteredTweets = new ArrayList<>();
-    final List<String> userIdList = new ArrayList<>();
+    final List<String> uniqueUserIdList = new ArrayList<>();
 
     for (final Tweet tweet : tweets) {
 
-      final int followersCount = tweet.getUser().getFollowersCount();
-      if (followersCount < 20) {
-        continue;
-      }
-
-      final int friendsCount = tweet.getUser().getFriendsCount();
-      if (friendsCount > 2000 && followersCount < 1000) {
-        continue;
-      }
-
-      final boolean isBot = friendsCount > followersCount * 5;
-      if (friendsCount > 600 && isBot) {
+      if (TweetFilter.checkIfHasUnexpectedFollowersAndFriendsCount(tweet)) {
         continue;
       }
 
@@ -83,11 +71,27 @@ public class TwitterServiceImpl {
         continue;
       }
 
-      if (TweetFilter.checkIfNotVisitedBefore(allTwitterUserList, tweet)) {
+      if (TweetFilter.isBlacklistedLanguage(tweet)) {
         continue;
       }
 
-      if (TweetFilter.isBlacklistedLanguage(tweet)) {
+      final String valueOf = String.valueOf(tweet.getUser().getId());
+      if (!uniqueUserIdList.contains(valueOf)) {
+        filteredTweets.add(tweet);
+        uniqueUserIdList.add(valueOf);
+      }
+    }
+    return filteredTweets;
+  }
+
+  public List<Tweet> filterUsers(final List<Tweet> tweets) {
+    final List<TwitterUserEntity> allTwitterUserList = this.twitterUserService.findAll();
+
+    final List<Tweet> filteredTweets = new ArrayList<>();
+    final List<String> userIdList = new ArrayList<>();
+    for (final Tweet tweet : tweets) {
+
+      if (TweetFilter.checkIfNotVisitedBefore(allTwitterUserList, tweet)) {
         continue;
       }
 
@@ -97,6 +101,7 @@ public class TwitterServiceImpl {
         userIdList.add(valueOf);
       }
     }
+
     return filteredTweets;
   }
 

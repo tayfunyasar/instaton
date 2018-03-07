@@ -19,6 +19,9 @@ import com.instaton.entity.enums.PlatformEnum;
 )
 public class SearchQueryEntity extends AbstractEntity {
 
+  //  @OneToMany(mappedBy = "searchQuery")
+  //  private List<TwitterUserEntity> twitterUsers;
+
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private PlatformEnum platform;
@@ -28,6 +31,7 @@ public class SearchQueryEntity extends AbstractEntity {
 
   private int interval;
   private LocalDateTime lastVisit;
+  private Integer priority = 0;
 
   public int getInterval() {
     return this.interval;
@@ -39,6 +43,10 @@ public class SearchQueryEntity extends AbstractEntity {
 
   public PlatformEnum getPlatform() {
     return this.platform;
+  }
+
+  public Integer getPriority() {
+    return this.priority;
   }
 
   public String getQuery() {
@@ -55,6 +63,10 @@ public class SearchQueryEntity extends AbstractEntity {
 
   public void setPlatform(final PlatformEnum platform) {
     this.platform = platform;
+  }
+
+  public void setPriority(final Integer priority) {
+    this.priority = priority;
   }
 
   public void setQuery(final String query) {
