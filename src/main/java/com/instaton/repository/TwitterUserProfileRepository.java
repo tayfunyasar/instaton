@@ -1,4 +1,4 @@
-package com.instaton.repository.social.twitter;
+package com.instaton.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

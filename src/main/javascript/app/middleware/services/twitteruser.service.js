@@ -11,6 +11,10 @@ function TwitterUserService(TwitterUserFactory) {
     return TwitterUserFactory.list();
   };
 
+  self.delete = function (postData) {
+    return TwitterUserFactory.delete(postData);
+  };
+
   return self;
 }
 

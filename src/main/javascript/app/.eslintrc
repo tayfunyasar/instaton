@@ -17,6 +17,7 @@
     },
   // severity for a rule should be one of the following: "off" = off, "warn" = warning, "error" = error
   "rules": {
+    "no-debugger": 0,
     // error list
     // "angular/controller-as-vm": ["error","self"],
     "angular/controller-as-vm": 0,

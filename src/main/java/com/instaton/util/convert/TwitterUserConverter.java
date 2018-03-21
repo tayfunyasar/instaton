@@ -16,7 +16,6 @@ public class TwitterUserConverter {
     user.setDescription(p.getDescription());
     user.setLocation(p.getLocation());
     user.setLanguage(p.getLanguage());
-    user.setBackgroundColor(p.getBackgroundColor());
     user.setFavoritesCount(p.getFavoritesCount());
     user.setFollowersCount(p.getFollowersCount());
     user.setFollowRequestSent(p.isFollowRequestSent());
@@ -26,6 +25,11 @@ public class TwitterUserConverter {
     user.setTimeZone(p.getTimeZone());
     user.setVerified(p.isVerified());
     user.setUtcOffset(p.getUtcOffset());
+    user.setBackgroundImageUrl(p.getBackgroundImageUrl());
+    user.setContributorsEnabled(p.isContributorsEnabled());
+    user.setGeoEnabled(p.isGeoEnabled());
+    user.setListedCount(p.getListedCount());
+    user.setProfileBannerUrl(p.getProfileBannerUrl());
 
     final long time = p.getCreatedDate().getTime();
     final java.sql.Date date = new java.sql.Date(time);

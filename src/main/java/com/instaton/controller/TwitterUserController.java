@@ -28,6 +28,14 @@ public class TwitterUserController {
     this.service.save(findByScreenName);
   }
 
+  @RequestMapping(value = "/delete", method = RequestMethod.POST)
+  public void delete(@RequestBody final TwitterUserEntity input) throws InstatonException {
+
+    final TwitterUserEntity findByScreenName = this.service.findByScreenName(input.getScreenName());
+
+    this.service.delete(findByScreenName);
+  }
+
   @RequestMapping(value = "/list", method = RequestMethod.POST)
   public List<TwitterUserEntity> list() throws InstatonException {
 

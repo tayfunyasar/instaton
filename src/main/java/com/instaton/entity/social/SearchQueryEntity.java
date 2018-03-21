@@ -1,4 +1,4 @@
-package com.instaton.entity.social.twitter;
+package com.instaton.entity.social;
 
 import java.time.LocalDateTime;
 

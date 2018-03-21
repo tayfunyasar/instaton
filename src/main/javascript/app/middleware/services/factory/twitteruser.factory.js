@@ -9,6 +9,12 @@ function TwitterUserFactory($http) {
     });
   };
 
+  self.delete = function (postData) {
+    return $http.post('/api/twitteruser/delete', postData).then(function (response) {
+      return response.data;
+    });
+  };
+
   self.list = function () {
     return $http.post('/api/twitteruser/list').then(function (response) {
       return response.data;

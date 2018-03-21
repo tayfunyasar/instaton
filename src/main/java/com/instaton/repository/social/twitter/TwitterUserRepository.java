@@ -15,5 +15,5 @@ public interface TwitterUserRepository extends CrudRepository<TwitterUserEntity,
 
   TwitterUserEntity findByScreenName(String screenName);
 
-  List<TwitterUserEntity> findTop100ByGenderIsNullOrderByUserId();
+  List<TwitterUserEntity> findTop200ByGenderIsNullOrderByUserId();
 }

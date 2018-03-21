@@ -18,6 +18,11 @@ public class TwitterUserService implements BaseService {
 
   @Autowired private TwitterUserRepository repository;
 
+  public void delete(final TwitterUserEntity input) {
+
+    this.repository.delete(input);
+  }
+
   @CacheEvict(
     cacheNames = CacheConstants.TWITTER_USER,
     keyGenerator = KeyGeneratorConstants.USER_BASED_CACHE_KEY_GENERATOR
@@ -41,7 +46,7 @@ public class TwitterUserService implements BaseService {
 
   public List<TwitterUserEntity> findTop100ByGenderIsNullOrderByUserId() {
 
-    return this.repository.findTop100ByGenderIsNullOrderByUserId();
+    return this.repository.findTop200ByGenderIsNullOrderByUserId();
   }
 
   public void save(final TwitterUserEntity input) {

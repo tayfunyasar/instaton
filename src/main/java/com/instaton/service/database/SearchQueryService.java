@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.instaton.entity.social.twitter.SearchQueryEntity;
+import com.instaton.entity.enums.PlatformEnum;
+import com.instaton.entity.social.SearchQueryEntity;
 import com.instaton.repository.social.twitter.SearchQueryRepository;
 
 @Service
@@ -18,12 +19,15 @@ public class SearchQueryService implements BaseService {
     throw new IllegalAccessError();
   }
 
-  public List<SearchQueryEntity> findAllByOrderByLastVisitAsc() {
-    return this.repository.findAllByOrderByLastVisitAsc();
+  public List<SearchQueryEntity> findAllByPlatformInstagramOrderByLastVisitAsc() {
+    return this.repository.findByPlatformOrderByLastVisitAsc(PlatformEnum.INSTAGRAM);
+  }
+
+  public List<SearchQueryEntity> findAllByPlatformTwitterOrderByLastVisitAsc() {
+    return this.repository.findByPlatformOrderByLastVisitAsc(PlatformEnum.TWITTER);
   }
 
   public void save(final SearchQueryEntity input) {
-
     this.repository.save(input);
   }
 }

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Component;
 
 import com.instaton.constant.WebConstants;
-import com.instaton.entity.social.twitter.SearchQueryEntity;
+import com.instaton.entity.social.SearchQueryEntity;
 import com.instaton.entity.social.twitter.TwitterUserEntity;
 import com.instaton.service.database.SearchQueryService;
 import com.instaton.service.impl.twitter.TwitterServiceImpl;
@@ -60,13 +59,12 @@ public class TwitterQueryScheduler {
 
       final SearchParameters searchParameters =
           new SearchParameters(query).count(100).resultType(ResultType.RECENT);
-      final SearchResults search =
-          TwitterQueryScheduler.this.twitterService.getSearch(searchParameters);
+      final SearchResults search = TwitterQueryScheduler.this.service.getSearch(searchParameters);
       final List<Tweet> filterTweets1 =
-          TwitterQueryScheduler.this.twitterService.filterTweets(search.getTweets());
+          TwitterQueryScheduler.this.service.filterTweets(search.getTweets());
 
       final List<Tweet> filterTweets =
-          TwitterQueryScheduler.this.twitterService.filterUsers(filterTweets1);
+          TwitterQueryScheduler.this.service.filterUsers(filterTweets1);
 
       final double tweetSize = search.getTweets().size();
       final double filteredSize = filterTweets.size();
@@ -93,25 +91,26 @@ public class TwitterQueryScheduler {
         final TwitterUserEntity user = TwitterUserConverter.convert(tweet.getUser());
         user.setSearchQuery(this.searchQueryEntity);
 
-        TwitterQueryScheduler.this.twitterUserService.save(user);
+        TwitterQueryScheduler.this.userService.save(user);
       }
-      TwitterQueryScheduler.this.twitterUserService.evictfindAll();
+      TwitterQueryScheduler.this.userService.evictfindAll();
 
       TwitterQueryScheduler.this.searchQueryService.save(this.searchQueryEntity);
     }
   }
 
-  @Autowired private TwitterServiceImpl twitterService;
+  @Autowired private TwitterServiceImpl service;
 
-  @Autowired private TwitterUserService twitterUserService;
+  @Autowired private TwitterUserService userService;
 
   @Autowired private WebConstants webConstants;
 
   @Autowired private SearchQueryService searchQueryService;
 
-  public void schedule() throws InterruptedException {
+  public void schedule() {
 
-    final List<SearchQueryEntity> findAll = this.searchQueryService.findAllByOrderByLastVisitAsc();
+    final List<SearchQueryEntity> findAll =
+        this.searchQueryService.findAllByPlatformTwitterOrderByLastVisitAsc();
 
     final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
@@ -119,9 +118,8 @@ public class TwitterQueryScheduler {
 
       final QueryRunnable queryRunnable = new QueryRunnable(searchQueryEntity);
 
-      final ScheduledFuture<?> scheduleAtFixedRate =
-          executor.scheduleAtFixedRate(
-              queryRunnable, 0L, searchQueryEntity.getInterval(), TimeUnit.MINUTES);
+      executor.scheduleAtFixedRate(
+          queryRunnable, 0L, searchQueryEntity.getInterval(), TimeUnit.MINUTES);
 
       System.out.println(searchQueryEntity.getQuery() + " -> " + searchQueryEntity.getInterval());
     }

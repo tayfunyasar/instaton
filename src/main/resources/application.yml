@@ -6,6 +6,7 @@ logging:
       springframework.social: DEBUG
       hibernate:
         SQL: ERROR
+      brunocvcunha.instagram4j: DEBUG
     net.sf.ehcache: DEBUG
 
 

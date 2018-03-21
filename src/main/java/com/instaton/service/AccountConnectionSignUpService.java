@@ -1,5 +1,7 @@
 package com.instaton.service;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +10,7 @@ import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.stereotype.Service;
 
 import com.instaton.entity.social.twitter.UserProfile;
-import com.instaton.repository.social.twitter.TwitterUserProfileRepository;
-
-import java.util.UUID;
+import com.instaton.repository.TwitterUserProfileRepository;
 
 @Service
 public class AccountConnectionSignUpService implements ConnectionSignUp {
@@ -19,15 +19,16 @@ public class AccountConnectionSignUpService implements ConnectionSignUp {
 
   @Autowired private TwitterUserProfileRepository twitterUserProfileRepository;
 
-  public String execute(Connection<?> connection) {
-    org.springframework.social.connect.UserProfile profile = connection.fetchUserProfile();
-    String userId = UUID.randomUUID().toString();
+  @Override
+  public String execute(final Connection<?> connection) {
+    final org.springframework.social.connect.UserProfile profile = connection.fetchUserProfile();
+    final String userId = UUID.randomUUID().toString();
     // TODO: Or simply use: r = new Random(); r.nextInt(); ???
     LOG.debug("Created user-id: " + profile.getId());
 
-    UserProfile userProfile = new UserProfile(userId, profile);
+    final UserProfile userProfile = new UserProfile(userId, profile);
 
-    twitterUserProfileRepository.save(userProfile);
+    this.twitterUserProfileRepository.save(userProfile);
 
     return userId;
   }

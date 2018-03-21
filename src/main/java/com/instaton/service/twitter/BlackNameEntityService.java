@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.instaton.config.cache.KeyGeneratorConstants;
 import com.instaton.constant.CacheConstants;
 import com.instaton.entity.social.BlackNameEntity;
-import com.instaton.repository.social.twitter.BlackNameEntityRepository;
+import com.instaton.repository.social.BlackNameEntityRepository;
 import com.instaton.service.database.BaseService;
 
 @Service

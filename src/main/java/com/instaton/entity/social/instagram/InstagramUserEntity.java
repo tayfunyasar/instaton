@@ -4,11 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.instaton.entity.AbstractEntity;
 import com.instaton.entity.enums.GenderEnum;
+import com.instaton.entity.social.SearchQueryEntity;
 
 @Entity
 @Table(
@@ -17,11 +20,20 @@ import com.instaton.entity.enums.GenderEnum;
 )
 public class InstagramUserEntity extends AbstractEntity {
 
+  //  @OneToOne(mappedBy = "instagramUser")
+  //  private UserRelationEntity userRelation;
+
+  @ManyToOne
+  @JoinColumn(name = "search_query_id")
+  private SearchQueryEntity searchQuery;
+
   @Enumerated(EnumType.STRING)
   private GenderEnum gender;
 
   @Column(nullable = false)
   private String username;
+
+  private long pk;
 
   private boolean isPrivate;
   private boolean isVerified;
@@ -37,7 +49,6 @@ public class InstagramUserEntity extends AbstractEntity {
   private String privatePhoneCountryCode;
   private String privatePhoneNumber;
   private String privateEmail;
-  private long pk;
   private int geoMediaCount;
   private int useTagsCount;
   private String profilePicUrl;
@@ -311,4 +322,8 @@ public class InstagramUserEntity extends AbstractEntity {
   public void setZip(final String zip) {
     this.zip = zip;
   }
+
+public SearchQueryEntity getSearchQuery(){return searchQuery;}
+
+public void setSearchQuery(SearchQueryEntity searchQuery){this.searchQuery = searchQuery;}
 }

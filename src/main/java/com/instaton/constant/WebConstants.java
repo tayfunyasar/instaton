@@ -17,8 +17,22 @@ public class WebConstants {
   @Value("${instaton.twitter.excluded-query}")
   private String excludedQuery;
 
+  @Value("${instaton.instagram.username}")
+  private String instagramUsername;
+
+  @Value("${instaton.instagram.password}")
+  private String instagramPassword;
+
   public String getExcludedQuery() {
     return this.excludedQuery;
+  }
+
+  public String getInstagramPassword() {
+    return this.instagramPassword;
+  }
+
+  public String getInstagramUsername() {
+    return this.instagramUsername;
   }
 
   public List<String> getKeywordList() {

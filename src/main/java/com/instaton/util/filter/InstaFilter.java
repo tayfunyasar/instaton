@@ -4,17 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.brunocvcunha.instagram4j.requests.payload.InstagramFeedItem;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.Tweet;
 
 import com.instaton.entity.social.BlackHashTagEntity;
 import com.instaton.entity.social.BlackNameEntity;
 import com.instaton.entity.social.BlackWordEntity;
-import com.instaton.entity.social.twitter.TwitterUserEntity;
+import com.instaton.entity.social.instagram.InstagramUserEntity;
 import com.instaton.util.LanguageUtil;
 import com.instaton.util.TurkishUtils;
 
-public class TweetFilter {
+public class InstaFilter {
 
   public static boolean checkIfBlackKeywordListed(
       final List<BlackHashTagEntity> blackKeywordList, final Tweet tweet) {
@@ -81,13 +82,14 @@ public class TweetFilter {
     return false;
   }
 
-  public static boolean checkIfHasUnexpectedFollowersAndFriendsCount(final Tweet tweet) {
-    final int followersCount = tweet.getUser().getFollowersCount();
+  public static boolean checkIfHasUnexpectedFollowersAndFriendsCount(
+      final InstagramFeedItem instagramFeedItem) {
+    final int followersCount = instagramFeedItem.getUser().getFollower_count();
     if (followersCount < 20) {
       return true;
     }
 
-    final int friendsCount = tweet.getUser().getFriendsCount();
+    final int friendsCount = instagramFeedItem.getUser().getFollowing_count();
     if (friendsCount > 3000) {
       return true;
     }
@@ -177,10 +179,10 @@ public class TweetFilter {
   }
 
   public static boolean checkIfNotVisitedBefore(
-      final List<TwitterUserEntity> twitterUserList, final Tweet tweet) {
+      final List<InstagramUserEntity> userList, final InstagramFeedItem item) {
 
-    for (final TwitterUserEntity twitterUser : twitterUserList) {
-      if (String.valueOf(tweet.getUser().getId()).equals(twitterUser.getUserId())) {
+    for (final InstagramUserEntity user : userList) {
+      if (item.getUser().getPk() == user.getPk()) {
         return true;
       }
     }
@@ -233,7 +235,7 @@ public class TweetFilter {
     return false;
   }
 
-  private TweetFilter() {
+  private InstaFilter() {
     throw new IllegalAccessError();
   }
 }

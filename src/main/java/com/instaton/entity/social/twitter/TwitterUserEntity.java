@@ -14,6 +14,7 @@ import javax.persistence.UniqueConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.instaton.entity.AbstractEntity;
 import com.instaton.entity.enums.GenderEnum;
+import com.instaton.entity.social.SearchQueryEntity;
 
 @Entity
 @Table(
@@ -22,6 +23,9 @@ import com.instaton.entity.enums.GenderEnum;
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TwitterUserEntity extends AbstractEntity {
+
+  //  @OneToOne(mappedBy = "twitterUser")
+  //  private UserRelationEntity userRelation;
 
   @ManyToOne
   @JoinColumn(name = "search_query_id")
@@ -38,8 +42,6 @@ public class TwitterUserEntity extends AbstractEntity {
   private String screenName;
 
   private String name;
-
-  private String url;
 
   private String profileImageUrl;
 
@@ -81,29 +83,9 @@ public class TwitterUserEntity extends AbstractEntity {
 
   private Integer utcOffset;
 
-  private String sidebarBorderColor;
-
-  private String sidebarFillColor;
-
-  private String backgroundColor;
-
-  private Boolean useBackgroundImage;
-
   private String backgroundImageUrl;
 
-  private Boolean backgroundImageTiled;
-
-  private String textColor;
-
-  private String linkColor;
-
-  private Boolean showAllInlineMedia;
-
   private String profileBannerUrl;
-
-  public String getBackgroundColor() {
-    return this.backgroundColor;
-  }
 
   public String getBackgroundImageUrl() {
     return this.backgroundImageUrl;
@@ -131,10 +113,6 @@ public class TwitterUserEntity extends AbstractEntity {
 
   public String getLanguage() {
     return this.language;
-  }
-
-  public String getLinkColor() {
-    return this.linkColor;
   }
 
   public Integer getListedCount() {
@@ -169,28 +147,12 @@ public class TwitterUserEntity extends AbstractEntity {
     return this.searchQuery;
   }
 
-  public String getSidebarBorderColor() {
-    return this.sidebarBorderColor;
-  }
-
-  public String getSidebarFillColor() {
-    return this.sidebarFillColor;
-  }
-
   public Integer getStatusesCount() {
     return this.statusesCount;
   }
 
-  public String getTextColor() {
-    return this.textColor;
-  }
-
   public String getTimeZone() {
     return this.timeZone;
-  }
-
-  public String getUrl() {
-    return this.url;
   }
 
   public Date getUserCreatedDate() {
@@ -203,10 +165,6 @@ public class TwitterUserEntity extends AbstractEntity {
 
   public Integer getUtcOffset() {
     return this.utcOffset;
-  }
-
-  public Boolean isBackgroundImageTiled() {
-    return this.backgroundImageTiled;
   }
 
   public Boolean isContributorsEnabled() {
@@ -233,28 +191,12 @@ public class TwitterUserEntity extends AbstractEntity {
     return this.isProtected;
   }
 
-  public Boolean isShowAllInlineMedia() {
-    return this.showAllInlineMedia;
-  }
-
   public Boolean isTranslator() {
     return this.translator;
   }
 
-  public Boolean isUseBackgroundImage() {
-    return this.useBackgroundImage;
-  }
-
   public Boolean isVerified() {
     return this.verified;
-  }
-
-  public void setBackgroundColor(final String backgroundColor) {
-    this.backgroundColor = backgroundColor;
-  }
-
-  public void setBackgroundImageTiled(final Boolean backgroundImageTiled) {
-    this.backgroundImageTiled = backgroundImageTiled;
   }
 
   public void setBackgroundImageUrl(final String backgroundImageUrl) {
@@ -301,10 +243,6 @@ public class TwitterUserEntity extends AbstractEntity {
     this.language = language;
   }
 
-  public void setLinkColor(final String linkColor) {
-    this.linkColor = linkColor;
-  }
-
   public void setListedCount(final Integer listedCount) {
     this.listedCount = listedCount;
   }
@@ -341,24 +279,8 @@ public class TwitterUserEntity extends AbstractEntity {
     this.searchQuery = searchQuery;
   }
 
-  public void setShowAllInlineMedia(final Boolean showAllInlineMedia) {
-    this.showAllInlineMedia = showAllInlineMedia;
-  }
-
-  public void setSidebarBorderColor(final String sidebarBorderColor) {
-    this.sidebarBorderColor = sidebarBorderColor;
-  }
-
-  public void setSidebarFillColor(final String sidebarFillColor) {
-    this.sidebarFillColor = sidebarFillColor;
-  }
-
   public void setStatusesCount(final Integer statusesCount) {
     this.statusesCount = statusesCount;
-  }
-
-  public void setTextColor(final String textColor) {
-    this.textColor = textColor;
   }
 
   public void setTimeZone(final String timeZone) {
@@ -367,14 +289,6 @@ public class TwitterUserEntity extends AbstractEntity {
 
   public void setTranslator(final Boolean translator) {
     this.translator = translator;
-  }
-
-  public void setUrl(final String url) {
-    this.url = url;
-  }
-
-  public void setUseBackgroundImage(final Boolean useBackgroundImage) {
-    this.useBackgroundImage = useBackgroundImage;
   }
 
   public void setUserCreatedDate(final Date userCreatedDate) {

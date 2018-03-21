@@ -13,7 +13,7 @@
 <div class="row">
       <div class="col-sm-2" ng-repeat="user in self.twitterUserList">
             <div class="thumbnail">
-                  <img ng-src="{{user.profileImageUrl.replace('_normal','')}}" alt="fromUser">
+                  <img ng-src="{{user.profileImageUrl.replace('_normal','')}}" alt="fromUser" imageonerror="self.deleteUser(user)">
                   <h4>
                     <a target="_blank" href="{{user.profileUrl}}">{{user.name}}</a>
                     <button type="button" class="btn btn-info" ng-click="self.hideUser(user)">Hide</button>

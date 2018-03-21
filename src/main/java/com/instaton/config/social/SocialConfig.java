@@ -26,12 +26,6 @@ public class SocialConfig implements SocialConfigurer {
 
   @Autowired private AccountConnectionSignUpService accountConnectionSignUpService;
 
-  // @Value("${spring.social.twitter.consumer-key}")
-  // private String consumerKey;
-  //
-  // @Value("${spring.social.twitter.consumer-secret}")
-  // private String consumerSecret;
-
   @Override
   public void addConnectionFactories(
       final ConnectionFactoryConfigurer connectionFactoryConfigurer,

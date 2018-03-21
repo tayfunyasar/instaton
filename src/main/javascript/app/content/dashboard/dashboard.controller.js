@@ -1,8 +1,8 @@
 var _ = require('underscore');
 
-DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'TwitterUserService', 'BlackWordEntityService', '$window'];
+DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'TwitterUserService', 'BlackWordEntityService', '$window', '$timeout'];
 
-function DashboardController(ProfileService, BlackHashTagEntityService, TwitterUserService, BlackWordEntityService, $window) {
+function DashboardController(ProfileService, BlackHashTagEntityService, TwitterUserService, BlackWordEntityService, $window, $timeout) {
   var self = this;
 
   self.tagFilterList = [];
@@ -72,7 +72,17 @@ function DashboardController(ProfileService, BlackHashTagEntityService, TwitterU
         self.hideUser(user);
       }
     });
-    $window.location.reload();
+    $timeout(function () {
+      $window.location.reload();
+    }, 2000);
+  };
+
+  self.deleteUser = function (user) {
+    self.twitterUserList = _.reject(self.twitterUserList, function (filteredTweet) {
+      return filteredTweet.screenName == user.screenName;
+    });
+
+    TwitterUserService.delete(user);
   };
 
   // self.addWordFilter = function (word) {
@@ -86,5 +96,20 @@ function DashboardController(ProfileService, BlackHashTagEntityService, TwitterU
   //   BlackWordEntityService.add(postData);
   // };
 }
+angular.module('instaton.app.content').directive('imageonerror', function () {
+  return {
+    restrict: 'A',
+    scope: {
+      imageonerror: '&'
+    },
+    link: function (scope, element, attrs) {
+      element.bind('load', function () {
 
+      });
+      element.bind('error', function () {
+        scope.imageonerror();
+      });
+    }
+  };
+});
 angular.module('instaton.app.content').controller('DashboardController', DashboardController);
