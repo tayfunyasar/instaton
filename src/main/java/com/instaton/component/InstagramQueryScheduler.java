@@ -61,10 +61,13 @@ public class InstagramQueryScheduler {
       final InstagramFeedResult feed =
           InstagramQueryScheduler.this.service.getInstagramFeedResult(query);
 
-      final List<InstagramFeedItem> filterItems =
+      final List<InstagramFeedItem> filteredUsersItems =
           InstagramQueryScheduler.this.service.filterUsers(feed.getItems());
 
-      for (final InstagramFeedItem instagramFeedItem : filterItems) {
+      final List<InstagramFeedItem> filter =
+          InstagramQueryScheduler.this.service.filter(filteredUsersItems);
+
+      for (final InstagramFeedItem instagramFeedItem : filter) {
 
         final InstagramUserEntity user =
             InstagramUserConverter.convert(instagramFeedItem.getUser());

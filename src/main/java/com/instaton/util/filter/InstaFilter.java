@@ -12,10 +12,28 @@ import com.instaton.entity.social.BlackHashTagEntity;
 import com.instaton.entity.social.BlackNameEntity;
 import com.instaton.entity.social.BlackWordEntity;
 import com.instaton.entity.social.instagram.InstagramUserEntity;
+import com.instaton.entity.social.instagram.black.InstagramBlackUsernameEntity;
 import com.instaton.util.LanguageUtil;
 import com.instaton.util.TurkishUtils;
 
 public class InstaFilter {
+
+  public static boolean checkIfBlackFullname(
+      final InstagramFeedItem item, final List<BlackNameEntity> blackNameEntityList) {
+    final String firstName = item.getUser().getFull_name().split(" ")[0];
+
+    for (final BlackNameEntity blackNameEntity : blackNameEntityList) {
+      final String name = blackNameEntity.getName();
+
+      if (TurkishUtils.equalsIgnoreCase(firstName, name)) {
+        return true;
+      }
+      if (TurkishUtils.startsWithIgnoreCase(firstName, name)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   public static boolean checkIfBlackKeywordListed(
       final List<BlackHashTagEntity> blackKeywordList, final Tweet tweet) {
@@ -46,14 +64,15 @@ public class InstaFilter {
     return false;
   }
 
-  public static boolean checkIfBlackName(
-      final Tweet tweet, final List<BlackNameEntity> blackNameEntityList) {
-    final String firstname = tweet.getUser().getName().split(" ")[0];
+  public static boolean checkIfBlackUsername(
+      final InstagramFeedItem item,
+      final List<InstagramBlackUsernameEntity> instagramBlackUsernameEntityList) {
+    final String username = item.getUser().getUsername();
 
-    for (final BlackNameEntity blackNameEntity : blackNameEntityList) {
-      final String name = blackNameEntity.getName();
+    for (final InstagramBlackUsernameEntity blackNameEntity : instagramBlackUsernameEntityList) {
+      final String name = blackNameEntity.getUsername();
 
-      if (TurkishUtils.equalsIgnoreCase(firstname, name)) {
+      if (TurkishUtils.containsIgnoreCase(username, name)) {
         return true;
       }
     }

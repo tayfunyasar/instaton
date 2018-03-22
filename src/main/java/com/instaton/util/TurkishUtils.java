@@ -25,6 +25,13 @@ public class TurkishUtils {
     return ns.replaceAll("[^\\x00-\\x7F]", "");
   }
 
+  public static boolean startsWithIgnoreCase(final String s1, final String s2) {
+    final String ws1 = TurkishUtils.replaceAllTurkishCharacters(s1);
+    final String ws2 = TurkishUtils.replaceAllTurkishCharacters(s2);
+
+    return StringUtils.startsWith(ws1, ws2);
+  }
+
   private TurkishUtils() {
     throw new IllegalArgumentException();
   }

@@ -23,14 +23,17 @@ import com.instaton.util.filter.InstaFilter;
 public class InstagramServiceImpl {
 
   @Autowired private InstagramUserService instagramUserService;
+  //  @Autowired private InstagramBlackFullnameEntityService instagramBlackUsernameEntityService;
+  @Autowired private BlackNameEntityService blackNameEntityService;
 
   @Autowired private WebConstants webConstants;
 
   private Instagram4j instagram = null;
-  @Autowired private BlackNameEntityService blackNameEntityService;
 
   public List<InstagramFeedItem> filter(final List<InstagramFeedItem> items) {
     final List<InstagramFeedItem> itemList = new ArrayList<>();
+    //    final List<InstagramBlackUsernameEntity> instagramBlackUsernameEntityList =
+    //        this.instagramBlackUsernameEntityService.findAll();
     final List<BlackNameEntity> blackNameEntityList = this.blackNameEntityService.findAll();
 
     for (final InstagramFeedItem item : items) {
@@ -39,7 +42,7 @@ public class InstagramServiceImpl {
       //        continue;
       //      }
 
-      if (InstaFilter.checkIfBlackName(item, blackNameEntityList)) {
+      if (InstaFilter.checkIfBlackFullname(item, blackNameEntityList)) {
         continue;
       }
 
