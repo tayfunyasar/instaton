@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.instaton.entity.AbstractEntity;
+import com.instaton.entity.enums.BlackNameOperationEnum;
 import com.instaton.entity.enums.BlackNameTypeEnum;
 
 @Entity
@@ -23,8 +24,15 @@ public class BlackNameEntity extends AbstractEntity {
   @Enumerated(EnumType.STRING)
   private BlackNameTypeEnum type;
 
+  @Enumerated(EnumType.STRING)
+  private BlackNameOperationEnum operation;
+
   public String getName() {
     return this.name;
+  }
+
+  public BlackNameOperationEnum getOperation() {
+    return this.operation;
   }
 
   public BlackNameTypeEnum getType() {
@@ -33,6 +41,10 @@ public class BlackNameEntity extends AbstractEntity {
 
   public void setName(final String name) {
     this.name = name;
+  }
+
+  public void setOperation(final BlackNameOperationEnum operation) {
+    this.operation = operation;
   }
 
   public void setType(final BlackNameTypeEnum type) {

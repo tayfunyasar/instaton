@@ -67,6 +67,14 @@ public class InstagramQueryScheduler {
       final List<InstagramFeedItem> filter =
           InstagramQueryScheduler.this.service.filter(filteredUsersItems);
 
+      System.out.println(
+          "feed.Items = "
+              + feed.getItems().size()
+              + " | filterUsers = "
+              + filteredUsersItems.size()
+              + " | filterItems = "
+              + filter.size());
+
       for (final InstagramFeedItem instagramFeedItem : filter) {
 
         final InstagramUserEntity user =

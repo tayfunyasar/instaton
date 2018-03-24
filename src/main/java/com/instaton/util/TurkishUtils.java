@@ -20,9 +20,11 @@ public class TurkishUtils {
     return StringUtils.equalsIgnoreCase(ws1, ws2);
   }
 
-  private static String replaceAllTurkishCharacters(final String s) {
-    final String ns = Normalizer.normalize(s, Normalizer.Form.NFD);
-    return ns.replaceAll("[^\\x00-\\x7F]", "");
+  public static String replaceAllTurkishCharacters(String string) {
+    string = Normalizer.normalize(string, Normalizer.Form.NFD);
+    string = string.replaceAll("[^\\p{ASCII}]", "");
+    string = string.toLowerCase();
+    return string.toLowerCase();
   }
 
   public static boolean startsWithIgnoreCase(final String s1, final String s2) {

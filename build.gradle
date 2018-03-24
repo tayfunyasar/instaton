@@ -74,5 +74,7 @@ dependencies {
 	compile 'org.springframework:spring-context-support'
 	
 	compile("com.optimaize.languagedetector:language-detector:0.6")
+	
 	compile 'org.brunocvcunha.instagram4j:instagram4j:1.7-SNAPSHOT'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
 }

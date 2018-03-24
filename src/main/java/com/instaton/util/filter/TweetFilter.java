@@ -8,7 +8,6 @@ import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.Tweet;
 
 import com.instaton.entity.social.BlackHashTagEntity;
-import com.instaton.entity.social.BlackNameEntity;
 import com.instaton.entity.social.BlackWordEntity;
 import com.instaton.entity.social.twitter.TwitterUserEntity;
 import com.instaton.util.LanguageUtil;
@@ -39,20 +38,6 @@ public class TweetFilter {
     for (final String languageCode : blackLanguageList) {
 
       if (TurkishUtils.equalsIgnoreCase(userLanguage, languageCode)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public static boolean checkIfBlackName(
-      final Tweet tweet, final List<BlackNameEntity> blackNameEntityList) {
-    final String firstname = tweet.getUser().getName().split(" ")[0];
-
-    for (final BlackNameEntity blackNameEntity : blackNameEntityList) {
-      final String name = blackNameEntity.getName();
-
-      if (TurkishUtils.equalsIgnoreCase(firstname, name)) {
         return true;
       }
     }
@@ -186,21 +171,6 @@ public class TweetFilter {
     }
     return false;
   }
-
-  //  public static boolean checkIfTweetEntityContains(
-  //      final List<TweetEntity> tweetEntityList, final Tweet tweet) {
-  //
-  //    final String screenName = tweet.getUser().getScreenName();
-  //    for (final TweetEntity tweetEntity : tweetEntityList) {
-  //      if (String.valueOf(tweet.getUser().getId()).equals(tweetEntity.getUser().getUserId())) {
-  //        return true;
-  //      }
-  //      if (TurkishUtils.equalsIgnoreCase(tweetEntity.getUser().getScreenName(), screenName)) {
-  //        return true;
-  //      }
-  //    }
-  //    return false;
-  //  }
 
   public static boolean isBlacklistedLanguage(final Tweet tweet) {
     final String name = tweet.getUser().getName();

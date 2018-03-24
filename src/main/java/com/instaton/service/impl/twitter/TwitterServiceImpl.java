@@ -22,6 +22,7 @@ import com.instaton.service.twitter.BlackHashTagEntityService;
 import com.instaton.service.twitter.BlackNameEntityService;
 import com.instaton.service.twitter.BlackWordEntityService;
 import com.instaton.service.twitter.TwitterUserService;
+import com.instaton.util.filter.CommonFilter;
 import com.instaton.util.filter.TweetFilter;
 
 @Service
@@ -67,7 +68,7 @@ public class TwitterServiceImpl {
         continue;
       }
 
-      if (TweetFilter.checkIfBlackName(tweet, blackNameEntityList)) {
+      if (CommonFilter.checkIfBlackFullname(tweet.getUser().getName(), blackNameEntityList)) {
         continue;
       }
 

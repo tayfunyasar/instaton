@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.connector.ClientAbortException;
 import org.apache.http.client.ClientProtocolException;
 import org.brunocvcunha.instagram4j.Instagram4j;
 import org.brunocvcunha.instagram4j.requests.InstagramTagFeedRequest;
@@ -17,18 +18,20 @@ import com.instaton.entity.social.BlackNameEntity;
 import com.instaton.entity.social.instagram.InstagramUserEntity;
 import com.instaton.service.instagram.InstagramUserService;
 import com.instaton.service.twitter.BlackNameEntityService;
+import com.instaton.util.filter.CommonFilter;
 import com.instaton.util.filter.InstaFilter;
 
 @Service
 public class InstagramServiceImpl {
 
+  private static Instagram4j instagram = null;
+
   @Autowired private InstagramUserService instagramUserService;
+
   //  @Autowired private InstagramBlackFullnameEntityService instagramBlackUsernameEntityService;
   @Autowired private BlackNameEntityService blackNameEntityService;
 
   @Autowired private WebConstants webConstants;
-
-  private Instagram4j instagram = null;
 
   public List<InstagramFeedItem> filter(final List<InstagramFeedItem> items) {
     final List<InstagramFeedItem> itemList = new ArrayList<>();
@@ -42,7 +45,7 @@ public class InstagramServiceImpl {
       //        continue;
       //      }
 
-      if (InstaFilter.checkIfBlackFullname(item, blackNameEntityList)) {
+      if (CommonFilter.checkIfBlackFullname(item.getUser().getFull_name(), blackNameEntityList)) {
         continue;
       }
 
@@ -74,7 +77,7 @@ public class InstagramServiceImpl {
   }
 
   public InstagramFeedResult getInstagramFeedResult(final String tag)
-      throws ClientProtocolException, IOException {
+      throws ClientAbortException, IOException {
     final InstagramFeedResult tagFeed =
         this.getInstance().sendRequest(new InstagramTagFeedRequest(tag));
 
@@ -82,17 +85,17 @@ public class InstagramServiceImpl {
   }
 
   private Instagram4j getInstance() throws ClientProtocolException, IOException {
-    if (this.instagram == null) {
-      this.instagram =
+    if (InstagramServiceImpl.instagram == null) {
+      InstagramServiceImpl.instagram =
           Instagram4j.builder()
               .username(this.webConstants.getInstagramUsername())
               .password(this.webConstants.getInstagramPassword())
               .build();
 
-      this.instagram.setup();
-      this.instagram.login();
+      InstagramServiceImpl.instagram.setup();
+      InstagramServiceImpl.instagram.login();
     }
 
-    return this.instagram;
+    return InstagramServiceImpl.instagram;
   }
 }

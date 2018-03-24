@@ -1,13 +1,12 @@
-
 logging:
   level:
     root: INFO
+    net.sf.ehcache: DEBUG
     org:
       springframework.social: DEBUG
       hibernate:
         SQL: ERROR
       brunocvcunha.instagram4j: DEBUG
-    net.sf.ehcache: DEBUG
 
 
 spring:
