@@ -27,14 +27,14 @@ http://localhost:5000/
 ## TODOs
 
 ### Architecture
-* Print request logs
+* Print instagram request logs
 
 ### Instagram
-* Implement Instagram API
-** Save credentials into db
+* Save InstagramFeedItem for each request
+* Save credentials into db
 * List private messages & send DMs using instagram4j
-** Find a colourful instagram messaging template like facebook.com/messages
-** Add notes, save phone number, add order with units for each users
-** Configure auto reply templates if user sends spesific keywords
+* Find a colourful instagram messaging template like facebook.com/messages
+* Add custom inputs like notes, phone number, free text save for each user
+* Configure auto reply templates if user sends spesific keywords
 
 Happy coding.

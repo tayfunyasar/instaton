@@ -20,6 +20,10 @@ public class TurkishUtils {
     return StringUtils.equalsIgnoreCase(ws1, ws2);
   }
 
+  //  public static void main(final String[] args) {
+  //    System.out.println(TurkishUtils.replaceAllTurkishCharacters("TASARİM"));
+  //  }
+
   public static String replaceAllTurkishCharacters(String string) {
     string = Normalizer.normalize(string, Normalizer.Form.NFD);
     string = string.replaceAll("[^\\p{ASCII}]", "");
