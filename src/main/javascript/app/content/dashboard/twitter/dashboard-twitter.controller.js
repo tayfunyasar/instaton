@@ -1,8 +1,8 @@
 var _ = require('underscore');
 
-DashboardController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'TwitterUserService', 'BlackWordEntityService', '$window', '$timeout'];
+DashboardTwitterController.$inject = ['ProfileService', 'BlackHashTagEntityService', 'TwitterUserService', 'BlackWordEntityService', '$window', '$timeout'];
 
-function DashboardController(ProfileService, BlackHashTagEntityService, TwitterUserService, BlackWordEntityService, $window, $timeout) {
+function DashboardTwitterController(ProfileService, BlackHashTagEntityService, TwitterUserService, BlackWordEntityService, $window, $timeout) {
   var self = this;
 
   self.tagFilterList = [];
@@ -112,4 +112,4 @@ angular.module('instaton.app.content').directive('imageonerror', function () {
     }
   };
 });
-angular.module('instaton.app.content').controller('DashboardController', DashboardController);
+angular.module('instaton.app.content').controller('DashboardTwitterController', DashboardTwitterController);

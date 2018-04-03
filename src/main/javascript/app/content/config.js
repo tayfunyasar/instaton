@@ -8,7 +8,7 @@ function config($stateProvider) {
   });
 
   $stateProvider.state('content.login', {
-    url: '/ss',
+    url: '/login',
     templateUrl: 'content/login/tpl.html',
     controller: 'LoginController',
     controllerAs: 'self',
@@ -16,8 +16,15 @@ function config($stateProvider) {
 
   $stateProvider.state('content.dashboard', {
     url: '/',
-    templateUrl: 'content/dashboard/tpl0.html',
-    controller: 'DashboardController',
+    templateUrl: 'content/dashboard/twitter/tpl.html',
+    controller: 'DashboardTwitterController',
+    controllerAs: 'self',
+  });
+
+  $stateProvider.state('content.dashboard.instagram', {
+    url: '/',
+    templateUrl: 'content/dashboard/instagram/tpl.html',
+    controller: 'DashboardInstagramController',
     controllerAs: 'self',
   });
 

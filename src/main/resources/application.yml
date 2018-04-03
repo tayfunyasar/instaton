@@ -1,3 +1,5 @@
+server.port: 8089
+
 logging:
   level:
     root: INFO
@@ -39,3 +41,4 @@ spring.jpa.generate-ddl: true
 
 instaton.twitter.searchkeywords: istanbul,manisa
 instaton.twitter.excluded-query: -izmir -kocaeli -izmit -adana -ankara -mersin -trabzon -haber -spor -radyo -galatasaray -fenerbahçe -gazete AND -filter:retweets AND -filter:replies
+

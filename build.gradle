@@ -75,6 +75,12 @@ dependencies {
 	
 	compile("com.optimaize.languagedetector:language-detector:0.6")
 	
-	compile 'org.brunocvcunha.instagram4j:instagram4j:1.7-SNAPSHOT'
+	compile 'org.brunocvcunha.instagram4j:instagram4j:1.6'
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
+}
+
+def profiles = 'dev'
+
+bootRun {
+  args = ["--spring.profiles.active=" + profiles]
 }

@@ -20,6 +20,8 @@ public class EndpointConstant {
 
   public static final String API_ENDPOINT_SEARCH = "/api/search/**";
 
+  public static final String API_ENDPOINT_INSTAGRAMUSER = "/api/instagramuser/**";
+
   private EndpointConstant() {
     throw new IllegalAccessError();
   }

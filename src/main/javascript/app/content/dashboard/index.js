@@ -1,1 +1,2 @@
-require('./dashboard.controller');
+require('./twitter');
+require('./instagram');

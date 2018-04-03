@@ -37,7 +37,7 @@ gulp.task('start-server', ['build'], function() { //
   var url = require('url');
   var proxy = require('proxy-middleware');
 
-  var options = url.parse('http://localhost:8080/');
+  var options = url.parse('http://localhost:8089/');
   options.route = '/';
 
   browserSync.init({
